@@ -3,7 +3,9 @@ let clickPoints = []
 let canvasElement = document.getElementById("drawArea")
 let ctx = canvasElement.getContext("2d")
 
-// let drawButton = document.querySelector("#drawBtn")
+let paragraphElement = document.querySelector("#numberOfLine")
+
+let drawCounter = 0
 
 canvasElement.addEventListener("click", function (e) {
 
@@ -26,11 +28,17 @@ const drawLines = () =>{
   for (let i = 1; i < clickPoints.length; i++) {
     ctx.lineTo(clickPoints[i].x, clickPoints[i].y)
   }
+
+  drawCounter++
+
+  let randomColor = Math.floor(Math.random() * 16777215).toString(16)
+  ctx.strokeStyle = "#"+randomColor
+
   ctx.stroke()
 
   clickPoints = []
 
-
+  paragraphElement.innerHTML += `Nacrtana ${drawCounter} linija  #${randomColor}`
 
 }
 
