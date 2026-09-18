@@ -1,73 +1,50 @@
+let clickPoints = []
 
-let automobiliDiv = document.querySelector("#automobili")
+let canvasElement = document.getElementById("drawArea")
+let ctx = canvasElement.getContext("2d")
 
-const automobili = [
-  {
-    id: 1,
-    ime: "Zastava 101",
-    cena: 1200,
-    slika: "image_agent_tag_4401098535013670719"
-  },
-  {
-    id: 2,
-    ime: "Peugeot 206",
-    cena: 2500,
-    slika: "image_agent_tag_4401098535013668598"
-  },
-  {
-    id: 3,
-    ime: "Opel Corsa",
-    cena: 3200,
-    slika: "image_agent_tag_4401098535013667891"
-  },
-  {
-    id: 4,
-    ime: "Volkswagen Golf 7",
-    cena: 9800,
-    slika: "image_agent_tag_4401098535013670012"
-  },
-  {
-    id: 5,
-    ime: "BMW E46",
-    cena: 4100,
-    slika: "image_agent_tag_4401098535013669305"
+
+
+canvasElement.addEventListener("click", function(e) {
+  
+  let rect = canvasElement.getBoundingClientRect()
+
+  let x = e.clientX - rect.left
+  let y = e.clientY - rect.top
+
+  clickPoints.push({x: x, y: y})  
+  
+  if(clickPoints.length >= 2){
+
+    ctx.beginPath()
+    ctx.moveTo(clickPoints[0].x, clickPoints[0].y)
+    ctx.lineTo(clickPoints[1].x, clickPoints[1].y)
+    ctx.stroke()
+
+    clickPoints = []
+
   }
-];
+  
 
-
-// for(let i = 0; i < automobili.length; i++){
-//     automobiliDiv.innerHTML += 
-//     `
-//         <img src=${automobili[i].slika}>
-//         <p>${automobili[i].ime}</p>
-//         <p>${automobili[i].cena}</p>
-
-//     `
-// }
-
-
-
-let cities = [
-    "Beograd",
-    "Kragujevac",
-    "Nis"
-]
-
-let selectDiv = document.querySelector("#selectCity")
-
-for(let city of cities){
-    
-    let optionElement = document.createElement("option")
-    optionElement.innerHTML = city
-
-    selectDiv.appendChild(optionElement)
-    
-
-}
-
-selectDiv.addEventListener("change", (event) => {
-    console.log(event.target.value);
-    
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
