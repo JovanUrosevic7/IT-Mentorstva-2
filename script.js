@@ -1,86 +1,66 @@
-let productsDiv = document.querySelector("#products")
-// inputProduct.addEventListener("input",function(e){
-//   console.log(e.target.value);
+let recipesDiv = document.querySelector("#recipes")
+let selectRecipe = document.querySelector("#selectRecipe")
 
-// })
 
-let searchBtn = document.querySelector("#searchBtn")
-searchBtn.addEventListener("click",function(){
-  let inputProduct = document.querySelector("#inputProduct")
-  let searchLink = 'https://dummyjson.com/products/search?q=' + inputProduct.value  
+fetch('https://dummyjson.com/recipes?limit=9&sortBy=name&order=asc')
+.then(response => response.json())
+.then(function(data){
+  for(let recipe of data.recipes){
+    
+    // console.log(recipe);
 
-  fetch(searchLink)
-    .then(function(response){
-      return response.json()
-    })
-    .then(
-      function(data){
-
-        // console.log(data);
-        
-
-        for(let product of data.products){
-          
-          appendProductToHolder(product)
-          
-        }
-        
-      }
-    )
+    appendCookingRecipe(recipe)
+  }
+  
 })
 
-// fetch(`https://dummyjson.com/products?limit=20&sortBy=price&order=asc`)
-//   .then(
-//     function(response){
-//       console.log(response);
-      
-//       return response.json()
-//     }
+fetch(`https://dummyjson.com/recipes/tags`)
+.then(response => response.json())
+.then(function(data){
 
-//   )
-//   .then(
-//     function(data){
-//       for(let product of data.products){
-        
-//         appendProductToHolder(product)
-        
-//       }
-      
-//     }
+  for(let tag of data){
+    let recipeOption = document.createElement("option")
+    recipeOption.innerHTML = tag
+    recipeOption.value = tag
+    selectRecipe.append(recipeOption)
     
-//   )
+  }
 
-function appendProductToHolder(product){
+})
 
-  let singleProduct = document.createElement("div")
-  let productTitle = document.createElement("h1")
-  productTitle.innerText = product.title
+selectRecipe.addEventListener("change", function(){
 
-  let productCategory = document.createElement("p")
-  productCategory.innerText = product.category
+  let apiUrl = "https://dummyjson.com/recipes/tag/" + this.value
 
-  let productPrice = document.createElement("p")
-  productPrice.innerText = product.price
+  fetch(apiUrl).then(response => response.json())
+    .then(function(data){
+      recipesDiv.innerHTML = ""
+      for(let recipe of data.recipes){
+        appendCookingRecipe(recipe)
+        
+      }
+    })
 
-  singleProduct.append(productTitle, productCategory,productPrice)
-  productsDiv.append(singleProduct)
+})
+
+function appendCookingRecipe(recipe){
+
+  let titleElement = document.createElement("h1")
+  titleElement.append(recipe.name)
+
+  let instructionsElement = document.createElement("ul")
+  for(let instruction of recipe.instructions){
+    let instructionElement = document.createElement("li")
+    instructionElement.innerText = instruction
+    instructionsElement.append(instructionElement)
+
+  }
+
+
+  let divElement = document.createElement("div")
+  divElement.append(titleElement,instructionsElement)
+
+  recipesDiv.append(divElement)
+  return recipesDiv
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
