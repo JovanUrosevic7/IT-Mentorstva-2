@@ -1,7 +1,7 @@
 let params = new URLSearchParams(window.location.search)
 let recipeId = params.get("id")
 
-let recipeElement = document.querySelector("#recipes")
+let recipeElement = document.querySelector("#recipe")
 
 fetch("https://dummyjson.com/recipe/"+recipeId)
 .then(response => response.json())

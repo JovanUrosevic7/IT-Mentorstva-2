@@ -19,9 +19,15 @@ fetch(`https://dummyjson.com/recipes/tags`)
 .then(function(data){
 
   for(let tag of data){
+
+    let linkHref = document.createElement("a")
+    linkHref.href = "index.html" 
+
     let recipeOption = document.createElement("option")
-    recipeOption.innerHTML = tag
     recipeOption.value = tag
+    linkHref.innerText = tag
+    recipeOption.append(linkHref)
+
     selectRecipe.append(recipeOption)
     
   }
