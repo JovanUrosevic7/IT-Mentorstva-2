@@ -56,9 +56,12 @@ function appendCookingRecipe(recipe){
 
   }
 
+  let permalink = document.createElement("a")
+  permalink.innerText = "Show recipe"
+  permalink.href = "permalink.html?id=" + recipe.id
 
   let divElement = document.createElement("div")
-  divElement.append(titleElement,instructionsElement)
+  divElement.append(titleElement,instructionsElement, permalink)
 
   recipesDiv.append(divElement)
   return recipesDiv
