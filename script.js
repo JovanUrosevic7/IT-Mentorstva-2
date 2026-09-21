@@ -31,8 +31,12 @@ const drawLines = () =>{
 
   drawCounter++
 
-  let randomColor = Math.floor(Math.random() * 16777215).toString(16)
-  ctx.strokeStyle = "#"+randomColor
+  const colorPromt = window.prompt("Unesi boju na engleskom")
+
+  // let randomColor = Math.floor(Math.random() * 16777215).toString(16)
+  // ctx.strokeStyle = "#"+randomColor
+
+  ctx.strokeStyle = colorPromt
 
   ctx.stroke()
 
