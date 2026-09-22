@@ -1,33 +1,43 @@
 let recipesDiv = document.querySelector("#recipes")
 let selectRecipe = document.querySelector("#selectRecipe")
+let params = new URLSearchParams(window.location.search)
 
+let categoryParams = params.get("category")
 
-fetch('https://dummyjson.com/recipes?limit=9&sortBy=name&order=asc')
-.then(response => response.json())
-.then(function(data){
-  for(let recipe of data.recipes){
+if(categoryParams == null){
+ 
+  fetch('https://dummyjson.com/recipes?limit=9&sortBy=name&order=asc')
+  .then(response => response.json())
+  .then(function(data){
+    for(let recipe of data.recipes){
+      appendCookingRecipe(recipe)
+    }
     
-    // console.log(recipe);
+  })
 
-    appendCookingRecipe(recipe)
-  }
-  
-})
+} else {
+  let apiUrl = "https://dummyjson.com/recipes/tag/" + categoryParams
+
+  fetch(apiUrl).then(response => response.json())
+    .then(function(data){
+      recipesDiv.innerHTML = ""
+      for(let recipe of data.recipes){
+        appendCookingRecipe(recipe)
+        
+      }
+    })
+}
+
+
 
 fetch(`https://dummyjson.com/recipes/tags`)
 .then(response => response.json())
 .then(function(data){
 
-  for(let tag of data){
-
-    let linkHref = document.createElement("a")
-    linkHref.href = "index.html" 
-
+  for(let tag of data){ 
     let recipeOption = document.createElement("option")
+    recipeOption.innerHTML = tag
     recipeOption.value = tag
-    linkHref.innerText = tag
-    recipeOption.append(linkHref)
-
     selectRecipe.append(recipeOption)
     
   }
