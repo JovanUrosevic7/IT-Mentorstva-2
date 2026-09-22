@@ -1,8 +1,16 @@
 const apiUrl = "http://www.omdbapi.com/"
 let apiKey = "450e8dbe"
 
-let response = await callOMDbApi("t=Terminator")
-console.log(response);
+document.querySelector("#searchBtn").addEventListener("click", async function(){
+    let movieName = document.querySelector("#searchMovie").value
+    let response = await callOMDbApi(`s=${movieName}`)
+
+    console.log(response);
+    
+})
+
+
+
 
 
 // getMovieByTitle("Home alone")
