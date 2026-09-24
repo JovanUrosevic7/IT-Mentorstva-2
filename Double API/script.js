@@ -1,14 +1,16 @@
 const mealDbAPI = "https://www.themealdb.com/api/json/v1/1/"
 
-const response = await fetch(mealDbAPI + "categories.php")
-const data = await response.json()
+const data = await getMealData("categories.php")
+// console.log(data);
 
 
 let categories = data.categories
 let selectElemet = document.querySelector("#categories")
 let mealsElement = document.querySelector("#meals")
 
-console.log(categories);
+let popup = document.querySelector("#popup")
+
+// console.log(categories);
 
 
 for(let category of categories){
@@ -17,26 +19,22 @@ for(let category of categories){
     optionElement.value = category.strCategory
 
     selectElemet.append(optionElement)
-    // console.log(category.strCategory);
     
-
 }
 
 selectElemet.addEventListener("change", async () => {
 
     mealsElement.innerHTML = ""
 
-    const mealsAPI = mealDbAPI+"filter.php?c="+selectElemet.value;
-    
-    const response = await fetch(mealsAPI)
-    const data = await response.json()
+
+    const data = await getMealData("filter.php?c="+selectElemet.value)
     const meals = data.meals
 
     for(let meal of meals){
 
-        let divElement = document.createElement("div")
-        divElement.classList.add("singleMeal")
-        // divElement.style.height = "300px"
+        let mealElement = document.createElement("div")
+        mealElement.classList.add("singleMeal")
+        // mealElement.style.height = "300px"
 
         let imgElement = document.createElement("img")
         let titleElement = document.createElement("h3")
@@ -49,17 +47,57 @@ selectElemet.addEventListener("change", async () => {
         imgElement.style.width = "300px"
         
 
-        divElement.style.display = "flex"
-        divElement.style.flexDirection = "column"
-        divElement.style.justifyContent = "space-between"
-        divElement.style.gap = "10px"
-        divElement.append(titleElement, imgElement)
+        mealElement.style.display = "flex"
+        mealElement.style.flexDirection = "column"
+        mealElement.style.justifyContent = "space-between"
+        mealElement.style.gap = "10px"
+        mealElement.append(titleElement, imgElement)
 
-        mealsElement.append(divElement)
+        mealsElement.append(mealElement)
+
+        mealElement.addEventListener("click",async () => {
+            popup.style.display = "block"
+            
+            const data = await getMealData("lookup.php?i="+meal.idMeal)
+            
+            document.querySelector("#recipeText").innerHTML = data.meals[0].strInstructions
+            
+            let cocktailData = await getCocktail("random.php")
+            let cocktailName = cocktailData.drinks[0].strDrink
+            let cocktailThumb = cocktailData.drinks[0].strDrinkThumb
+
+            
+            document.querySelector("#cocktailName").innerHTML = cocktailName 
+            document.querySelector("#cocktailImg").setAttribute("src",cocktailThumb)  
+        })
 
     }
     
+})
+
+let closeBtn = document.querySelector("#closeBtn")
+closeBtn.addEventListener("click", () =>{
+    popup.style.display = "none"
     
 
 })
+
+async function getMealData(endpoint) {
+
+    const response = await fetch(mealDbAPI + endpoint)
+    return await response.json()
+
+}
+
+
+
+async function getCocktail(endpoint) {
+
+    const response = await fetch("https://www.thecocktaildb.com/api/json/v1/1/" + endpoint)
+    let data = await response.json()
+    return data
+    
+}
+
+
 

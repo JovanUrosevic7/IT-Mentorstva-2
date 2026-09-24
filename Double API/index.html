@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/style.css">
     <title>Double API</title>
 </head>
 <body>
@@ -11,6 +12,16 @@
 
     <div id="meals" style="display: flex; flex-wrap: wrap; gap: 20px;">
 
+    </div>
+
+    <div id="popup">
+        <p id="recipeText" style="display: block;"></p>
+        <div style="display: flex; gap: 5px;">
+            <p id="">Cocktail:</p>
+            <p id="cocktailName"></p>
+        </div>
+        <img src="" alt="" id="cocktailImg" width="200">
+        <button type="button" id="closeBtn">X</button>
     </div>
 
     <script type="module" src="script.js"></script>
