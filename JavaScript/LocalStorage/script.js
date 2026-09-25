@@ -2,12 +2,13 @@
 const valueLS = localStorage.getItem("loggedIn")
 
 if(!valueLS){
+
     document.querySelector("form").style.display = "block"
 } 
 
 else {
     document.querySelector("form").style.display = "none"
-    document.querySelector("#logoutBtn").style.display = "block"
+    document.querySelector("#loggedInData").style.display = "block"
 }
 
 document.querySelector("#loginBtn").addEventListener("click", () => {
@@ -30,6 +31,7 @@ document.querySelector("#logoutBtn").addEventListener("click", () => {
     window.location.reload()
 
 })
+
 
 
 
