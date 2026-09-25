@@ -1,3 +1,15 @@
+
+const valueLS = localStorage.getItem("loggedIn")
+
+if(!valueLS){
+    document.querySelector("form").style.display = "block"
+} 
+
+else {
+    document.querySelector("form").style.display = "none"
+    document.querySelector("#logoutBtn").style.display = "block"
+}
+
 document.querySelector("#loginBtn").addEventListener("click", () => {
 
     let name = document.querySelector("#nameInput").value.toLowerCase()
@@ -7,6 +19,17 @@ document.querySelector("#loginBtn").addEventListener("click", () => {
         alert("Niste uneli dobre podakte")
     }else{
         localStorage.setItem("loggedIn", true)
+        window.location.reload()
     }
 
 })
+
+document.querySelector("#logoutBtn").addEventListener("click", () => {
+
+    localStorage.removeItem("loggedIn")
+    window.location.reload()
+
+})
+
+
+
