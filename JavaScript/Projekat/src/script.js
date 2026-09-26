@@ -42,7 +42,7 @@ try{
         console.log("Day");
         
     } else{
-        document.querySelector("body").style.backgroundColor = "black"
+        // document.querySelector("body").style.backgroundColor = "black"
         console.log("Night");
         
     }
@@ -53,7 +53,25 @@ try{
 }
 
 
+const forecastApi = await axios.get("https://api.weatherapi.com/v1/forecast.json",{
+    params:{
+        key: apiKey,
+        q: location,
+        days: 3,
+        aqi: "no",
+        alerts: "no"
+    }
+})
 
+console.log(forecastApi);
+let firstDayTemp = forecastApi.data.forecast.forecastday[0].day.avgtemp_c
+let secondDayTemp = forecastApi.data.forecast.forecastday[1].day.avgtemp_c
+let thirdDayTemp = forecastApi.data.forecast.forecastday[2].day.avgtemp_c
+
+
+document.querySelector("#firstDay").innerHTML = firstDayTemp + "°C"
+document.querySelector("#secondDay").innerHTML = secondDayTemp + "°C"
+document.querySelector("#thirdDay").innerHTML = thirdDayTemp + "°C"
 
 
 
