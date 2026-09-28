@@ -1,5 +1,6 @@
 const path = require("path")
 const { pathToFileURL } = require("url")
+const Dotenv = require("dotenv-webpack")
 
 module.exports = {
     mode: "production",
@@ -18,5 +19,8 @@ module.exports = {
                 }
             }
         ]
-    }
+    },
+    plugins:[
+        new Dotenv()
+    ]
 };
