@@ -104,5 +104,6 @@ document.querySelector("#showWeatherForMyLocation").addEventListener("click", as
         console.log(coords);
     })
 
-
+    console.log("End");
+    
 })
