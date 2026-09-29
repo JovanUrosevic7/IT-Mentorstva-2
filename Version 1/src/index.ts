@@ -9,7 +9,12 @@ programmingLanguages.push("PHP")
 
 const result: string|number = 200
 
-const user: {name: string, age: number} = {
+interface User {
+    name: string,
+    age: number
+}
+
+const user: User = {
     name: "Jovan",
     age: 17
 }
