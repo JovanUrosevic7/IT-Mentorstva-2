@@ -10,36 +10,24 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/index.ts"
-/*!**********************!*\
-  !*** ./src/index.ts ***!
-  \**********************/
-(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ "./src/domaci.ts"
+/*!***********************!*\
+  !*** ./src/domaci.ts ***!
+  \***********************/
+() {
 
-eval("{__webpack_require__.r(__webpack_exports__);\n\n\nconst loaction = [\n  [40.7128, -74.006, \"New York City\"],\n  [44.2345, -12.3456, \"Belgrade\"]\n];\nconsole.log(location);\n\n\n//# sourceURL=webpack://version-1/./src/index.ts?\n}");
+eval("{\nfunction addOrder(name, locationString, zip, productName, amount, currency) {\n  const splitName = name.split(\" \");\n  const splitLocation = locationString.split(\" \");\n  return {\n    firstName: splitName[0],\n    lastName: splitName[1],\n    city: splitLocation[0],\n    country: splitLocation[1],\n    zip,\n    productName,\n    amount,\n    currency\n  };\n}\nconst singleOrder = addOrder(\"Marko Markovic\", \"Bograd Srbija\", 11e3, \"Monitor\", 2, \"EUR\");\nconsole.log(singleOrder);\n\n\n//# sourceURL=webpack://version-1/./src/domaci.ts?\n}");
 
 /***/ }
 
 /******/ 	});
-/************************************************************************/
-/******/ 	// The require scope
-/******/ 	const __webpack_require__ = {};
-/******/ 	
-/************************************************************************/
-/******/ 	/* webpack/runtime/make namespace object */
-/******/ 	// define __esModule on exports
-/******/ 	__webpack_require__.r = (exports) => {
-/******/ 		Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 	};
-/******/ 	
 /************************************************************************/
 /******/ 	
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
 /******/ 	let __webpack_exports__ = {};
-/******/ 	__webpack_modules__["./src/index.ts"](0,__webpack_exports__,__webpack_require__);
+/******/ 	__webpack_modules__["./src/domaci.ts"]();
 /******/ 	
 /******/ })()
 ;
