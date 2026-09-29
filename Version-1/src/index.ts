@@ -1,20 +1,22 @@
 export {}
 
 
-let name: string = "Jovan"
+function calculator(num1: number, num2:number): void{
 
-const programmingLanguages: string[] = []
+    console.log(num1 + num2);
+    
 
-programmingLanguages.push("PHP")
-
-const result: string|number = 200
-
-interface User {
-    name: string,
-    age: number
 }
 
-const user: User = {
-    name: "Jovan",
-    age: 17
-}
+calculator(5,2)
+
+
+
+
+
+
+
+
+
+
+

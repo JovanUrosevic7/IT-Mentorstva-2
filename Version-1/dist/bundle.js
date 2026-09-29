@@ -16,7 +16,7 @@
   \**********************/
 (__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
-eval("{__webpack_require__.r(__webpack_exports__);\n\n\nlet name = \"Jovan\";\nconst programmingLanguages = [];\nprogrammingLanguages.push(\"PHP\");\nconst result = 200;\nconst user = {\n  name: \"Jovan\",\n  age: 17\n};\n\n\n//# sourceURL=webpack://version-1/./src/index.ts?\n}");
+eval("{__webpack_require__.r(__webpack_exports__);\n\n\nfunction calculator(num1, num2) {\n  console.log(num1 + num2);\n}\ncalculator(5, 2);\n\n\n//# sourceURL=webpack://version-1/./src/index.ts?\n}");
 
 /***/ }
 
