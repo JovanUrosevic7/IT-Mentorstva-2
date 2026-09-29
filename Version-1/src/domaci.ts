@@ -46,10 +46,13 @@ orders.push(singleOrder, secondOrder)
 
 function listOrders(orders: OrderInterface[]): void{
 
-    orders.forEach(function(a,b){
-        console.log(a,b);
-        
-    })
+    orders.forEach(item => {
+            const ordersDiv: HTMLElement = document.querySelector("#listOrders")
+            const singleOrder: HTMLElement = document.createElement("div")
+            const singleOrderTitle: HTMLElement = document.createElement("h1")
+        }
+    );
+
     
 }
 
