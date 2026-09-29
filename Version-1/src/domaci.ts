@@ -1,5 +1,8 @@
 
 type CurrencyType = "RSD" | "EUR"
+type NameFormat = `${string} ${string}`
+
+const orders: OrderInterface[] = []
 
 interface OrderInterface {
 
@@ -15,7 +18,7 @@ interface OrderInterface {
 }
 
 
-function addOrder(name: string, locationString: string, zip: number, productName: string, amount: number, currency: CurrencyType){
+function addOrder(name: NameFormat, locationString: string, zip: number, productName: string, amount: number, currency: CurrencyType){
 
     const splitName = name.split(" ")
     const splitLocation = locationString.split(" ")
@@ -35,8 +38,19 @@ function addOrder(name: string, locationString: string, zip: number, productName
 }
 
 
-const singleOrder = addOrder("Marko Markovic","Bograd Srbija",11000,"Monitor",2, "EUR")
+const singleOrder = addOrder("Uros Mikic","Bograd Srbija",11000,"Monitor",2, "EUR")
+const secondOrder = addOrder("Mihajlo Katic","Bograd Srbija",11000,"Monitor",2, "EUR")
 
-console.log(singleOrder);
+orders.push(singleOrder, secondOrder)
+    
 
+function listOrders(orders: OrderInterface[]): void{
 
+    orders.forEach(function(a,b){
+        console.log(a,b);
+        
+    })
+    
+}
+
+listOrders(orders)
