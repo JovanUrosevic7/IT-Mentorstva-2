@@ -16,7 +16,7 @@
   \**********************/
 (__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
-eval("{__webpack_require__.r(__webpack_exports__);\n\n\nconst location = [40.7128, -74.006, \"New York City\"];\nconsole.log(location);\n\n\n//# sourceURL=webpack://version-1/./src/index.ts?\n}");
+eval("{__webpack_require__.r(__webpack_exports__);\n\n\nconst loaction = [\n  [40.7128, -74.006, \"New York City\"],\n  [44.2345, -12.3456, \"Belgrade\"]\n];\nconsole.log(location);\n\n\n//# sourceURL=webpack://version-1/./src/index.ts?\n}");
 
 /***/ }
 
