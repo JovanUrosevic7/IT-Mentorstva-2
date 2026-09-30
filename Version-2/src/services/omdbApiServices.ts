@@ -1,3 +1,4 @@
+import axios from "axios"
 import { ApiParametersInterface } from "../interfaces/ApiParametersInterface"
 
 const API_KEY = "450e8dbe"
@@ -6,7 +7,7 @@ const API_URL = "http://www.omdbapi.com/"
 // https://www.omdbapi.com/?i=tt3896198&apikey=450e8dbe
 // http://www.omdbapi.com/?t=avengers+age+of+ultron&y=2015
 
-export function buildUrl(params: ApiParametersInterface[]): void{
+export function buildUrl(params: ApiParametersInterface[]): string{
 
     let searchParams = ""
     
@@ -17,8 +18,15 @@ export function buildUrl(params: ApiParametersInterface[]): void{
 
     const url = API_URL
 
-    console.log(url+"?"+searchParams+"apikey="+API_KEY);
+    return url+"?"+searchParams+"apikey="+API_KEY
     
 
 }
 
+export async function callOmdbApi(param: ApiParametersInterface[]){
+
+    const url = buildUrl(param)
+
+    return await axios.get(url)
+
+}

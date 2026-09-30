@@ -1,14 +1,12 @@
-import { buildUrl } from "./services/omdbApiServices";
+import { buildUrl, callOmdbApi } from "./services/omdbApiServices";
 
 
-buildUrl([
+const response = await callOmdbApi([
     {
-        key: "t",
-        value: `avengers+age+of+ultron`
-    
-    },
-    {
-        key: "y",
-        value: "2015"
+        key: "i",
+        value: "tt3896198"
     }
 ])
+
+
+console.log(response);
