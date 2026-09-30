@@ -10,13 +10,23 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/helpers/generateYears.ts"
+/*!**************************************!*\
+  !*** ./src/helpers/generateYears.ts ***!
+  \**************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   generateYears: () => (/* binding */ generateYears)\n/* harmony export */ });\n\nfunction generateYears(from, ageSelect, defaultYear) {\n  for (let i = 1960; i <= 2026; i++) {\n    let optionElement = document.createElement(\"option\");\n    optionElement.value = i.toString();\n    optionElement.innerHTML = i.toString();\n    if (i === defaultYear) {\n      optionElement.selected = true;\n    }\n    ageSelect?.append(optionElement);\n  }\n}\n\n\n//# sourceURL=webpack://version-2/./src/helpers/generateYears.ts?\n}");
+
+/***/ },
+
 /***/ "./src/index.ts"
 /*!**********************!*\
   !*** ./src/index.ts ***!
   \**********************/
-(module, __webpack_exports__, __webpack_require__) {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
-eval("{__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {\n__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _services_omdbApiServices__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./services/omdbApiServices */ \"./src/services/omdbApiServices.ts\");\n\n\nconst response = await (0,_services_omdbApiServices__WEBPACK_IMPORTED_MODULE_0__.callOmdbApi)([\n  {\n    key: \"i\",\n    value: \"tt3896198\"\n  }\n]);\nconsole.log(response);\n\n__webpack_async_result__();\n} catch(e) { __webpack_async_result__(e); } }, 1);\n\n//# sourceURL=webpack://version-2/./src/index.ts?\n}");
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _helpers_generateYears__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helpers/generateYears */ \"./src/helpers/generateYears.ts\");\n/* harmony import */ var _services_omdbApiServices__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./services/omdbApiServices */ \"./src/services/omdbApiServices.ts\");\n\n\n\nconst titleInput = document.querySelector(\"#titleInput\");\nconst ageSelect = document.querySelector(\"#ageSelect\");\nconst searchBtn = document.querySelector(\"#searchBtn\");\n(0,_helpers_generateYears__WEBPACK_IMPORTED_MODULE_0__.generateYears)(1960, ageSelect, 2025);\nasync function searchMovie(name, age) {\n  const response = await (0,_services_omdbApiServices__WEBPACK_IMPORTED_MODULE_1__.callOmdbApi)([\n    {\n      key: \"s\",\n      value: name\n    },\n    {\n      key: \"y\",\n      value: age\n    }\n  ]);\n  console.log(response);\n}\nsearchBtn?.addEventListener(\"click\", () => {\n  const movieName = titleInput?.value ?? \"\";\n  const movieYear = ageSelect?.value ?? \"\";\n  searchMovie(movieName, movieYear);\n});\n\n\n//# sourceURL=webpack://version-2/./src/index.ts?\n}");
 
 /***/ },
 
@@ -603,82 +613,6 @@ eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpa
 /******/ 	}
 /******/ 	
 /************************************************************************/
-/******/ 	/* webpack/runtime/async module */
-/******/ 	(() => {
-/******/ 		const webpackQueues = Symbol("webpack queues");
-/******/ 		const webpackExports = Symbol("webpack exports");
-/******/ 		const webpackError = Symbol("webpack error");
-/******/ 		
-/******/ 		const resolveQueue = (queue) => {
-/******/ 			if(queue?.d < 1) {
-/******/ 				queue.d = 1;
-/******/ 				queue.forEach((fn) => (fn.r--));
-/******/ 				queue.forEach((fn) => (fn.r-- ? fn.r++ : fn()));
-/******/ 			}
-/******/ 		}
-/******/ 		const wrapDeps = (deps) => (deps.map((dep) => {
-/******/ 			if(dep !== null && typeof dep === "object") {
-/******/ 		
-/******/ 				if(dep[webpackQueues]) return dep;
-/******/ 				if(dep.then) {
-/******/ 					const queue = [];
-/******/ 					queue.d = 0;
-/******/ 					dep.then((r) => {
-/******/ 						obj[webpackExports] = r;
-/******/ 						resolveQueue(queue);
-/******/ 					}, (e) => {
-/******/ 						obj[webpackError] = e;
-/******/ 						resolveQueue(queue);
-/******/ 					});
-/******/ 					const obj = {};
-/******/ 		
-/******/ 					obj[webpackQueues] = (fn) => (fn(queue));
-/******/ 					return obj;
-/******/ 				}
-/******/ 			}
-/******/ 			const ret = {};
-/******/ 			ret[webpackQueues] = x => {};
-/******/ 			ret[webpackExports] = dep;
-/******/ 			return ret;
-/******/ 		}));
-/******/ 		__webpack_require__.a = (module, body, hasAwait) => {
-/******/ 			let queue;
-/******/ 			hasAwait && ((queue = []).d = -1);
-/******/ 			const depQueues = new Set();
-/******/ 			const exports = module.exports;
-/******/ 			let currentDeps;
-/******/ 			let outerResolve;
-/******/ 			let reject;
-/******/ 			const promise = new Promise((resolve, rej) => {
-/******/ 				reject = rej;
-/******/ 				outerResolve = resolve;
-/******/ 			});
-/******/ 			promise[webpackExports] = exports;
-/******/ 			promise[webpackQueues] = (fn) => (queue && fn(queue), depQueues.forEach(fn), promise["catch"](x => {}));
-/******/ 			module.exports = promise;
-/******/ 			const handle = (deps) => {
-/******/ 				currentDeps = wrapDeps(deps);
-/******/ 				let fn;
-/******/ 				const getResult = () => (currentDeps.map((d) => {
-/******/ 		
-/******/ 					if(d[webpackError]) throw d[webpackError];
-/******/ 					return d[webpackExports];
-/******/ 				}))
-/******/ 				const promise = new Promise((resolve) => {
-/******/ 					fn = () => (resolve(getResult));
-/******/ 					fn.r = 0;
-/******/ 					const fnQueue = (q) => (q !== queue && !depQueues.has(q) && (depQueues.add(q), q && !q.d && (fn.r++, q.push(fn))));
-/******/ 					currentDeps.forEach((dep) => (dep[webpackQueues](fnQueue)));
-/******/ 				});
-/******/ 				return fn.r ? promise : getResult();
-/******/ 			}
-/******/ 			const done = (err) => ((err ? reject(promise[webpackError] = err) : outerResolve(exports)), resolveQueue(queue))
-/******/ 		
-/******/ 			body(handle, done);
-/******/ 			queue?.d < 0 && (queue.d = 0);
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	// define getter/value functions for harmony exports
 /******/ 	__webpack_require__.d = (exports, definition) => {

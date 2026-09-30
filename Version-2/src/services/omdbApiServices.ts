@@ -1,5 +1,6 @@
 import axios from "axios"
 import { ApiParametersInterface } from "../interfaces/ApiParametersInterface"
+import { ApiResponseInterface } from "../interfaces/ApiResponseInterface"
 
 const API_KEY = "450e8dbe"
 const API_URL = "http://www.omdbapi.com/"
@@ -23,7 +24,9 @@ export function buildUrl(params: ApiParametersInterface[]): string{
 
 }
 
-export async function callOmdbApi(param: ApiParametersInterface[]){
+
+
+export async function callOmdbApi(param: ApiParametersInterface[]): Promise<ApiResponseInterface> {
 
     const url = buildUrl(param)
 
