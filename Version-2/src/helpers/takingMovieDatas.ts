@@ -1,18 +1,25 @@
-export function getMovieDatas(response){
+import { SingleMovieInterface } from "../interfaces/SingleMovieInterface"
 
-    response.data.Search.forEach((movie: {Title: string, Poster: string}) => {        
+export function getMovieDatas(movies: SingleMovieInterface, htmlMovieList: HTMLDivElement){
+
+    movies.forEach((movie: {Title: string, Poster: string}) => {        
 
         let movieTitle = document.createElement("h3") as HTMLHeadElement
         let moviePoster = document.createElement("img") as HTMLImageElement
         let movieHolder = document.createElement("div") as HTMLDivElement
 
-        movieTitle.textContent = movie.Title
-        moviePoster.src = movie.Poster
+        movieTitle.textContent = <string> movie.Title
+        moviePoster.src = <string> movie.Poster
 
         movieHolder.append(movieTitle, moviePoster)
 
-        movieList?.append(movieHolder)
+        htmlMovieList.append(movieHolder)
+
+        console.log(movie);
+
 
     })
+
+    
 
 }

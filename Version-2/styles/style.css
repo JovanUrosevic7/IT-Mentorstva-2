@@ -1,0 +1,15 @@
+#movieList{
+
+    display: flex;
+    flex-direction: wrap;
+
+}
+
+#movieList div{
+    max-width: 200px;
+    margin: 10px;
+}
+
+#movieList div img {
+    max-width: 100%;
+}

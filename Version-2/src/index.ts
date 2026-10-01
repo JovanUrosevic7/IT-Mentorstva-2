@@ -10,7 +10,7 @@ const movieList = document.querySelector("#movieList") as HTMLDivElement | null
 
 
 if (ageSelect) {
-    generateYears(1960, ageSelect, 2025);
+    generateYears(1960, ageSelect, 2026);
 }
 
 async function searchMovie(name: string, age: string){
@@ -27,26 +27,31 @@ async function searchMovie(name: string, age: string){
     }
 
     let response = await callOmdbApi([
-        {
-            key: "s",
-            value: name
-        },
-        {
-            key: "y",
-            value: age
-        }
-    ])
+        { key: "s", value: name },
+        { key: "y", value: age }
+    ]);
 
-    if(response.data.Response === "False" || !response.data.Search){
-        alert("Nismo pronasli film")
-        return
+    // 2. Ako prva pretraga nije uspela, a korisnik JE izabrao godinu, pokušavamo rezervnu pretragu SAMO po nazivu
+    if ((response.data.Response === "False" || !response.data.Search) && age !== "") {
+        console.warn(`Nema rezultata za godinu ${age}. Pokrećemo pretragu samo po nazivu...`);
+
+        response = await callOmdbApi([
+            { key: "s", value: name }
+        ]);
+
+        // Opciono: Obaveštavamo korisnika da je primenjen fallback
+        if (response.data.Response === "True" && response.data.Search) {
+            alert(`Nismo pronašli film iz ${age}. godine, ali evo svih ostalih filmova sa nazivom "${name}":`);
+        }
     }
 
-    getMovieDatas(response)
+    // 3. Ako i dalje nema rezultata (ni nakon rezervne pretrage), obaveštavamo korisnika
+    if (response.data.Response === "False" || !response.data.Search) {
+        alert("Nismo pronašli nijedan film sa tim nazivom.");
+        return;
+    }
 
-    console.log(response.data);
-    
-
+    getMovieDatas(response.data.Search, movieList)    
 
 }
 
