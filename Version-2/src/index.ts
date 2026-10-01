@@ -1,6 +1,7 @@
 import { generateYears } from "./helpers/generateYears";
 import { getMovieDatas } from "./helpers/takingMovieDatas";
-import { remeberMovieSearch } from "./repository/movieStorage";
+import { SingleMovieSearch } from "./interfaces/movieStorage/SingleMovieSearch";
+import { getAllMovieSearches, remeberMovieSearch } from "./repository/movieStorage";
 import { buildUrl, callOmdbApi } from "./services/omdbApiServices";
 
 
@@ -8,11 +9,28 @@ const titleInput = document.querySelector("#titleInput") as HTMLInputElement | n
 const ageSelect = document.querySelector("#ageSelect") as HTMLSelectElement | null
 const searchBtn = document.querySelector("#searchBtn") as HTMLButtonElement | null
 const movieList = document.querySelector("#movieList") as HTMLDivElement | null
+const existingMovieDiv = document.querySelector("#searchedMovies") as HTMLDivElement | null
 
 
 if (ageSelect) {
     generateYears(1960, ageSelect, 2026);
 }
+
+const existingMovies: SingleMovieSearch[] = getAllMovieSearches()
+existingMovies.forEach((movie: SingleMovieSearch) => {
+
+    const existingMovieHolder = document.createElement("div") as HTMLDivElement
+    const existingMovieParagraph = document.createElement("p") as HTMLParagraphElement
+
+    existingMovieParagraph.textContent = `${movie.name} - ${movie.year}`
+   
+    existingMovieHolder.append(existingMovieParagraph)
+   
+    existingMovieDiv.append(existingMovieHolder)
+    
+
+})
+
 
 async function searchMovie(name: string, age: string){
 
@@ -60,9 +78,9 @@ async function searchMovie(name: string, age: string){
                 year: age
             }
         )
-        
-        
     }
+
+    
 
     getMovieDatas(response.data.Search, movieList)    
 

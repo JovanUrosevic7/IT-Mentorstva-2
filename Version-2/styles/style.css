@@ -13,3 +13,9 @@
 #movieList div img {
     max-width: 100%;
 }
+
+#searchedMovies{
+    display: flex;
+    gap: 15px;
+}
+

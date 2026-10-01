@@ -5,7 +5,7 @@ export function remeberMovieSearch(movie: SingleMovieSearch): void{
 
     const existingMovies = getAllMovieSearches()
 
-    const alreadyExists = existingMovies.some((m: SingleMovieSearch) => 
+    const alreadyExists: boolean = existingMovies.some((m: SingleMovieSearch) => 
         m.name.toLowerCase() === movie.name.toLowerCase()
         &&
         m.year === movie.year
