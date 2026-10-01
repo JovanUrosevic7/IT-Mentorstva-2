@@ -1,5 +1,6 @@
 import { generateYears } from "./helpers/generateYears";
 import { getMovieDatas } from "./helpers/takingMovieDatas";
+import { remeberMovieSearch } from "./repository/movieStorage";
 import { buildUrl, callOmdbApi } from "./services/omdbApiServices";
 
 
@@ -49,6 +50,18 @@ async function searchMovie(name: string, age: string){
     if (response.data.Response === "False" || !response.data.Search) {
         alert("Nismo pronašli nijedan film sa tim nazivom.");
         return;
+    }
+
+    if(response.data){
+        
+        remeberMovieSearch(
+            {
+                name: name,
+                year: age
+            }
+        )
+        
+        
     }
 
     getMovieDatas(response.data.Search, movieList)    
