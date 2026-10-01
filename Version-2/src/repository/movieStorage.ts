@@ -3,12 +3,15 @@ import { SingleMovieInterface } from "../interfaces/SingleMovieInterface";
 
 export function remeberMovieSearch(movie: SingleMovieSearch): void{
 
-    const preparedData: string = JSON.stringify(movie)
+    const existingMovies = getAllMovieSearches()
 
-    localStorage.setItem("rememberMovies", preparedData)
+    existingMovies.push(movie)
+
+    localStorage.setItem("rememberedMovies", JSON.stringify(existingMovies))
 
 }
 
-export function getAllMovieSearches(){
-
+export function getAllMovieSearches(): SingleMovieSearch[] {
+    const data = localStorage.getItem("rememberedMovies")
+    return data ? JSON.parse(data) : []
 }

@@ -46,7 +46,7 @@ eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _he
   \****************************************/
 (__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
-eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   getAllMovieSearches: () => (/* binding */ getAllMovieSearches),\n/* harmony export */   remeberMovieSearch: () => (/* binding */ remeberMovieSearch)\n/* harmony export */ });\n\nfunction remeberMovieSearch(movie) {\n  const preparedData = JSON.stringify(movie);\n  localStorage.setItem(\"rememberMovies\", preparedData);\n}\nfunction getAllMovieSearches() {\n}\n\n\n//# sourceURL=webpack://version-2/./src/repository/movieStorage.ts?\n}");
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   getAllMovieSearches: () => (/* binding */ getAllMovieSearches),\n/* harmony export */   remeberMovieSearch: () => (/* binding */ remeberMovieSearch)\n/* harmony export */ });\n\nfunction remeberMovieSearch(movie) {\n  const existingMovies = getAllMovieSearches();\n  existingMovies.push(movie);\n  localStorage.setItem(\"rememberedMovies\", JSON.stringify(existingMovies));\n}\nfunction getAllMovieSearches() {\n  const data = localStorage.getItem(\"rememberedMovies\");\n  return data ? JSON.parse(data) : [];\n}\n\n\n//# sourceURL=webpack://version-2/./src/repository/movieStorage.ts?\n}");
 
 /***/ },
 
