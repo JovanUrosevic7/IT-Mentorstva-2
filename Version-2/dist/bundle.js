@@ -20,13 +20,23 @@ eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpa
 
 /***/ },
 
+/***/ "./src/helpers/takingMovieDatas.ts"
+/*!*****************************************!*\
+  !*** ./src/helpers/takingMovieDatas.ts ***!
+  \*****************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   getMovieDatas: () => (/* binding */ getMovieDatas)\n/* harmony export */ });\n\nfunction getMovieDatas(response) {\n  response.data.Search.forEach((movie) => {\n    let movieTitle = document.createElement(\"h3\");\n    let moviePoster = document.createElement(\"img\");\n    let movieHolder = document.createElement(\"div\");\n    movieTitle.textContent = movie.Title;\n    moviePoster.src = movie.Poster;\n    movieHolder.append(movieTitle, moviePoster);\n    movieList?.append(movieHolder);\n  });\n}\n\n\n//# sourceURL=webpack://version-2/./src/helpers/takingMovieDatas.ts?\n}");
+
+/***/ },
+
 /***/ "./src/index.ts"
 /*!**********************!*\
   !*** ./src/index.ts ***!
   \**********************/
 (__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
-eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _helpers_generateYears__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helpers/generateYears */ \"./src/helpers/generateYears.ts\");\n/* harmony import */ var _services_omdbApiServices__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./services/omdbApiServices */ \"./src/services/omdbApiServices.ts\");\n\n\n\nconst titleInput = document.querySelector(\"#titleInput\");\nconst ageSelect = document.querySelector(\"#ageSelect\");\nconst searchBtn = document.querySelector(\"#searchBtn\");\n(0,_helpers_generateYears__WEBPACK_IMPORTED_MODULE_0__.generateYears)(1960, ageSelect, 2025);\nasync function searchMovie(name, age) {\n  const response = await (0,_services_omdbApiServices__WEBPACK_IMPORTED_MODULE_1__.callOmdbApi)([\n    {\n      key: \"s\",\n      value: name\n    },\n    {\n      key: \"y\",\n      value: age\n    }\n  ]);\n  console.log(response);\n}\nsearchBtn?.addEventListener(\"click\", () => {\n  const movieName = titleInput?.value ?? \"\";\n  const movieYear = ageSelect?.value ?? \"\";\n  searchMovie(movieName, movieYear);\n});\n\n\n//# sourceURL=webpack://version-2/./src/index.ts?\n}");
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _helpers_generateYears__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helpers/generateYears */ \"./src/helpers/generateYears.ts\");\n/* harmony import */ var _helpers_takingMovieDatas__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers/takingMovieDatas */ \"./src/helpers/takingMovieDatas.ts\");\n/* harmony import */ var _services_omdbApiServices__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./services/omdbApiServices */ \"./src/services/omdbApiServices.ts\");\n\n\n\n\nconst titleInput = document.querySelector(\"#titleInput\");\nconst ageSelect = document.querySelector(\"#ageSelect\");\nconst searchBtn = document.querySelector(\"#searchBtn\");\nconst movieList = document.querySelector(\"#movieList\");\nif (ageSelect) {\n  (0,_helpers_generateYears__WEBPACK_IMPORTED_MODULE_0__.generateYears)(1960, ageSelect, 2025);\n}\nasync function searchMovie(name, age) {\n  if (movieList) {\n    movieList.innerHTML = \"\";\n  }\n  if (!name.trim()) {\n    alert(\"Molimo unesite naziv filma.\");\n    return;\n  }\n  let response = await (0,_services_omdbApiServices__WEBPACK_IMPORTED_MODULE_2__.callOmdbApi)([\n    {\n      key: \"s\",\n      value: name\n    },\n    {\n      key: \"y\",\n      value: age\n    }\n  ]);\n  if (response.data.Response === \"False\" || !response.data.Search) {\n    alert(\"Nismo pronasli film\");\n    return;\n  }\n  ;(0,_helpers_takingMovieDatas__WEBPACK_IMPORTED_MODULE_1__.getMovieDatas)(response);\n  console.log(response.data);\n}\nsearchBtn?.addEventListener(\"click\", () => {\n  const movieName = titleInput?.value ?? \"\";\n  const movieYear = ageSelect?.value ?? \"\";\n  searchMovie(movieName, movieYear);\n});\n\n\n//# sourceURL=webpack://version-2/./src/index.ts?\n}");
 
 /***/ },
 
