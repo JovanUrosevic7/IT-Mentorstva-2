@@ -23,3 +23,8 @@ export function getAllMovieSearches(): SingleMovieSearch[] {
     const data = localStorage.getItem("rememberedMovies")
     return data ? JSON.parse(data) : []
 }
+
+
+export function clearExistingMovies() {
+    localStorage.removeItem("rememberedMovies")
+}

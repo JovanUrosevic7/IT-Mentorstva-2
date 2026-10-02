@@ -1,6 +1,8 @@
 import { SingleMovieInterface } from "../interfaces/SingleMovieInterface"
 
-export function getMovieDatas(movies: SingleMovieInterface, htmlMovieList: HTMLDivElement){
+export function getMovieDatas(movies: SingleMovieInterface[], htmlMovieList: HTMLDivElement): void{
+
+    htmlMovieList.innerHTML = ""
 
     movies.forEach((movie: {Title: string, Poster: string}) => {        
 
