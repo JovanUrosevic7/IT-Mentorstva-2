@@ -20,7 +20,6 @@ export async function showMovieDetails(imdbID: string): Promise<void> {
 
     const movie: SingleMovieInterface = response.data;
 
-    // 3. Kreiramo HTML elemente
     const closeBtn = document.createElement("button");
     closeBtn.textContent = "✕";
     closeBtn.className = "close-popup-btn";
@@ -28,9 +27,11 @@ export async function showMovieDetails(imdbID: string): Promise<void> {
         singleMoviePopup.style.display = "none";
     });
 
+    // 2. Poster filma
     const moviePoster = document.createElement("img");
     moviePoster.src = movie.Poster !== "N/A" ? movie.Poster : "https://via.placeholder.com/300x450?text=No+Poster";
     moviePoster.alt = movie.Title;
+    moviePoster.className = "popup-movie-poster";
 
     const movieTitle = document.createElement("h2");
     movieTitle.textContent = movie.Title;
@@ -56,4 +57,8 @@ export async function showMovieDetails(imdbID: string): Promise<void> {
 
     // 5. Prikazujemo popup
     singleMoviePopup.style.display = "flex";
+
+    singleMoviePopup.addEventListener("click", () => {
+        singleMoviePopup.style.display = "none"
+    })
 }

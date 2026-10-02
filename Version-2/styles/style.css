@@ -57,3 +57,34 @@
     position: relative;
 
 }
+
+/* X Dugme u gornjem desnom uglu */
+.close-popup-btn {
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    font-size: 22px;
+    font-weight: bold;
+    color: #666;
+    cursor: pointer;
+    line-height: 1;
+    padding: 5px;
+    transition: color 0.2s ease;
+}
+
+.close-popup-btn:hover {
+    color: #e74c3c; /* Crvena boja na hover */
+}
+
+/* Stil i poravnanje za sliku */
+.popup-movie-poster {
+    max-width: 250px;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    align-self: center; /* Osigurava da je slika savršeno centrirana */
+    object-fit: cover;
+}
