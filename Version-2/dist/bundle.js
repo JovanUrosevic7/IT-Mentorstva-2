@@ -10,6 +10,36 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/events/searchEevents.ts"
+/*!*************************************!*\
+  !*** ./src/events/searchEevents.ts ***!
+  \*************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   blindSearchEvent: () => (/* binding */ blindSearchEvent)\n/* harmony export */ });\n/* harmony import */ var _handlers_clearMovieSearchesHandler__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../handlers/clearMovieSearchesHandler */ \"./src/handlers/clearMovieSearchesHandler.ts\");\n/* harmony import */ var _handlers_searchMovieHandler__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../handlers/searchMovieHandler */ \"./src/handlers/searchMovieHandler.ts\");\n\n\n\nfunction blindSearchEvent() {\n  const searchBtn = document.querySelector(\"#searchBtn\");\n  const clearSearchesBtn = document.querySelector(\"#clearSearchesBtn\");\n  searchBtn?.addEventListener(\"click\", _handlers_searchMovieHandler__WEBPACK_IMPORTED_MODULE_1__.searchMovieHandler);\n  clearSearchesBtn?.addEventListener(\"click\", _handlers_clearMovieSearchesHandler__WEBPACK_IMPORTED_MODULE_0__.clearMovieSearchesHandler);\n}\n\n\n//# sourceURL=webpack://version-2/./src/events/searchEevents.ts?\n}");
+
+/***/ },
+
+/***/ "./src/handlers/clearMovieSearchesHandler.ts"
+/*!***************************************************!*\
+  !*** ./src/handlers/clearMovieSearchesHandler.ts ***!
+  \***************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   clearMovieSearchesHandler: () => (/* binding */ clearMovieSearchesHandler)\n/* harmony export */ });\n/* harmony import */ var _repository_movieStorage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../repository/movieStorage */ \"./src/repository/movieStorage.ts\");\n\n\nfunction clearMovieSearchesHandler() {\n  const existingMovieDiv = document.querySelector(\"#searchedMovies\");\n  (0,_repository_movieStorage__WEBPACK_IMPORTED_MODULE_0__.clearExistingMovies)();\n  existingMovieDiv.innerHTML = \"\";\n}\n\n\n//# sourceURL=webpack://version-2/./src/handlers/clearMovieSearchesHandler.ts?\n}");
+
+/***/ },
+
+/***/ "./src/handlers/searchMovieHandler.ts"
+/*!********************************************!*\
+  !*** ./src/handlers/searchMovieHandler.ts ***!
+  \********************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   searchMovieHandler: () => (/* binding */ searchMovieHandler)\n/* harmony export */ });\n/* harmony import */ var _helpers_generateYears__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helpers/generateYears */ \"./src/helpers/generateYears.ts\");\n/* harmony import */ var _helpers_takingMovieDatas__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../helpers/takingMovieDatas */ \"./src/helpers/takingMovieDatas.ts\");\n/* harmony import */ var _helpers_takingMovieDatas__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_helpers_takingMovieDatas__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _repository_movieStorage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../repository/movieStorage */ \"./src/repository/movieStorage.ts\");\n/* harmony import */ var _services_omdbApiServices__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/omdbApiServices */ \"./src/services/omdbApiServices.ts\");\n\n\n\n\n\nconst movieList = document.querySelector(\"#movieList\");\nconst searchBtn = document.querySelector(\"#searchBtn\");\nconst titleInput = document.querySelector(\"#titleInput\");\nconst ageSelect = document.querySelector(\"#ageSelect\");\nif (ageSelect) {\n  (0,_helpers_generateYears__WEBPACK_IMPORTED_MODULE_0__.generateYears)(1960, ageSelect, 2026);\n}\nasync function searchMovieHandler(name, age) {\n  if (movieList) {\n    movieList.innerHTML = \"\";\n  }\n  if (!name.trim()) {\n    alert(\"Molimo unesite naziv filma.\");\n    return;\n  }\n  let response = await (0,_services_omdbApiServices__WEBPACK_IMPORTED_MODULE_3__.callOmdbApi)([\n    { key: \"s\", value: name },\n    { key: \"y\", value: age }\n  ]);\n  if ((response.data.Response === \"False\" || !response.data.Search) && age !== \"\") {\n    console.warn(`Nema rezultata za godinu ${age}. Pokre\\u0107emo pretragu samo po nazivu...`);\n    response = await (0,_services_omdbApiServices__WEBPACK_IMPORTED_MODULE_3__.callOmdbApi)([\n      { key: \"s\", value: name }\n    ]);\n    if (response.data.Response === \"True\" && response.data.Search) {\n      alert(`Nismo prona\\u0161li film iz ${age}. godine, ali evo svih ostalih filmova sa nazivom \"${name}\":`);\n    }\n  }\n  if (response.data.Response === \"False\" || !response.data.Search) {\n    alert(\"Nismo prona\\u0161li nijedan film sa tim nazivom.\");\n    return;\n  }\n  if (response.data) {\n    (0,_repository_movieStorage__WEBPACK_IMPORTED_MODULE_2__.remeberMovieSearch)(\n      {\n        name,\n        year: age\n      }\n    );\n  }\n  ;(0,_helpers_takingMovieDatas__WEBPACK_IMPORTED_MODULE_1__.getMovieDatas)(response.data.Search, movieList);\n}\nsearchBtn?.addEventListener(\"click\", () => {\n  const movieName = titleInput?.value ?? \"\";\n  const movieYear = ageSelect?.value ?? \"\";\n  searchMovieHandler(movieName, movieYear);\n});\n\n\n//# sourceURL=webpack://version-2/./src/handlers/searchMovieHandler.ts?\n}");
+
+/***/ },
+
 /***/ "./src/helpers/generateYears.ts"
 /*!**************************************!*\
   !*** ./src/helpers/generateYears.ts ***!
@@ -24,9 +54,9 @@ eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpa
 /*!*****************************************!*\
   !*** ./src/helpers/takingMovieDatas.ts ***!
   \*****************************************/
-(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+() {
 
-eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   getMovieDatas: () => (/* binding */ getMovieDatas)\n/* harmony export */ });\n\nfunction getMovieDatas(movies, htmlMovieList) {\n  htmlMovieList.innerHTML = \"\";\n  movies.forEach((movie) => {\n    let movieTitle = document.createElement(\"h3\");\n    let moviePoster = document.createElement(\"img\");\n    let movieHolder = document.createElement(\"div\");\n    movieTitle.textContent = movie.Title;\n    moviePoster.src = movie.Poster;\n    movieHolder.append(movieTitle, moviePoster);\n    htmlMovieList.append(movieHolder);\n    console.log(movie);\n  });\n}\n\n\n//# sourceURL=webpack://version-2/./src/helpers/takingMovieDatas.ts?\n}");
+eval("{\n\n\n//# sourceURL=webpack://version-2/./src/helpers/takingMovieDatas.ts?\n}");
 
 /***/ },
 
@@ -36,7 +66,7 @@ eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpa
   \**********************/
 (__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
-eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _helpers_generateYears__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helpers/generateYears */ \"./src/helpers/generateYears.ts\");\n/* harmony import */ var _helpers_takingMovieDatas__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers/takingMovieDatas */ \"./src/helpers/takingMovieDatas.ts\");\n/* harmony import */ var _repository_movieStorage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./repository/movieStorage */ \"./src/repository/movieStorage.ts\");\n/* harmony import */ var _services_omdbApiServices__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./services/omdbApiServices */ \"./src/services/omdbApiServices.ts\");\n\n\n\n\n\nconst titleInput = document.querySelector(\"#titleInput\");\nconst ageSelect = document.querySelector(\"#ageSelect\");\nconst searchBtn = document.querySelector(\"#searchBtn\");\nconst movieList = document.querySelector(\"#movieList\");\nconst existingMovieDiv = document.querySelector(\"#searchedMovies\");\nconst clearSearchesBtn = document.querySelector(\"#clearSearchesBtn\");\nif (ageSelect) {\n  (0,_helpers_generateYears__WEBPACK_IMPORTED_MODULE_0__.generateYears)(1960, ageSelect, 2026);\n}\nlistAllMovieLabels();\nasync function searchMovie(name, age) {\n  if (movieList) {\n    movieList.innerHTML = \"\";\n  }\n  if (!name.trim()) {\n    alert(\"Molimo unesite naziv filma.\");\n    return;\n  }\n  let response = await (0,_services_omdbApiServices__WEBPACK_IMPORTED_MODULE_3__.callOmdbApi)([\n    { key: \"s\", value: name },\n    { key: \"y\", value: age }\n  ]);\n  if ((response.data.Response === \"False\" || !response.data.Search) && age !== \"\") {\n    console.warn(`Nema rezultata za godinu ${age}. Pokre\\u0107emo pretragu samo po nazivu...`);\n    response = await (0,_services_omdbApiServices__WEBPACK_IMPORTED_MODULE_3__.callOmdbApi)([\n      { key: \"s\", value: name }\n    ]);\n    if (response.data.Response === \"True\" && response.data.Search) {\n      alert(`Nismo prona\\u0161li film iz ${age}. godine, ali evo svih ostalih filmova sa nazivom \"${name}\":`);\n    }\n  }\n  if (response.data.Response === \"False\" || !response.data.Search) {\n    alert(\"Nismo prona\\u0161li nijedan film sa tim nazivom.\");\n    return;\n  }\n  if (response.data) {\n    (0,_repository_movieStorage__WEBPACK_IMPORTED_MODULE_2__.remeberMovieSearch)(\n      {\n        name,\n        year: age\n      }\n    );\n  }\n  listAllMovieLabels();\n  (0,_helpers_takingMovieDatas__WEBPACK_IMPORTED_MODULE_1__.getMovieDatas)(response.data.Search, movieList);\n}\nsearchBtn?.addEventListener(\"click\", () => {\n  const movieName = titleInput?.value ?? \"\";\n  const movieYear = ageSelect?.value ?? \"\";\n  searchMovie(movieName, movieYear);\n});\nfunction listAllMovieLabels() {\n  existingMovieDiv.innerHTML = \"\";\n  const existingMovies = (0,_repository_movieStorage__WEBPACK_IMPORTED_MODULE_2__.getAllMovieSearches)();\n  existingMovies.forEach((movie) => {\n    const existingMovieHolder = document.createElement(\"div\");\n    const existingMovieParagraph = document.createElement(\"p\");\n    existingMovieParagraph.textContent = `${movie.name} - ${movie.year}`;\n    existingMovieHolder.append(existingMovieParagraph);\n    existingMovieDiv.append(existingMovieHolder);\n    existingMovieHolder.addEventListener(\"click\", async () => {\n      let response = await (0,_services_omdbApiServices__WEBPACK_IMPORTED_MODULE_3__.callOmdbApi)([\n        { key: \"s\", value: movie.name },\n        { key: \"y\", value: movie.year }\n      ]);\n      const successData = response.data;\n      (0,_helpers_takingMovieDatas__WEBPACK_IMPORTED_MODULE_1__.getMovieDatas)(successData.Search, movieList);\n    });\n  });\n}\nclearSearchesBtn?.addEventListener(\"click\", () => {\n  ;(0,_repository_movieStorage__WEBPACK_IMPORTED_MODULE_2__.clearExistingMovies)();\n  existingMovieDiv.innerHTML = \"\";\n});\n\n\n//# sourceURL=webpack://version-2/./src/index.ts?\n}");
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _events_searchEevents__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./events/searchEevents */ \"./src/events/searchEevents.ts\");\n/* harmony import */ var _ui_renderPreviousSearches__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ui/renderPreviousSearches */ \"./src/ui/renderPreviousSearches.ts\");\n\n\n\n(0,_ui_renderPreviousSearches__WEBPACK_IMPORTED_MODULE_1__.renderPreviousSearches)();\n(0,_events_searchEevents__WEBPACK_IMPORTED_MODULE_0__.blindSearchEvent)();\n\n\n//# sourceURL=webpack://version-2/./src/index.ts?\n}");
 
 /***/ },
 
@@ -57,6 +87,36 @@ eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpa
 (__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   buildUrl: () => (/* binding */ buildUrl),\n/* harmony export */   callOmdbApi: () => (/* binding */ callOmdbApi)\n/* harmony export */ });\n/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ \"./node_modules/axios/lib/axios.js\");\n\n\nconst API_KEY = \"450e8dbe\";\nconst API_URL = \"http://www.omdbapi.com/\";\nfunction buildUrl(params) {\n  let searchParams = \"\";\n  params.forEach((param) => {\n    searchParams += `${param.key}=${param.value}&`;\n  });\n  const url = API_URL;\n  return url + \"?\" + searchParams + \"apikey=\" + API_KEY;\n}\nasync function callOmdbApi(param) {\n  const url = buildUrl(param);\n  return await axios__WEBPACK_IMPORTED_MODULE_0__[\"default\"].get(url);\n}\n\n\n//# sourceURL=webpack://version-2/./src/services/omdbApiServices.ts?\n}");
+
+/***/ },
+
+/***/ "./src/ui/listMovieResults.ts"
+/*!************************************!*\
+  !*** ./src/ui/listMovieResults.ts ***!
+  \************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   getMovieDatas: () => (/* binding */ getMovieDatas)\n/* harmony export */ });\n/* harmony import */ var _showMovieDetails__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./showMovieDetails */ \"./src/ui/showMovieDetails.ts\");\n\n\nfunction getMovieDatas(movies, htmlMovieList) {\n  htmlMovieList.innerHTML = \"\";\n  movies.forEach((movie) => {\n    let movieTitle = document.createElement(\"h3\");\n    let moviePoster = document.createElement(\"img\");\n    let movieHolder = document.createElement(\"div\");\n    let viewMovieDetails = document.createElement(\"button\");\n    movieTitle.textContent = movie.Title;\n    moviePoster.src = movie.Poster;\n    viewMovieDetails.textContent = \"Details\";\n    viewMovieDetails.setAttribute(\"show-imdb-id\", movie.imdbID);\n    viewMovieDetails.addEventListener(\"click\", async () => {\n      (0,_showMovieDetails__WEBPACK_IMPORTED_MODULE_0__.showMovieDetails)(movie.imdbID);\n    });\n    movieHolder.append(movieTitle, moviePoster, viewMovieDetails);\n    htmlMovieList.append(movieHolder);\n    console.log(movie);\n  });\n}\n\n\n//# sourceURL=webpack://version-2/./src/ui/listMovieResults.ts?\n}");
+
+/***/ },
+
+/***/ "./src/ui/renderPreviousSearches.ts"
+/*!******************************************!*\
+  !*** ./src/ui/renderPreviousSearches.ts ***!
+  \******************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   renderPreviousSearches: () => (/* binding */ renderPreviousSearches)\n/* harmony export */ });\n/* harmony import */ var _repository_movieStorage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../repository/movieStorage */ \"./src/repository/movieStorage.ts\");\n/* harmony import */ var _services_omdbApiServices__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/omdbApiServices */ \"./src/services/omdbApiServices.ts\");\n/* harmony import */ var _listMovieResults__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./listMovieResults */ \"./src/ui/listMovieResults.ts\");\n\n\n\n\nfunction renderPreviousSearches() {\n  const existingMovieDiv = document.querySelector(\"#searchedMovies\");\n  const movieList = document.querySelector(\"#movieList\");\n  const existingMovies = (0,_repository_movieStorage__WEBPACK_IMPORTED_MODULE_0__.getAllMovieSearches)();\n  existingMovies.forEach((movie) => {\n    const existingMovieHolder = document.createElement(\"div\");\n    const existingMovieParagraph = document.createElement(\"p\");\n    existingMovieParagraph.textContent = `${movie.name} - ${movie.year}`;\n    existingMovieHolder.append(existingMovieParagraph);\n    existingMovieDiv.append(existingMovieHolder);\n    existingMovieHolder.addEventListener(\"click\", async () => {\n      let response = await (0,_services_omdbApiServices__WEBPACK_IMPORTED_MODULE_1__.callOmdbApi)([\n        { key: \"s\", value: movie.name },\n        { key: \"y\", value: movie.year }\n      ]);\n      const successData = response.data;\n      (0,_listMovieResults__WEBPACK_IMPORTED_MODULE_2__.getMovieDatas)(successData.Search, movieList);\n    });\n  });\n}\n\n\n//# sourceURL=webpack://version-2/./src/ui/renderPreviousSearches.ts?\n}");
+
+/***/ },
+
+/***/ "./src/ui/showMovieDetails.ts"
+/*!************************************!*\
+  !*** ./src/ui/showMovieDetails.ts ***!
+  \************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   showMovieDetails: () => (/* binding */ showMovieDetails)\n/* harmony export */ });\n/* harmony import */ var _services_omdbApiServices__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../services/omdbApiServices */ \"./src/services/omdbApiServices.ts\");\n\n\nasync function showMovieDetails(imdbID) {\n  const response = await (0,_services_omdbApiServices__WEBPACK_IMPORTED_MODULE_0__.callOmdbApi)([\n    { key: \"i\", value: imdbID }\n  ]);\n  console.log(response);\n}\n\n\n//# sourceURL=webpack://version-2/./src/ui/showMovieDetails.ts?\n}");
 
 /***/ },
 
@@ -633,6 +693,16 @@ eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpa
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = (module) => {
+/******/ 		const getter = module && module.__esModule ?
+/******/ 			() => (module['default']) :
+/******/ 			() => (module);
+/******/ 		__webpack_require__.d(getter, { a: getter });
+/******/ 		return getter;
+/******/ 	};
+/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	// define getter/value functions for harmony exports
 /******/ 	__webpack_require__.d = (exports, definition) => {
