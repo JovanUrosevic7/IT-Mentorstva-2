@@ -1,46 +1,14 @@
+import { BudgetTracker } from "./namespaces/BudgetTracker/BudgetTracker"
 
 
-namespace BudgetTracker{
+namespace App{
 
-    export namespace Finances{
-        export function addExpense(expense: string, amount: string): void{
-
-            const expenses = getAllExpenses()
-
-            expenses.push({expense: expense, amount: amount})
-
-            localStorage.setItem("expenses", JSON.stringify(expenses))
-
-        }
-
-        export function getAllExpenses(){
-            const data = localStorage.getItem("expenses")
-            return data ? JSON.parse(data) : []
-        }
-
+    export function Init(){
+        BudgetTracker.Finances.addExpense("Tastatura", "300")
+        BudgetTracker.Finances.addExpense("Mis", "200")
+        BudgetTracker.UI.showBudgetExpenses()
     }
-
-    export namespace UI{
-
-        import getAllExpences = BudgetTracker.Finances.getAllExpenses   
-
-        export function showBudgetExpenses(): void{
-
-            const data = getAllExpences()
-            
-            data.forEach(expense => {
-
-                const budgetDiv = document.querySelector("#budgetDiv") as HTMLDivElement
-                budgetDiv.innerHTML += `<p>${expense.expense} - ${expense.amount}</p>`
-            })
-
-        }
-    }
-
-    
 
 }
 
-BudgetTracker.Finances.addExpense("komp","2000")
-BudgetTracker.Finances.addExpense("mis","200")
-BudgetTracker.UI.showBudgetExpenses()
+App.Init()
