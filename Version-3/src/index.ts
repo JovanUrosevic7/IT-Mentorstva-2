@@ -1,24 +1,46 @@
 
 
-namespace Chat {
+namespace BudgetTracker{
 
-    export function send(message: string){
+    export namespace Finances{
+        export function addExpense(expense: string, amount: string): void{
 
-        console.log("Message was sent to chat: "+message);
+            const expenses = getAllExpenses()
+
+            expenses.push({expense: expense, amount: amount})
+
+            localStorage.setItem("expenses", JSON.stringify(expenses))
+
+        }
+
+        export function getAllExpenses(){
+            const data = localStorage.getItem("expenses")
+            return data ? JSON.parse(data) : []
+        }
 
     }
 
-}
+    export namespace UI{
 
-namespace Email {
+        import getAllExpences = BudgetTracker.Finances.getAllExpenses   
 
-    export function send(message: string){
+        export function showBudgetExpenses(): void{
 
-        console.log("Message was sent to email: "+message);
+            const data = getAllExpences()
+            
+            data.forEach(expense => {
 
+                const budgetDiv = document.querySelector("#budgetDiv") as HTMLDivElement
+                budgetDiv.innerHTML += `<p>${expense.expense} - ${expense.amount}</p>`
+            })
+
+        }
     }
 
+    
+
 }
 
-Chat.send("Test")
-Email.send("Test123")
+BudgetTracker.Finances.addExpense("komp","2000")
+BudgetTracker.Finances.addExpense("mis","200")
+BudgetTracker.UI.showBudgetExpenses()
