@@ -6,7 +6,13 @@ function getFirst<T>(items: T[]): T | undefined{
 
 const numbers = [1,2,3,4,5]
 
-console.log(getFirst(numbers));
+const userInfo: Record<string, any> = {
+    name: "Nikola",
+    age: 16,
+    roles: ["admin", "user"]
+}
+
+
 
 
 
