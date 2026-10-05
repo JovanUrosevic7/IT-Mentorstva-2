@@ -1,68 +1,37 @@
 
 
-// function getFirst<T>(items: T[]): T | undefined{
-//     return items[0]
-// }
 
-// const numbers = [1,2,3,4,5]
+interface UserInfo{
+    name: string,
+    email: string,
+    age: number
+}
 
-// const userInfo: Record<string, any> = {
-//     name: "Nikola",
-//     age: 16,
-//     roles: ["admin", "user"]
-// }
+type UserKey = keyof UserInfo
 
-// type Role = "admin" | "editor" | "guest"
+const userData: UserInfo = {
 
-// const permissions: Record<Role, boolean> = {
-
-//     admin: true,
-//     editor: false,
-//     guest: false
-
-// }
-
-// interface Property{
-//     name: string,
-//     address: string,
-//     city: string,
-//     price: number
-// }
-
-// const Houses: Partial<Property>[] = [
-
-//     {
-//         name: "Velika vila",
-//         address: "Neka ulica 12",
-//         city: "Belgrade",
-//         price: 500000
-//     },
-
-    
-//     {
-//         name: "Stan",
-//         address: "Neka ulica 24a",
-//         city: "Kragujevac",
-//     }
-// ]
-
-
-type Role = "admin" | "editor" | "guest"
-
-const permissions:Partial <Record<Role, boolean>> = {
-
-    admin: true,
-    editor: false,
+    name: "Luka",
+    email: "luka@gmail.com",
+    age: 19
 
 }
 
+function getUserKeyValue(data: UserInfo, key: string){
 
-type Fileds = "username" | "email" | "password"
+    if(key in data){
+        return data[key]
+    }
 
-const form: Partial<Record<Fileds, any>> = {
-
-    email: 12345
-
+    return null
 }
 
-console.log(form);
+function getUserKeyValue2 <UserInfo, K extends keyof UserKey> (data: UserInfo, key: K): UserInfo[K] {
+    return data[key]
+}
+
+
+console.log(getUserKeyValue2(userData, "email"));
+
+
+
