@@ -55,3 +55,14 @@ const permissions:Partial <Record<Role, boolean>> = {
     editor: false,
 
 }
+
+
+type Fileds = "username" | "email" | "password"
+
+const form: Partial<Record<Fileds, any>> = {
+
+    email: 12345
+
+}
+
+console.log(form);

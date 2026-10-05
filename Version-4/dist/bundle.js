@@ -16,7 +16,7 @@
   \**********************/
 () {
 
-eval("{\nconst permissions = {\n  admin: true,\n  editor: false\n};\n\n\n//# sourceURL=webpack://version-4/./src/index.ts?\n}");
+eval("{\nconst permissions = {\n  admin: true,\n  editor: false\n};\nconst form = {\n  email: 12345\n};\nconsole.log(form);\n\n\n//# sourceURL=webpack://version-4/./src/index.ts?\n}");
 
 /***/ }
 
