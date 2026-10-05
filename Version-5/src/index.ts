@@ -1,6 +1,8 @@
-import { buildApiUrl } from "./services/mealDbServices";
+import { buildApiUrl, getMealById } from "./services/mealDbServices";
 
 
-const testUrl = buildApiUrl({endpoint: "search.php", data: [{param: "g", value: "Arrabiata"}]})
+const testUrl = buildApiUrl({endpoint: "search.php", data: [{param: "s", value: "Arrabiata"}]})
 
-console.log(testUrl);
+const x = getMealById({endpoint: "lookup.php", data: [{param: "i", value: "52772"}]})
+
+console.log(x);
