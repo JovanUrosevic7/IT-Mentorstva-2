@@ -16,7 +16,7 @@
   \**********************/
 () {
 
-eval("{\nconst userData = {\n  name: \"Luka\",\n  email: \"luka@gmail.com\",\n  age: 19\n};\nfunction getUserKeyValue(data, key) {\n  if (key in data) {\n    return data[key];\n  }\n  return null;\n}\nfunction getUserKeyValue2(data, key) {\n  return data[key];\n}\nconsole.log(getUserKeyValue2(userData, \"email\"));\n\n\n//# sourceURL=webpack://version-4/./src/index.ts?\n}");
+eval("{\nconst myAccount = {\n  amount: 5e4,\n  accountName: \"Marko\",\n  blocked: false\n};\n\n\n//# sourceURL=webpack://version-4/./src/index.ts?\n}");
 
 /***/ }
 

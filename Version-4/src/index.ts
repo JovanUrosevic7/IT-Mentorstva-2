@@ -1,37 +1,21 @@
 
 
 
-interface UserInfo{
-    name: string,
-    email: string,
-    age: number
-}
+interface Bank { 
 
-type UserKey = keyof UserInfo
-
-const userData: UserInfo = {
-
-    name: "Luka",
-    email: "luka@gmail.com",
-    age: 19
+    amount: number,
+    accountName: string,
+    blocked?: boolean // ? -> optional
 
 }
 
-function getUserKeyValue(data: UserInfo, key: string){
+const myAccount: Required <Bank> = {
 
-    if(key in data){
-        return data[key]
-    }
+    amount: 50000,
+    accountName: "Marko",
+    blocked: false 
+    
 
-    return null
 }
-
-function getUserKeyValue2 <UserInfo, K extends keyof UserKey> (data: UserInfo, key: K): UserInfo[K] {
-    return data[key]
-}
-
-
-console.log(getUserKeyValue2(userData, "email"));
-
 
 
