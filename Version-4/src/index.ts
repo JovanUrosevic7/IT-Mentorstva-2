@@ -22,5 +22,28 @@ const permissions: Record<Role, boolean> = {
 
 }
 
+interface Property{
+    name: string,
+    address: string,
+    city: string,
+    price: number
+}
+
+const Houses: Partial<Property>[] = [
+
+    {
+        name: "Velika vila",
+        address: "Neka ulica 12",
+        city: "Belgrade",
+        price: 500000
+    },
+
+    
+    {
+        name: "Stan",
+        address: "Neka ulica 24a",
+        city: "Kragujevac",
+    }
+]
 
 
