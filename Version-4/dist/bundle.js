@@ -16,7 +16,7 @@
   \**********************/
 () {
 
-eval("{\nconst myAccount = {\n  amount: 5e4,\n  accountName: \"Marko\",\n  blocked: false\n};\n\n\n//# sourceURL=webpack://version-4/./src/index.ts?\n}");
+eval("{\nconst myAccount = {\n  amount: 5e4,\n  accountName: \"Marko\",\n  blocked: false\n};\nfunction createBankAccount(data) {\n  return {\n    accountName: data.accountName,\n    amount: data.amount,\n    blockked: data.blocked\n  };\n}\nfunction updateBankAccount(data) {\n  return {\n    accountName: data.accountName ?? \"Unknown\",\n    amount: data.amount ?? 0\n  };\n}\nfunction createUser(data) {\n  return {\n    name: data.name,\n    email: data.email,\n    age: data.age\n  };\n}\nfunction updateUser(data) {\n  return {\n    name: data.name\n  };\n}\nconst user = {\n  name: \"Mihajlo\",\n  email: \"mihajlo@gmail.com\",\n  age: 22\n};\nfunction getField(data, key) {\n  return data[key];\n}\nconsole.log(getField(user, \"email\"));\n\n\n//# sourceURL=webpack://version-4/./src/index.ts?\n}");
 
 /***/ }
 
