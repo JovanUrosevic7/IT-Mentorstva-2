@@ -16,7 +16,7 @@
   \**********************/
 () {
 
-eval("{\nfunction getFirst(items) {\n  return items[0];\n}\nconst numbers = [1, 2, 3, 4, 5];\nconst userInfo = {\n  name: \"Nikola\",\n  age: 16,\n  roles: [\"admin\", \"user\"]\n};\n\n\n//# sourceURL=webpack://version-4/./src/index.ts?\n}");
+eval("{\nfunction getFirst(items) {\n  return items[0];\n}\nconst numbers = [1, 2, 3, 4, 5];\nconst userInfo = {\n  name: \"Nikola\",\n  age: 16,\n  roles: [\"admin\", \"user\"]\n};\nconst permissions = {\n  admin: true,\n  editor: false,\n  guest: false\n};\n\n\n//# sourceURL=webpack://version-4/./src/index.ts?\n}");
 
 /***/ }
 

@@ -12,8 +12,15 @@ const userInfo: Record<string, any> = {
     roles: ["admin", "user"]
 }
 
+type Role = "admin" | "editor" | "guest"
 
+const permissions: Record<Role, boolean> = {
 
+    admin: true,
+    editor: false,
+    guest: false
+
+}
 
 
 
