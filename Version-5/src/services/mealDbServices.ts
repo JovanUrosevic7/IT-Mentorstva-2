@@ -5,45 +5,46 @@ import { SearchByTextOrLetterInterface } from "../interfaces/SearchByTextOrLette
 import { SingleProductSearchInterface } from "../interfaces/SingleProductSearchInterface"
 import { GetCategoriesInterface } from "../interfaces/GetCategoriesInterface"
 import { CategoriesInterface } from "../interfaces/CategoriesInterface"
+import { BuilUrlInterface } from "../interfaces/BuildUrlInterface"
 
 
 const API_URL = "https://www.themealdb.com/api/json/v1/1/"
 
 
-export function buildApiUrl(data: ApiUrlInterface): string {
-
-    const queryParams = data.data.map(p => `${encodeURIComponent(p.param)}=${encodeURIComponent(p.value)}`).join("&") 
+export function buildApiUrl(endpoint: string ,data: BuilUrlInterface): string {
     
-    const url = API_URL + data.endpoint + "?" + queryParams    
-
-    return url
+    return API_URL + endpoint + "?" + data.data.param + "=" + data.data.value
 
 }
 
-async function callApi(data: SingleProductSearchInterface | SearchByTextOrLetterInterface | GetCategoriesInterface): Promise<MealsResponseInterface[]> {
-    const url = buildApiUrl(data)
+async function callApi(
+        endpoint: string,
+        data: SingleProductSearchInterface | SearchByTextOrLetterInterface | GetCategoriesInterface
+    )
+        : Promise<MealsResponseInterface[]> 
+    
+{
+        const url = buildApiUrl(endpoint, data)
 
-    const response = await axios.get(url)
+        const response = await axios.get(url)
 
-    return response.data.meals
+        return response.data
 }
 
 
 export async function getMealByNameOrFirstLetter(data:SearchByTextOrLetterInterface): Promise<MealsResponseInterface[]> {
     
-    return await callApi(data)
+    return await callApi("search.php", data)
 }
-
 
 
 export async function getMealById(data: SingleProductSearchInterface): Promise<MealsResponseInterface[]> {
 
-    return await callApi(data)
+    return await callApi("lookup.php", data)
 
 }
 
 
-
 export async function getMealCategories(data: GetCategoriesInterface): Promise<CategoriesInterface[]> {
-    return await callApi(data)
+    return await callApi("categories.php", data)
 }

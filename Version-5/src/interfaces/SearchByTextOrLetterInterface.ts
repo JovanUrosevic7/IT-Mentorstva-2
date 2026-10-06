@@ -1,6 +1,6 @@
 import { ApiUrlInterface } from "./ApiUrlInterface";
 
-export interface SearchByTextOrLetterInterface extends ApiUrlInterface{
+export interface SearchByTextOrLetterInterface {
 
     data: {params: "s" | "f", value: string}
 
