@@ -16,37 +16,7 @@
   \************************************/
 (__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
-eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   hookSelectEvents: () => (/* binding */ hookSelectEvents)\n/* harmony export */ });\n/* harmony import */ var _handlers_areaSelectHandler__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../handlers/areaSelectHandler */ \"./src/handlers/areaSelectHandler.ts\");\n/* harmony import */ var _handlers_categorySelectHandler__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../handlers/categorySelectHandler */ \"./src/handlers/categorySelectHandler.ts\");\n/* harmony import */ var _handlers_ingredientSelectHandler__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../handlers/ingredientSelectHandler */ \"./src/handlers/ingredientSelectHandler.ts\");\n/* harmony import */ var _handlers_searchMealsHandler__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../handlers/searchMealsHandler */ \"./src/handlers/searchMealsHandler.ts\");\n\n\n\n\n\nfunction hookSelectEvents() {\n  const categorySelect = document.getElementById(\"categorySelect\");\n  const ingredientSelect = document.getElementById(\"ingredientSelect\");\n  const areaSelect = document.getElementById(\"areaSelect\");\n  const searchMeal = document.getElementById(\"searchMeal\");\n  categorySelect.addEventListener(\"change\", _handlers_categorySelectHandler__WEBPACK_IMPORTED_MODULE_1__.categorySelectHandler);\n  ingredientSelect.addEventListener(\"change\", _handlers_ingredientSelectHandler__WEBPACK_IMPORTED_MODULE_2__.ingredientSelectHandler);\n  areaSelect.addEventListener(\"change\", _handlers_areaSelectHandler__WEBPACK_IMPORTED_MODULE_0__.areaSelectHandler);\n  searchMeal.addEventListener(\"clikc\", _handlers_searchMealsHandler__WEBPACK_IMPORTED_MODULE_3__.searchMealsHandler);\n}\n\n\n//# sourceURL=webpack://version-5/./src/events/selectEvents.ts?\n}");
-
-/***/ },
-
-/***/ "./src/handlers/areaSelectHandler.ts"
-/*!*******************************************!*\
-  !*** ./src/handlers/areaSelectHandler.ts ***!
-  \*******************************************/
-(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   areaSelectHandler: () => (/* binding */ areaSelectHandler)\n/* harmony export */ });\n\nasync function areaSelectHandler() {\n}\n\n\n//# sourceURL=webpack://version-5/./src/handlers/areaSelectHandler.ts?\n}");
-
-/***/ },
-
-/***/ "./src/handlers/categorySelectHandler.ts"
-/*!***********************************************!*\
-  !*** ./src/handlers/categorySelectHandler.ts ***!
-  \***********************************************/
-(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   categorySelectHandler: () => (/* binding */ categorySelectHandler)\n/* harmony export */ });\n\nasync function categorySelectHandler() {\n}\n\n\n//# sourceURL=webpack://version-5/./src/handlers/categorySelectHandler.ts?\n}");
-
-/***/ },
-
-/***/ "./src/handlers/ingredientSelectHandler.ts"
-/*!*************************************************!*\
-  !*** ./src/handlers/ingredientSelectHandler.ts ***!
-  \*************************************************/
-(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   ingredientSelectHandler: () => (/* binding */ ingredientSelectHandler)\n/* harmony export */ });\n\nasync function ingredientSelectHandler() {\n}\n\n\n//# sourceURL=webpack://version-5/./src/handlers/ingredientSelectHandler.ts?\n}");
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   hookSelectEvents: () => (/* binding */ hookSelectEvents)\n/* harmony export */ });\n/* harmony import */ var _handlers_searchMealsHandler__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../handlers/searchMealsHandler */ \"./src/handlers/searchMealsHandler.ts\");\n\n\nfunction hookSelectEvents() {\n  const searchMeal = document.getElementById(\"searchMeal\");\n  searchMeal.addEventListener(\"click\", _handlers_searchMealsHandler__WEBPACK_IMPORTED_MODULE_0__.searchMealsHandler);\n}\n\n\n//# sourceURL=webpack://version-5/./src/events/selectEvents.ts?\n}");
 
 /***/ },
 
@@ -56,7 +26,7 @@ eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpa
   \********************************************/
 (__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
-eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   searchMealsHandler: () => (/* binding */ searchMealsHandler)\n/* harmony export */ });\n\nfunction searchMealsHandler() {\n}\n\n\n//# sourceURL=webpack://version-5/./src/handlers/searchMealsHandler.ts?\n}");
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   searchMealsHandler: () => (/* binding */ searchMealsHandler)\n/* harmony export */ });\n\nfunction searchMealsHandler() {\n  const categorySelect = document.getElementById(\"categorySelect\");\n  const ingredientSelect = document.getElementById(\"ingredientSelect\");\n  const areaSelect = document.getElementById(\"areaSelect\");\n  const selectIngredients = Array.from(ingredientSelect.selectedOptions).map((option) => option.value);\n  console.log(categorySelect.value, selectIngredients, areaSelect.value);\n}\n\n\n//# sourceURL=webpack://version-5/./src/handlers/searchMealsHandler.ts?\n}");
 
 /***/ },
 
