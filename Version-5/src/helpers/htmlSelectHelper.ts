@@ -5,8 +5,6 @@ export function fillSelectWithOptions(elementId: string, data: any): void{
     const select = document.getElementById(elementId) as HTMLSelectElement
 
     data.forEach(option => {
-        console.log(option);
-
         
         const optionData = buildValueAndTextBasendOnType(option)
 

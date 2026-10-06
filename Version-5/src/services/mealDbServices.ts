@@ -11,15 +11,18 @@ import { BuilUrlInterface } from "../interfaces/BuildUrlInterface"
 const API_URL = "https://www.themealdb.com/api/json/v1/1/"
 
 
-export function buildApiUrl(endpoint: string ,data: BuilUrlInterface): string {
-    
-    return API_URL + endpoint + "?" + data.data.param + "=" + data.data.value
+export function buildApiUrl(endpoint: string ,data: BuilUrlInterface | null): string {
+    if(data !== null){
+        return API_URL + endpoint + "?" + data.data.param + "=" + data.data.value
+    }
+
+    return API_URL + endpoint
 
 }
 
 async function callApi(
         endpoint: string,
-        data: SingleProductSearchInterface | SearchByTextOrLetterInterface | GetCategoriesInterface
+        data: SingleProductSearchInterface | SearchByTextOrLetterInterface | GetCategoriesInterface | null
     )
         : Promise<MealsResponseInterface[]> 
     
@@ -48,3 +51,20 @@ export async function getMealById(data: SingleProductSearchInterface): Promise<M
 export async function getMealCategories(data: GetCategoriesInterface): Promise<CategoriesInterface[]> {
     return await callApi("list.php", data)
 }
+
+
+export async function getRandomMeal(amount: number): Promise<MealsResponseInterface[]>{
+
+    const mealPromises = []
+
+    for(let i = 0; i < amount; i++){
+
+        mealPromises.push(callApi("random.php", null))
+
+    }
+
+    const mealsArray = await Promise.all(mealPromises)    
+    return mealsArray.flatMap(response => response.meals)
+
+}
+
