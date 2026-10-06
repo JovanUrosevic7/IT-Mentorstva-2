@@ -14,9 +14,9 @@
 /*!**********************!*\
   !*** ./src/index.ts ***!
   \**********************/
-(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+(module, __webpack_exports__, __webpack_require__) {
 
-eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _services_mealDbServices__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./services/mealDbServices */ \"./src/services/mealDbServices.ts\");\n\n\nconst testUrl = (0,_services_mealDbServices__WEBPACK_IMPORTED_MODULE_0__.buildApiUrl)({ endpoint: \"search.php\", data: [{ param: \"s\", value: \"Arrabiata\" }] });\nconst x = (0,_services_mealDbServices__WEBPACK_IMPORTED_MODULE_0__.getMealById)({ endpoint: \"lookup.php\", data: [{ param: \"i\", value: \"52772\" }] });\nconsole.log(x);\n\n\n//# sourceURL=webpack://version-5/./src/index.ts?\n}");
+eval("{__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {\n__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _services_mealDbServices__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./services/mealDbServices */ \"./src/services/mealDbServices.ts\");\n\n\nconst testUrl = (0,_services_mealDbServices__WEBPACK_IMPORTED_MODULE_0__.buildApiUrl)({ endpoint: \"search.php\", data: [{ param: \"s\", value: \"Arrabiata\" }] });\nconst x = await (0,_services_mealDbServices__WEBPACK_IMPORTED_MODULE_0__.getMealById)({ endpoint: \"lookup.php\", data: [{ param: \"i\", value: \"52772\" }] });\nconst r = await (0,_services_mealDbServices__WEBPACK_IMPORTED_MODULE_0__.getMealCategories)({ endpoint: \"list.php\", data: [{ param: \"a\", value: \"list\" }] });\nconsole.log(x);\nconsole.log(r);\n\n__webpack_async_result__();\n} catch(e) { __webpack_async_result__(e); } }, 1);\n\n//# sourceURL=webpack://version-5/./src/index.ts?\n}");
 
 /***/ },
 
@@ -26,7 +26,7 @@ eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _se
   \****************************************/
 (__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
-eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   buildApiUrl: () => (/* binding */ buildApiUrl),\n/* harmony export */   getMealById: () => (/* binding */ getMealById)\n/* harmony export */ });\n/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ \"./node_modules/axios/lib/axios.js\");\n\n\nconst API_URL = \"https://www.themealdb.com/api/json/v1/1/\";\nfunction buildApiUrl(data) {\n  const queryParams = data.data.map((p) => `${encodeURIComponent(p.param)}=${encodeURIComponent(p.value)}`).join(\"&\");\n  const url = API_URL + data.endpoint + \"?\" + queryParams;\n  return url;\n}\nasync function getMealById(data) {\n  const url = buildApiUrl(data);\n  const response = await axios__WEBPACK_IMPORTED_MODULE_0__[\"default\"].get(url);\n  return response.data.meals;\n}\n\n\n//# sourceURL=webpack://version-5/./src/services/mealDbServices.ts?\n}");
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   buildApiUrl: () => (/* binding */ buildApiUrl),\n/* harmony export */   getMealById: () => (/* binding */ getMealById),\n/* harmony export */   getMealByNameOrFirstLetter: () => (/* binding */ getMealByNameOrFirstLetter),\n/* harmony export */   getMealCategories: () => (/* binding */ getMealCategories)\n/* harmony export */ });\n/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ \"./node_modules/axios/lib/axios.js\");\n\n\nconst API_URL = \"https://www.themealdb.com/api/json/v1/1/\";\nfunction buildApiUrl(data) {\n  const queryParams = data.data.map((p) => `${encodeURIComponent(p.param)}=${encodeURIComponent(p.value)}`).join(\"&\");\n  const url = API_URL + data.endpoint + \"?\" + queryParams;\n  return url;\n}\nasync function callApi(data) {\n  const url = buildApiUrl(data);\n  const response = await axios__WEBPACK_IMPORTED_MODULE_0__[\"default\"].get(url);\n  return response.data.meals;\n}\nasync function getMealByNameOrFirstLetter(data) {\n  return await callApi(data);\n}\nasync function getMealById(data) {\n  return await callApi(data);\n}\nasync function getMealCategories(data) {\n  return await callApi(data);\n}\n\n\n//# sourceURL=webpack://version-5/./src/services/mealDbServices.ts?\n}");
 
 /***/ },
 
@@ -603,6 +603,82 @@ eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpa
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/async module */
+/******/ 	(() => {
+/******/ 		const webpackQueues = Symbol("webpack queues");
+/******/ 		const webpackExports = Symbol("webpack exports");
+/******/ 		const webpackError = Symbol("webpack error");
+/******/ 		
+/******/ 		const resolveQueue = (queue) => {
+/******/ 			if(queue?.d < 1) {
+/******/ 				queue.d = 1;
+/******/ 				queue.forEach((fn) => (fn.r--));
+/******/ 				queue.forEach((fn) => (fn.r-- ? fn.r++ : fn()));
+/******/ 			}
+/******/ 		}
+/******/ 		const wrapDeps = (deps) => (deps.map((dep) => {
+/******/ 			if(dep !== null && typeof dep === "object") {
+/******/ 		
+/******/ 				if(dep[webpackQueues]) return dep;
+/******/ 				if(dep.then) {
+/******/ 					const queue = [];
+/******/ 					queue.d = 0;
+/******/ 					dep.then((r) => {
+/******/ 						obj[webpackExports] = r;
+/******/ 						resolveQueue(queue);
+/******/ 					}, (e) => {
+/******/ 						obj[webpackError] = e;
+/******/ 						resolveQueue(queue);
+/******/ 					});
+/******/ 					const obj = {};
+/******/ 		
+/******/ 					obj[webpackQueues] = (fn) => (fn(queue));
+/******/ 					return obj;
+/******/ 				}
+/******/ 			}
+/******/ 			const ret = {};
+/******/ 			ret[webpackQueues] = x => {};
+/******/ 			ret[webpackExports] = dep;
+/******/ 			return ret;
+/******/ 		}));
+/******/ 		__webpack_require__.a = (module, body, hasAwait) => {
+/******/ 			let queue;
+/******/ 			hasAwait && ((queue = []).d = -1);
+/******/ 			const depQueues = new Set();
+/******/ 			const exports = module.exports;
+/******/ 			let currentDeps;
+/******/ 			let outerResolve;
+/******/ 			let reject;
+/******/ 			const promise = new Promise((resolve, rej) => {
+/******/ 				reject = rej;
+/******/ 				outerResolve = resolve;
+/******/ 			});
+/******/ 			promise[webpackExports] = exports;
+/******/ 			promise[webpackQueues] = (fn) => (queue && fn(queue), depQueues.forEach(fn), promise["catch"](x => {}));
+/******/ 			module.exports = promise;
+/******/ 			const handle = (deps) => {
+/******/ 				currentDeps = wrapDeps(deps);
+/******/ 				let fn;
+/******/ 				const getResult = () => (currentDeps.map((d) => {
+/******/ 		
+/******/ 					if(d[webpackError]) throw d[webpackError];
+/******/ 					return d[webpackExports];
+/******/ 				}))
+/******/ 				const promise = new Promise((resolve) => {
+/******/ 					fn = () => (resolve(getResult));
+/******/ 					fn.r = 0;
+/******/ 					const fnQueue = (q) => (q !== queue && !depQueues.has(q) && (depQueues.add(q), q && !q.d && (fn.r++, q.push(fn))));
+/******/ 					currentDeps.forEach((dep) => (dep[webpackQueues](fnQueue)));
+/******/ 				});
+/******/ 				return fn.r ? promise : getResult();
+/******/ 			}
+/******/ 			const done = (err) => ((err ? reject(promise[webpackError] = err) : outerResolve(exports)), resolveQueue(queue))
+/******/ 		
+/******/ 			body(handle, done);
+/******/ 			queue?.d < 0 && (queue.d = 0);
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	// define getter/value functions for harmony exports
 /******/ 	__webpack_require__.d = (exports, definition) => {

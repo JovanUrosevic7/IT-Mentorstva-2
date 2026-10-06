@@ -1,4 +1,4 @@
-export interface Meal {
+export interface MealsResponseInterface {
     idMeal: string;
     strMeal: string;
     strMealAlternate: string | null;
@@ -62,6 +62,6 @@ export interface Meal {
 }
 
 // Interfejs za celokupan odgovor sa API-ja
-export interface MealsResponse {
-    meals: Meal[] | null;
-}
+// export interface MealsResponseInterface {
+//     meals: Meal[] | null;
+// }
