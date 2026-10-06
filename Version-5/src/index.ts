@@ -1,15 +1,31 @@
-import { buildApiUrl, getMealById, getMealCategories } from "./services/mealDbServices";
+import { hookSelectEvents } from "./events/selectEvents"
+import { fillSelectWithOptions } from "./helpers/htmlSelectHelper"
+import { getMealCategories } from "./services/mealDbServices"
 
 
-// const testUrl = buildApiUrl({data: [{param: "s", value: "Arrabiata"}]})
 
-const x = await getMealById({data: [{param: "i", value: "52772"}]})
+async function main(){
 
-const r = await getMealCategories({data: [{param: "a", value: "list"}]})
+    hookSelectEvents()
 
-// console.log(testUrl);
-// console.log(x);
-console.log(r);
+    const categories =await getMealCategories({
+        data: {param: "c", value: "list"}
+    })
+
+    const ingredients =await getMealCategories({
+        data: {param: "i", value: "list"}
+    })
+
+    const areas =await getMealCategories({
+        data: {param: "a", value: "list"}
+    })
 
 
+    fillSelectWithOptions("categorySelect", categories.meals)
+    fillSelectWithOptions("ingredientSelect", ingredients.meals)
+    fillSelectWithOptions("areaSelect", areas.meals)
+
+}
+
+main()
 

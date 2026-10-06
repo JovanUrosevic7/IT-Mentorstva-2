@@ -46,5 +46,5 @@ export async function getMealById(data: SingleProductSearchInterface): Promise<M
 
 
 export async function getMealCategories(data: GetCategoriesInterface): Promise<CategoriesInterface[]> {
-    return await callApi("categories.php", data)
+    return await callApi("list.php", data)
 }
