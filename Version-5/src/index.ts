@@ -28,7 +28,6 @@ async function main(){
 
 
     const randomMeals = await getRandomMeal(3)
-    console.log(randomMeals);
     
     showMeals("mealHolder", randomMeals)
     

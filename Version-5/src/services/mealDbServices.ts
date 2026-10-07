@@ -6,6 +6,7 @@ import { SingleProductSearchInterface } from "../interfaces/SingleProductSearchI
 import { GetCategoriesInterface } from "../interfaces/GetCategoriesInterface"
 import { CategoriesInterface } from "../interfaces/CategoriesInterface"
 import { BuilUrlInterface } from "../interfaces/BuildUrlInterface"
+import { SearchByCategoryInterface } from "../interfaces/SearchByCategoryInterface"
 
 
 const API_URL = "https://www.themealdb.com/api/json/v1/1/"
@@ -44,6 +45,12 @@ export async function getMealByNameOrFirstLetter(data:SearchByTextOrLetterInterf
 export async function getMealById(data: SingleProductSearchInterface): Promise<MealsResponseInterface[]> {
 
     return await callApi("lookup.php", data)
+
+}
+
+export async function getMealByCategory(data: SearchByCategoryInterface): Promise<MealsResponseInterface[]>{
+
+    return await callApi("filter.php", data)
 
 }
 

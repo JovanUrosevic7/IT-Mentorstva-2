@@ -1,5 +1,6 @@
+import { getMealByCategory } from "../services/mealDbServices"
 
-export function searchMealsHandler(): void{
+export async function searchMealsHandler() {
 
     const categorySelect = document.getElementById("categorySelect") as HTMLSelectElement
     const ingredientSelect = document.getElementById("ingredientSelect") as HTMLSelectElement
@@ -7,7 +8,9 @@ export function searchMealsHandler(): void{
 
     const selectIngredients = Array.from(ingredientSelect.selectedOptions).map(option => option.value)
 
-    console.log(categorySelect.value, selectIngredients, areaSelect.value);
+    const response = await getMealByCategory({data:{param: "c", value: categorySelect.value}})
+    
+    console.log(response);
     
 }
 
