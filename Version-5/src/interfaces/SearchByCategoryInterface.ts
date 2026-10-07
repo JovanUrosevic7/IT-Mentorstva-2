@@ -1,11 +1,11 @@
 import { ApiUrlInterface } from "./ApiUrlInterface";
 
 
-export interface SearchByCategoryInterface  {
+export interface SearchByCategoryOrAreaInterface  {
 
     data: {
 
-        param: "c",
+        param: "c" | "a",
         value: string
 
     }
