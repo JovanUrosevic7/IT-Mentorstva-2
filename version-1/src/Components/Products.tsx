@@ -13,11 +13,8 @@ const phones = {
 
 
 
-function Products({tax}): PhonesInterface {
-
-
-
-
+function Products({tax}: number): PhonesInterface {
+    
     return (
 
         <>
@@ -32,7 +29,7 @@ function Products({tax}): PhonesInterface {
 
 
 
-function CalculateTax(priceProducts,taxProduct): number{
+function CalculateTax(priceProducts: number, taxProduct: number): number{
 
     return priceProducts * ((100 +  taxProduct) / 100 )
 
