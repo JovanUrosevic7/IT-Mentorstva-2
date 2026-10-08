@@ -14,6 +14,8 @@ const phones = {
 
 
 function Products({tax}: number): PhonesInterface {
+
+    tax = parseInt(tax)
     
     return (
 

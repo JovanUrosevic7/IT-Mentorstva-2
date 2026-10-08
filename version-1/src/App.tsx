@@ -17,15 +17,7 @@ function App() {
   const [btnName, setBtnName] = useState("Dugme")
   const [productTax, setProductTax] = useState(0)
 
-  function inputElement (e) {
-    setBtnName(e.target.value)
-  }
-
-  function enterTax (e) {
-    setProductTax(parseInt(e.target.value))
-    console.log(typeof(productTax));
-    
-  }
+ 
 
   
 
@@ -37,10 +29,10 @@ function App() {
       
       <button onClick={btnElement}>{btnName}</button>
 
-      <input type="text" name="" id="" onChange={inputElement} />
+      <input type="text" name="" id="" onChange={(e) => setBtnName(e.target.value)} />
 
       <p>Unesi taksu: </p>
-      <input type="text" name="" id="" onInput={enterTax} />
+      <input type="text" name="" id="" onInput={(e) => setProductTax(e.target.value)} />
       {/* <button onClick={enterTax}>Enter Tax</button> */}
 
     </div>
