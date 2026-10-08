@@ -13,6 +13,7 @@ function Products({tax}) {
     )
     let [newProductName, setNewProductName] = useState("")
     let [newProductPrice, setNewProductPrice] = useState("")
+    let [infoMesage, setInfoMessage] = useState()
 
     const addProduct = () => {
 
@@ -25,6 +26,21 @@ function Products({tax}) {
             ...newProduct
         }))
         
+    }
+
+    
+    let keys = Object.keys(products)
+    const searchProduct = (e) => {
+        let searchedProduct = e.target.value 
+        
+        if(keys.find(p => p.toLocaleLowerCase() === searchedProduct.toLocaleLowerCase())){
+            setInfoMessage("Uspesno ste pronasli proizovd")
+            
+        }else{
+            setInfoMessage("Ne postoji trazeni proizvod");
+            
+        }
+
     }
 
     tax = parseInt(tax)
@@ -49,7 +65,8 @@ function Products({tax}) {
            })}
             <button onClick={() => setProducts({})}>Delete Products</button>
 
-
+           <input type="text" name="" id="" onChange={searchProduct} style={{display:"block", marginTop:"10px", marginBottom:"10px"}}/>
+           <p>{infoMesage}</p>
         </>
   
 
