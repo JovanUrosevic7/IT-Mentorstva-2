@@ -1,19 +1,20 @@
+import { useState } from "react"
 
 interface PhonesInterface {
     [phone: string]: number
 }
 
 
-const phones = {
-    "Iphone 14": 1200, 
-    "Iphone 15": 1300,
-    "Samsung S23 Ultra": 1400
-
-}
-
-
 
 function Products({tax}: number): PhonesInterface {
+
+    const [phones, setPhones] = useState(
+        {
+            "Iphone 14": 1200, 
+            "Iphone 15": 1300,
+            "Samsung S23 Ultra": 1400
+        }
+    )
 
     tax = parseInt(tax)
     
