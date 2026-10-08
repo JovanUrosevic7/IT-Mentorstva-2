@@ -1,6 +1,6 @@
 import "./style.css"
 import favIcon from "../public/favicon.svg"
-
+import Products from "./Components/Products"
 
 const name = "Jovan"
 const colorText = "blue"
@@ -12,7 +12,16 @@ if(currentTime >= 21 || currentTime<= 7){
   console.log(template);
 } 
 
+let nameBtn = "Marko"
 
+function inputElement (e) {
+  console.log(e.target.value);
+}
+
+const btnElement = () => {
+  console.log("works");
+  
+}
 
 function App() {
   
@@ -27,6 +36,13 @@ function App() {
       <img src={favIcon} alt="" />
   
       <p style={{color: colorText, border: "12px dotted black"}}>Pozdrav: {name}</p>
+
+      <Products tax={20}/>
+
+      <button onClick={btnElement}>{nameBtn}</button>
+
+      <input type="text" name="" id="" onChange={inputElement} />
+
 
     </div>
   
