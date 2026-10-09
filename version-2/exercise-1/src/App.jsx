@@ -1,5 +1,6 @@
-import AllVideos from "./Components/AllVideos"
 import {BrowserRouter, Route, Routes} from "react-router-dom"
+import Home from "./Pages/Home"
+import TempVideo from "./Components/TempVideo"
 
 function App() {
 
@@ -10,7 +11,8 @@ function App() {
     <div className="m-4">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<AllVideos />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/video/:id" element={<TempVideo />} />
         </Routes>
       </BrowserRouter>
 
@@ -19,3 +21,5 @@ function App() {
 }
 
 export default App
+
+
