@@ -1,4 +1,5 @@
 import AllVideos from "./Components/AllVideos"
+import {BrowserRouter, Route, Routes} from "react-router-dom"
 
 function App() {
 
@@ -7,8 +8,11 @@ function App() {
 
   return (
     <div className="m-4">
-
-      <AllVideos />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<AllVideos />} />
+        </Routes>
+      </BrowserRouter>
 
     </div>
   )
