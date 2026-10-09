@@ -1,4 +1,5 @@
 import { useState } from "react"
+import "bootstrap/dist/css/bootstrap.min.css"
 
 
 
@@ -47,27 +48,40 @@ function Products({tax}) {
     
     return (
 
-        <>
+        <div className="">
             
-            <div>
-                <p>Product name:</p>
-                <input type="text" onChange={(e) => setNewProductName(e.target.value)} />
+            <div className="d-flex justify-content-start">
+
+                <div>
+                    <p>Product name:</p>
+                    <input type="text" onChange={(e) => setNewProductName(e.target.value)} />
+                    
+                    <p>Product price:</p>
+                    <input type="number" onChange={(e) => setNewProductPrice(e.target.value)} />
+                    <br />
+                    <br />
+                    <button onClick={addProduct}>Create new product</button>
+                </div>
+
+                <div className="m-5">
+
+                    {Object.entries(products).map(([phone, price]) => {
+                        return <p>{phone} - ${price}, with tax: ${CalculateTax(price, tax)}</p>
+                    })}
+                </div>
                 
-                <p>Product price:</p>
-                <input type="number" onChange={(e) => setNewProductPrice(e.target.value)} />
-                <br />
-                <br />
-                <button onClick={addProduct}>Create new product</button>
+                <div className="d-flex flex-column justify-content-center gap-3 ">
+
+                    <input type="text" name="" id="" onChange={searchProduct} placeholder="Pretrazite proizvod" style={{display:"block", marginTop:"10px", marginBottom:"10px"}}/>
+                    <p>{infoMesage}</p>
+
+                    <button onClick={() => setProducts({})}>Delete All Products</button>
+                    
+                </div>
+
             </div>
 
-           {Object.entries(products).map(([phone, price]) => {
-                return <p>{phone} - ${price}, with tax: ${CalculateTax(price, tax)}</p>
-           })}
-            <button onClick={() => setProducts({})}>Delete Products</button>
-
-           <input type="text" name="" id="" onChange={searchProduct} style={{display:"block", marginTop:"10px", marginBottom:"10px"}}/>
-           <p>{infoMesage}</p>
-        </>
+        </div>
   
 
     )
