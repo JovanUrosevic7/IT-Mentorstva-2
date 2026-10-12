@@ -1,6 +1,5 @@
-import VIDEOS from "../videos.json"
 
-function AllVideos() {
+function AllVideos({filteredVideos}) {
 
 
 
@@ -8,7 +7,7 @@ function AllVideos() {
     
         <div>
 
-            {VIDEOS.map((item, index) => (
+            {filteredVideos.map((item, index) => (
 
                 <div key={index} className="mb-[10px] w-[300px]">
                     <h1>{item.title}</h1>
