@@ -1,4 +1,5 @@
 import AllVideos from "../Components/AllVideos"
+import SearchBar from "../Components/SearchBar"
 
 function Home() {
 
@@ -9,6 +10,9 @@ function Home() {
         <div>
 
             <h1>Glavna stranica</h1>
+
+            <SearchBar />
+
             <AllVideos />   
 
 
