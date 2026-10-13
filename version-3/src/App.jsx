@@ -1,6 +1,9 @@
 import axios from "axios"
 import { useState } from "react"
 import Movie from "./Components/Movie"
+import Navigation from "./Templates/Snippets/Navigation"
+import Footer from "./Templates/Snippets/Footer"
+import Search from "./Templates/Snippets/Search"
 
 
 const API_KEY = "450e8dbe"
@@ -20,7 +23,13 @@ function App() {
   return (
     <div>
 
-      <Movie />
+      <Navigation />
+
+      <Search />
+
+      {/* <Movie /> */}
+
+      <Footer />
       
     </div>
   )

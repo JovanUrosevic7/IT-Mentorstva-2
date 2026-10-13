@@ -46,7 +46,6 @@ function Movie() {
 
     return (
         <div>
-            <Navigation />
 
             <form action="">
                 <input type="text" name="" id="" className="border" placeholder="Search" onInput={(e) => setSearchedMovie(e.currentTarget.value)} />
@@ -55,7 +54,6 @@ function Movie() {
             </form>
 
 
-            <Footer />
 
         </div>
     )
