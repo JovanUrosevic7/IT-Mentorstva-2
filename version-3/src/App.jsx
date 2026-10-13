@@ -4,6 +4,7 @@ import Movie from "./Components/Movie"
 import Navigation from "./Templates/Snippets/Navigation"
 import Footer from "./Templates/Snippets/Footer"
 import Search from "./Templates/Snippets/Search"
+import SearchResults from "./Templates/SearchResults"
 
 
 const API_KEY = "450e8dbe"
@@ -26,6 +27,8 @@ function App() {
       <Navigation />
 
       <Search />
+
+      <SearchResults />
 
       {/* <Movie /> */}
 
