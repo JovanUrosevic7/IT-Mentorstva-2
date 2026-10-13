@@ -29,11 +29,15 @@ function Movie() {
         console.log(searchedMovie, typeMovie);
         
 
-        let movieDataByName = await axios.get(`${import.meta.env.VITE_OMDBAPI_URL}?s=${searchedMovie.toLowerCase()}&type=${typeMovie.toLocaleLowerCase()}&apikey=${import.meta.env.VITE_OMDBAPI_KEY}`)
-            .then(response => { return response.data })
-            .catch(err => console.log(err))
+        let movieDataByName = await axios.get(import.meta.env.VITE_OMDBAPI_URL, {
+            params:{
+                s: searchedMovie.toLowerCase(),
+                type: typeMovie.toLocaleLowerCase(),
+                apikey: import.meta.env.VITE_OMDBAPI_KEY
+            }
+        })
 
-        console.log(movieDataByName.type);
+        console.log(movieDataByName.data.Search);
 
     }
 
