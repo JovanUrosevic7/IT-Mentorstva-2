@@ -1,23 +1,28 @@
-import { createContext } from "react"
+import { createContext, useState } from "react"
 import Payment from "./Components/Payment"
 
 
-export const CurrenyContext = createContext("USD")
-console.log(CurrenyContext);
+export const CurrencyContext = createContext("USD")
+console.log(CurrencyContext);
 
 
 function App() {
 
-  
+  const [currency, setCurrency] = useState("USD")
+
+  const updateCurrency = () => {
+    setCurrency("EURO")
+  }
 
   return (
     <div>
   
       This is app
   
-      <CurrenyContext.Provider value="USD">
+      <CurrencyContext.Provider value={{currency, updateCurrency}}>
         <Payment />
-      </CurrenyContext.Provider>
+        <button onClick={updateCurrency}>Update currency</button>
+      </CurrencyContext.Provider>
 
     </div>
   )

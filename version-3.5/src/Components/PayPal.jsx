@@ -1,9 +1,9 @@
 import { useContext } from "react"
-import { CurrenyContext } from "../App"
+import { CurrencyContext} from "../App"
 
 function PayPal() {
 
-    const currency = useContext(CurrenyContext)
+    const currency = useContext(CurrencyContext)
     console.log(currency);
     
 
