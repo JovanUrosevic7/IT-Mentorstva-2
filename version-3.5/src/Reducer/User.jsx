@@ -6,6 +6,19 @@ export const initialUserState = {
 
 }
 
+export const loadUserState = () => {
+
+    const userData = localStorage.getItem("userCreated")
+
+    if(userData){
+        return JSON.parse(userData)
+    }
+
+    return initialUserState
+
+}
+
+
 export const userReducer = (state, action) => {
 
     switch(action.type){

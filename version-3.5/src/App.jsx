@@ -1,7 +1,7 @@
-import { createContext, useReducer, useState } from "react"
+import { createContext, useEffect, useReducer, useState } from "react"
 import Payment from "./Components/Payment"
 import { CURRENCIES } from "./Utils/CurrencyUtil"
-import { initialUserState, userReducer } from "./Reducer/User"
+import { initialUserState, loadUserState, userReducer } from "./Reducer/User"
 
 
 export const CurrencyContext = createContext("USD")
@@ -11,7 +11,7 @@ export const AmountContext = createContext(0)
 
 function App() {
 
-  const [userState, dispatch] = useReducer(userReducer, initialUserState)
+  const [userState, dispatch] = useReducer(userReducer, loadUserState())
 
   const [currency, setCurrency] = useState("USD")
   const [amount, setAmount] = useState(0)
@@ -33,7 +33,14 @@ function App() {
 
     console.log(userState.username, userState.money);
     dispatch({type: "SET_ISUSERCREATED",payload: true})
+
   }
+
+  useEffect(() => {
+    if(userState.isUserCreated){
+      localStorage.setItem("userCreated", JSON.stringify(userState))
+    }
+  }, [userState])
 
   return (
     <div>
