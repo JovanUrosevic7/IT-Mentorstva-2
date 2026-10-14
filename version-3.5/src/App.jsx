@@ -1,44 +1,48 @@
-import { createContext, useState } from "react"
+import { createContext, useReducer, useState } from "react"
 import Payment from "./Components/Payment"
 import { CURRENCIES } from "./Utils/CurrencyUtil"
+import { initialUserState, userReducer } from "./Reducer/User"
 
 
 export const CurrencyContext = createContext("USD")
 export const AmountContext = createContext(0)
 
-// 10.18 predavanje 
+// 11.19 predavanje 
 
 function App() {
 
+  const [userState, dispatch] = useReducer(userReducer, initialUserState)
+
   const [currency, setCurrency] = useState("USD")
   const [amount, setAmount] = useState(0)
+  const [username, setUsername] = useState(null)
+  const [money, setMoney] = useState(null)
+  const [isUserCreated, setIsUserCreated] = useState(false)
+
 
   const updateCurrency = (valute) => {
     setCurrency(valute)
   }
 
   const updateAmount = (amountValue) => {
-    setAmount(amountValue)    
+    setAmount(amountValue)
   }
 
-  const exchangeMoney = () => {
+  const saveUser = () => {
+    if (!userState.username || userState.username.trim() === "" || isNaN(userState.money) || userState.money === null) return
 
-    console.log(currency, amount);
-    
-
-    // if(chooseValute.trim() == "" && amount.trim() == "" ) return
-    // console.log(parseInt(chooseValute) * parseInt(amount));
-
+    console.log(userState.username, userState.money);
+    dispatch({type: "SET_ISUSERCREATED",payload: true})
   }
 
   return (
     <div>
-  
+
       App
-  
+
       <CurrencyContext.Provider value={{ currency, updateCurrency }}>
         <AmountContext.Provider value={{ amount, updateAmount }}>
-          
+
           <Payment />
 
         </AmountContext.Provider>
@@ -46,15 +50,24 @@ function App() {
 
       {/* <button onClick={updateCurrency}>Update currency</button> */}
 
-      <input type="text" placeholder="Amount" onInput={(e) => updateAmount(e.target.value)}/>
+      <input type="text" placeholder="Amount" onInput={(e) => updateAmount(e.target.value)} />
+
+      {!userState.isUserCreated && (
+
+        <form action="">
+          <input type="text" placeholder="Enter username" onInput={(e) => dispatch({type: "SET_USERNAME",payload: e.target.value})} />
+          <input type="text" placeholder="Enter money" onInput={(e) => dispatch({type: "SET_MONEY",payload: Number(e.target.value)})} />
+          <button type="button" onClick={saveUser}>Create User</button>
+        </form>
+      )}
 
       <select name="" id="" onChange={(e) => updateCurrency(e.target.value)}>
         {Object.keys(CURRENCIES).map(currency => (
-          <option key={currency} value={currency}>{currency}</option> 
-        ))}  
-      </select>  
+          <option key={currency} value={currency}>{currency}</option>
+        ))}
+      </select>
 
-      <button type="button" onClick={exchangeMoney}>Exchange money in RSD</button>
+      {/* <button type="button" onClick={exchangeMoney}>Exchange money in RSD</button> */}
 
     </div>
   )
