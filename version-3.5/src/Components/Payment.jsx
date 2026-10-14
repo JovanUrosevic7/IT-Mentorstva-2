@@ -6,7 +6,7 @@ function Payment() {
 
     return (
         <div>
-            PAYMANT
+            Payment
 
             <PayPal />    
         </div>
