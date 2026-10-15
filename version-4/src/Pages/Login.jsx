@@ -43,10 +43,7 @@ function Login() {
 
   }
 
-  const logOut = () => {
-    localStorage.removeItem("userData")
-  }
-
+  
 
   useEffect(() => {
     if (userState.isLoggedIn) {
@@ -57,14 +54,6 @@ function Login() {
 
   return (
     <div>
-
-      {!userState.isLoggedIn ? (
-        <h1>Login</h1>
-      ) : (
-        <a href="" onClick={logOut}>
-          <button>Log out</button>
-        </a>
-      )}
 
       {!userState.isLoggedIn && (
         <form action="">

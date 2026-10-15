@@ -1,13 +1,29 @@
+import { useContext } from "react"
+import { UserContext } from "../App"
 
 function Navigation() {
-  return (
-    <div>
 
-        <a href="">Login</a>
-        <a href="">Logout</a>
+    const {userState} = useContext(UserContext)
 
-    </div>
-  )
+    const logOut = () => {
+        localStorage.removeItem("userData")
+        window.location.reload()
+    }
+    
+
+    return (
+        <div>
+
+            <p>Test</p>
+
+            {!userState.isLoggedIn ? (
+                <a href="">Login</a>
+            ) : (
+                <a href="" onClick={logOut}>Logout</a>
+            )}
+
+        </div>
+    )
 }
 
 export default Navigation
