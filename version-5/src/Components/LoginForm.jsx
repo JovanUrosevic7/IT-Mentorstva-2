@@ -10,33 +10,22 @@ function LoginForm() {
         formState: { errors },
     } = useForm()
 
-    const onSubmit = (data) => console.log(data)
-
-    const [password, setPassword] = useState(null)
-    const [passwordError, setPasswordError] = useState(null)
-
-    const passwordCheck = (newPassword) => {
-
-        newPassword = newPassword.trim()
-
-        if (newPassword !== "") {
-            setPasswordError("")
-            setPassword(newPassword)
-        } else {
-            setPasswordError("Morate uneti validnu sifru")
-        }
-
-    }
+    const formSubmitted = (data) => console.log(data)
 
 
     return (
         <div>
 
-            <form action="" onSubmit={handleSubmit(onSubmit)}>
+            <form action="" onSubmit={handleSubmit(formSubmitted)}>
                 <input type="text" placeholder="Username" />
-                <p>{passwordError}</p>
+
                 {errors.password && <p>Password is required</p>}
-                <input {...register("password", {required: true})} type="password" placeholder="Password" onInput={(e) => passwordCheck(e.currentTarget.value)} />
+                <input {...register("password", {
+                    required: true,
+                    validate:{
+                        trimCheck: value => value.trim() !== "" || "Password cannot be empty or space only"
+                    }
+                })} type="password" placeholder="Password"  />
                 <button >Login</button>
             </form>
 
