@@ -14,7 +14,6 @@ function Navigation() {
     return (
         <div>
 
-            <p>Test</p>
 
             {!userState.isLoggedIn ? (
                 <a href="">Login</a>
