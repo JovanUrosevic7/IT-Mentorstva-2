@@ -4,7 +4,7 @@ import {useForm} from "react-hook-form"
 function Home() {
 
 
-    const getAddress = () => console.log("We got the address");
+    const getAddress = (location: GeolocationPosition) => console.log(location.coords);
     const addressForbidden = () => console.log("We got reject");
 
     if(navigator.geolocation){
