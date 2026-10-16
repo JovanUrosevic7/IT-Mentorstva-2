@@ -1,18 +1,32 @@
+import axios from "axios";
+import { useEffect } from "react";
 import {useForm} from "react-hook-form"
 
+// https://nominatim.openstreetmap.org/reverse?lat=44.010208&lon=20.918261&format=json
 
 function Home() {
 
 
-    const getAddress = (location: GeolocationPosition) => console.log(location.coords);
-    const addressForbidden = () => console.log("We got reject");
+    useEffect(() => {
+        const getAddress = (location: GeolocationPosition) => {
+            // console.log(location.coords);
+            const lat: number = location.coords.latitude;
+            const long: number = location.coords.longitude;
 
-    if(navigator.geolocation){
-        console.log(navigator.geolocation.getCurrentPosition(getAddress, addressForbidden));
-    } else{
-        console.log("Doesnt work");
-        
-    }
+            // Ispravljeno: iskorišćene promenljive lat i long umesto hardkodovanih brojeva
+            axios.get(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${long}&format=json`)
+                .then(response => console.log(response.data))
+                .catch(error => console.error("Greška pri dohvatanju adrese:", error));
+        };
+
+        const addressForbidden = () => console.log("We got reject");
+
+        if (navigator.geolocation) {            
+            navigator.geolocation.getCurrentPosition(getAddress, addressForbidden);
+        } else {
+            console.log("Doesnt work");
+        }
+    }, []);
 
    
     
@@ -27,7 +41,7 @@ function Home() {
 
     const isValidateCityName = (name: string) => validateCities.includes(name)
 
-    const onFormSubmit = (data: string) => console.log(data);
+    const onFormSubmit = (data: any) => console.log(data);
     
 
     return (
