@@ -3,6 +3,20 @@ import {useForm} from "react-hook-form"
 
 function Home() {
 
+
+    const getAddress = () => console.log("We got the address");
+    const addressForbidden = () => console.log("We got reject");
+
+    if(navigator.geolocation){
+        console.log(navigator.geolocation.getCurrentPosition(getAddress, addressForbidden));
+    } else{
+        console.log("Doesnt work");
+        
+    }
+
+   
+    
+
     const validateCities = ["Beograd","Subotica","Novi Sad", "Zagreb", "Sarajevo"]
 
     const {
@@ -11,9 +25,9 @@ function Home() {
         formState:{errors}
     } = useForm()
 
-    const isValidateCityName = (name) => validateCities.includes(name)
+    const isValidateCityName = (name: string) => validateCities.includes(name)
 
-    const onFormSubmit = (data) => console.log(data);
+    const onFormSubmit = (data: string) => console.log(data);
     
 
     return (
