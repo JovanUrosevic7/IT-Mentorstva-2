@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { EmailValidator } from "../Validators/EmailValidator"
+import { PasswordValidator } from "../Validators/PasswordValidator"
 
 function LoginForm() {
 
@@ -28,12 +29,7 @@ function LoginForm() {
 
                 {errors.password && <p>{errors.password.message}</p>}
                 <input
-                    {...register("password", {
-                        required: true,
-                        validate: {
-                            trimCheck: value => value.trim() !== "" || "Password cannot be empty or space only"
-                        }
-                    })}
+                    {...register("password", PasswordValidator)}
                     type="password"
                     placeholder="Password"
                 />
