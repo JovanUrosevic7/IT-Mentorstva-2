@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useUserStore } from "../States/userState";
+import UserData from "./UserData";
 
 function Login() {
 
@@ -13,21 +14,32 @@ function Login() {
 
         setUserState({
             "loggedIn": true,
-            // "email": email,
+            "email": email,
         })
         
         
     }
 
+    const userData = useUserStore((state) => state.userState)
+    
+    const logoutUser = () => {
+        setUserState({})
+    }
 
     return (
         <div>
 
-            <form action="">
-                <input type="text" placeholder="Email" onInput={(e) => setEmail(e.currentTarget.value)}/>
-                <input type="password" placeholder="Password" onInput={(e) => setPassword(e.currentTarget.value)}/>
-                <button type="button" onClick={handleLogin}>Login</button>
-            </form>
+            {!userData.loggedIn ? (
+                <form action="">
+                    <input type="text" placeholder="Email" onInput={(e) => setEmail(e.currentTarget.value)}/>
+                    <input type="password" placeholder="Password" onInput={(e) => setPassword(e.currentTarget.value)}/>
+                    <button type="button" onClick={handleLogin}>Login</button>
+                </form>
+            ) : (
+
+                <button type="button" onClick={logoutUser}>Logout</button>
+            )}
+            
 
 
         </div>
