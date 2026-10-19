@@ -1,10 +1,21 @@
+import { RecoilRoot } from "recoil"
+import Login from "./Components/Login"
+import UserData from "./Components/UserData"
 
 function App() {
 
 
 
   return (
-    <div>App</div>
+    <div>
+
+      {/* <RecoilRoot> */}
+        <UserData />
+        <Login />
+      {/* </RecoilRoot> */}
+
+
+    </div>
   )
 }
 
