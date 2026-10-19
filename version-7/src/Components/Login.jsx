@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useUserStore } from "../States/userState";
-import UserData from "./UserData";
 
 function Login() {
 

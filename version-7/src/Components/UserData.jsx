@@ -1,4 +1,3 @@
-import { useRecoilValue } from "recoil"
 import { useUserStore } from "../States/userState"
 
 function UserData() {
