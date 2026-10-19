@@ -1,6 +1,7 @@
 import { RecoilRoot } from "recoil"
 import Login from "./Components/Login"
 import UserData from "./Components/UserData"
+import Tasks from "./Components/Tasks"
 
 function App() {
 
@@ -10,6 +11,7 @@ function App() {
     <div>
 
       {/* <RecoilRoot> */}
+        <Tasks />
         <UserData />
         <Login />
       {/* </RecoilRoot> */}
