@@ -45,9 +45,13 @@ function Login() {
 
             {!userData.loggedIn ? (
                 <form action="" onSubmit={handleSubmit(handleLogin)}>
+
                     {errors.errorData && <p>{errors.errorData.message}</p>}
+                    
                     <input type="text" placeholder="Email" {...register("email")}  />
+                    
                     <input type="password" placeholder="Password" {...register("password")} />
+                    
                     <button  >Login</button>
                 </form>
             ) : (

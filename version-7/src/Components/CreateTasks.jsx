@@ -1,24 +1,36 @@
 import { useState } from "react"
 import { useTasksState } from "../States/taskState"
+import {useForm} from "react-hook-form"
+
 
 function CreateTasks() {
+
+    const {
+        register,
+        handleSubmit,
+        watch,
+        reset,
+        formState: { errors },
+    } = useForm()
 
     const [taskName, setTaskName] = useState("")
 
     const setTasksState = useTasksState((state) => state.setTasksState)
 
-    const createTask = () => {
-        if(!taskName.trim()) return
+    const createTask = (data) => {
+        if (!data.taskName.trim()) return
 
-        setTasksState(taskName)
-        setTaskName("")
+        setTasksState(data.taskName)
+        reset()
     }
 
     return (
         <div>
-            <form action="">
-                <input type="text" placeholder="Enter Title of the task" value={taskName} onInput={e => setTaskName(e.currentTarget.value)} />
-                <button type="button" onClick={createTask}>Create Task</button>
+            <form action="" onSubmit={handleSubmit(createTask)}>
+                
+                <input type="text" placeholder="Enter Title of the task" {...register("taskName")} />
+                
+                <button >Create Task</button>
             </form>
         </div>
     )
