@@ -6,9 +6,9 @@ function UserData() {
     // console.log(userData);
     
     return(
-        <div>
+        <div className="">
             <p>{userData.loggedIn}</p>
-            <p>{userData.email}</p>
+            <p className="underline ">{userData.email}</p>
         </div>
     )
 }

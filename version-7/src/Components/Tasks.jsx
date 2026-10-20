@@ -72,7 +72,7 @@ function Tasks() {
                     Tasks:
                     {taskData.map(task => (
 
-                        <div key={task.id}>
+                        <div key={task.id} className="flex">
 
                             {editTaskId == task.id ? (
 

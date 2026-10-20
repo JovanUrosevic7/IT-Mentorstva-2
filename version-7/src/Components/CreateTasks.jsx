@@ -54,15 +54,15 @@ function CreateTasks() {
                 
                 <input type="text" placeholder="Enter Title of the task" {...register("taskName", {
                     required: "Task name is required."
-                })} />
+                })} className="border" />
 
-                <select name="" id="" {...register("category")}>
+                <select name="" id="" {...register("category")} className="border">
                     {categories.map((category) => (
                         <option key={category} value={category}>{category}</option>
                     ))}
                 </select>
                 
-                <button >Create Task</button>
+                <button className="border">Create Task</button>
                 
                 {errors.taskName && <p>Task name is required</p>}
             </form>

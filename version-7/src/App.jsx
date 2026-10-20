@@ -7,9 +7,9 @@ function App() {
 
 
   return (
-    <div>
+    <div className="p-[10px]">
 
-        <div style={{"display": "flex", "alignItems": "center", "gap":"10px"}}>
+        <div style={{"display": "flex", "alignItems": "center", "gap":"10px"}} className="flex item-center mb-[20px]">
           <UserData />
           <Login />
         </div>

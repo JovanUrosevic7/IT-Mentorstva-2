@@ -41,22 +41,22 @@ function Login() {
     
 
     return (
-        <div>
+        <div className="">
 
             {!userData.loggedIn ? (
-                <form action="" onSubmit={handleSubmit(handleLogin)}>
+                <form action="" onSubmit={handleSubmit(handleLogin)} className="flex gap-[10px]">
 
                     {errors.errorData && <p>{errors.errorData.message}</p>}
                     
-                    <input type="text" placeholder="Email" {...register("email")}  />
+                    <input type="text" placeholder="Email" {...register("email")}  className="border"/>
                     
-                    <input type="password" placeholder="Password" {...register("password")} />
+                    <input type="password" placeholder="Password" {...register("password")} className="border"/>
                     
-                    <button  >Login</button>
+                    <button  className="border">Login</button>
                 </form>
             ) : (
 
-                <button type="button" onClick={logoutUser}>Logout</button>
+                <button type="button" onClick={logoutUser} className="border-b border-yellow-500">Logout</button>
             )}
 
 
