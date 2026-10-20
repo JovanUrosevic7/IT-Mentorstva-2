@@ -9,9 +9,12 @@ function App() {
   return (
     <div>
 
+        <div style={{"display": "flex", "alignItems": "center", "gap":"10px"}}>
+          <UserData />
+          <Login />
+        </div>
+
         <Tasks />
-        <UserData />
-        <Login />
 
 
     </div>

@@ -6,9 +6,7 @@ function Tasks() {
 
     const userData = useUserStore((state) => state.userState)
 
-    const taskData = useTasksState((state) => state.taskState)
-    // console.log(taskData);
-    
+    const taskData = useTasksState((state) => state.taskState)    
 
     const deleteTask = useTasksState((state) => state.deleteTaskState)
 
@@ -19,9 +17,10 @@ function Tasks() {
                     <CreateTasks />
                     Tasks:
                     {taskData.map(task => (
-                        <div key={task}>
-                            <p>{task}</p>
-                            <button type="button" onClick={() => deleteTask(task)}>Delete task</button>
+                        <div key={task.id}>
+                            <p>{task.name}</p>
+                            <p>{task.category}</p>
+                            <button type="button" onClick={() => deleteTask(task.id)}>Delete task</button>
                         </div>
                     ))}
 
