@@ -7,7 +7,7 @@ function Tasks() {
     const userData = useUserStore((state) => state.userState)
 
     const taskData = useTasksState((state) => state.taskState)
-    console.log(taskData);
+    // console.log(taskData);
     
 
     const deleteTask = useTasksState((state) => state.deleteTaskState)
