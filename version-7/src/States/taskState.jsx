@@ -13,7 +13,12 @@ export const useTasksState = create(
             deleteTaskState: (deleteTask) =>
                 set((state) => ({
                     taskState: state.taskState.filter(task => task !== deleteTask)
-                }))
+                })),
+
+            updateTaskState: (updatedTask) =>
+                set(() => ({
+                    taskState: updatedTask
+                })) 
         }),
         {
             name: "userTasks"
