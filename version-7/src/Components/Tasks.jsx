@@ -5,6 +5,7 @@ import CreateTasks from "./CreateTasks"
 import { categories } from "../Utils/Categories"
 import { useForm } from "react-hook-form"
 import CommentForm from "./CommentForm"
+import GetAllCommentsForPost from "./GetAllCommentsForPost"
 
 function Tasks() {
 
@@ -23,7 +24,7 @@ function Tasks() {
     const updateTaskState = useTasksState((state) => state.updateTaskState)
     const deleteTask = useTasksState((state) => state.deleteTaskState)
 
-    // console.log(editTaskId);
+    // console.log(taskData);
 
 
     const updateTask = (data) => {
@@ -41,11 +42,38 @@ function Tasks() {
             return task
         })
 
-        console.log(updateTasks);
+        // console.log(updateTasks);
         updateTaskState(updateTasks)
 
     }
 
+    const newCommentPosted = (data) => {
+        console.log(data);
+
+        const tasksWithComments = taskData.map(task => {
+            if(task.id === parseInt(data.taskId)){
+
+                let existingComments = []
+                if(Array.isArray(task.comments)){
+                    existingComments = task.comments
+                }
+
+                return {
+                    ...task,
+                    comments: [...existingComments, data.comments]
+                }
+            }
+
+            return task
+        })
+        
+        
+        updateTaskState(tasksWithComments)
+        console.log(tasksWithComments);
+        
+
+        
+    }
     
 
 
@@ -97,21 +125,21 @@ function Tasks() {
                                         <button className="border">Update task</button>
 
                                     </form>
-                                ) : (
 
+                                ) : (
 
                                     <div className="w-[200px] flex flex-col gap-[10px] bg-blue-100">
                                         <p onClick={() => setEditTaskId(task.id)} className="border min-w-[100px]" >{task.name}</p>
                                         
                                         <p onClick={() => setEditTaskId(task.id)} className="border min-w-[100px]" >{task.category}</p>
 
-                                        <CommentForm task={task}/>
+                                        <CommentForm task={task} callbackPostComment={newCommentPosted}/>
 
                                         <button type="button" onClick={() => deleteTask(task.id)} className="border border-black text-red-500">Delete task</button>
                                     </div>
                                 )}
 
-
+                                <GetAllCommentsForPost comments={task.comments} />
 
                             </div>
                         ))}

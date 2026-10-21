@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form"
 
-function CommentForm({ task }) {
+function CommentForm({ task, callbackPostComment }) {
 
     const {
         register,
@@ -8,7 +8,7 @@ function CommentForm({ task }) {
     } = useForm()
 
     const postComment = (data) => {
-        console.log(data);
+        callbackPostComment(data);
         
     }
 
@@ -17,7 +17,7 @@ function CommentForm({ task }) {
 
             <input type="hidden" defaultValue={task.id} {...register("taskId")} />
 
-            <input type="text" placeholder="Comment" className="border min-w-[100px]" {...register("comment")} />
+            <input type="text" placeholder="Comment" className="border min-w-[100px]" {...register("comments")} />
 
             <button className="border bg-blue-500">Post comment</button>
         </form>
