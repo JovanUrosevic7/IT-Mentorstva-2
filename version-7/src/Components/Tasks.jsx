@@ -139,7 +139,7 @@ function Tasks() {
                                     </div>
                                 )}
 
-                                <GetAllCommentsForPost comments={task.comments} />
+                                <GetAllCommentsForPost comments={task.comments} taskId={task.id}/>
 
                             </div>
                         ))}
