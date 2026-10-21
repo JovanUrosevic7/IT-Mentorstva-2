@@ -50,7 +50,7 @@ function CreateTasks() {
 
     return (
         <div>
-            <form action="" onSubmit={handleSubmit(createTask)}>
+            <form action="" onSubmit={handleSubmit(createTask)} className="flex gap-[10px]">
                 
                 <input type="text" placeholder="Enter Title of the task" {...register("taskName", {
                     required: "Task name is required."
@@ -62,7 +62,7 @@ function CreateTasks() {
                     ))}
                 </select>
                 
-                <button className="border">Create Task</button>
+                <button className="border p-1">Create Task</button>
                 
                 {errors.taskName && <p>Task name is required</p>}
             </form>

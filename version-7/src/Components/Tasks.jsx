@@ -4,6 +4,7 @@ import { useUserStore } from "../States/userState"
 import CreateTasks from "./CreateTasks"
 import { categories } from "../Utils/Categories"
 import { useForm } from "react-hook-form"
+import CommentForm from "./CommentForm"
 
 function Tasks() {
 
@@ -29,7 +30,7 @@ function Tasks() {
         setEditTaskId(null)
 
         const updateTasks = taskData.map(task => {
-            if(task.id === data.taskId){
+            if (task.id === data.taskId) {
                 return {
                     ...task,
                     name: data.taskName,
@@ -42,12 +43,10 @@ function Tasks() {
 
         console.log(updateTasks);
         updateTaskState(updateTasks)
-        
-        
+
     }
 
-
-
+    
 
 
     useEffect(() => {
@@ -68,45 +67,58 @@ function Tasks() {
         <div>
             {userData.loggedIn && (
                 <div>
+
                     <CreateTasks />
-                    Tasks:
-                    {taskData.map(task => (
 
-                        <div key={task.id} className="flex">
+                    <p className="text-2xl my-[10px]">Tasks:</p>
 
-                            {editTaskId == task.id ? (
+                    <div className="flex flex-wrap gap-[10px]">
 
-                                <form action="" onSubmit={handleSubmit(updateTask)} >
+                        {taskData.map(task => (
 
-                                    <input type="hidden" defaultValue={task.id} {...register("taskId")} />
+                            <div key={task.id} >
 
-                                    <input type="text" defaultValue={task.name} {...register("taskName")} />
+                                {editTaskId == task.id ? (
 
-                                    <select {...register("category")} defaultValue={task.category}>
+                                    <form action="" onSubmit={handleSubmit(updateTask)} className="flex flex-col gap-[5px] bg-yellow-200">
 
-                                        {categories.map((category) => (
-                                            <option key={category} value={category}>{category}</option>
-                                        ))}
+                                        <input type="hidden" defaultValue={task.id} {...register("taskId")} />
 
-                                    </select>
+                                        <input type="text" defaultValue={task.name} {...register("taskName")} className="border min-w-[100px]" />
 
-                                    <button >Update task</button>
+                                        <select {...register("category")} defaultValue={task.category} className="border">
 
-                                </form>
-                            ) : (
+                                            {categories.map((category) => (
+                                                <option key={category} value={category}>{category}</option>
+                                            ))}
 
+                                        </select>
 
-                                <div >
-                                    <p onClick={() => setEditTaskId(task.id)}>{task.name}</p>
-                                    <p onClick={() => setEditTaskId(task.id)}>{task.category}</p>
-                                    <button type="button" onClick={() => deleteTask(task.id)}>Delete task</button>
-                                </div>
-                            )}
+                                        <button className="border">Update task</button>
+
+                                    </form>
+                                ) : (
 
 
+                                    <div className="w-[200px] flex flex-col gap-[10px] bg-blue-100">
+                                        <p onClick={() => setEditTaskId(task.id)} className="border min-w-[100px]" >{task.name}</p>
+                                        
+                                        <p onClick={() => setEditTaskId(task.id)} className="border min-w-[100px]" >{task.category}</p>
 
-                        </div>
-                    ))}
+                                        <CommentForm task={task}/>
+
+                                        <button type="button" onClick={() => deleteTask(task.id)} className="border border-black text-red-500">Delete task</button>
+                                    </div>
+                                )}
+
+
+
+                            </div>
+                        ))}
+
+
+
+                    </div>
 
                 </div>
             )}
