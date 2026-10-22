@@ -1,37 +1,24 @@
 
-async function page({params}) {
+async function page({ params }) {
 
     const resolvedParams = await params
-    const slug = resolvedParams.slug
 
 
-    const blogPosts = [
-        {
-            name: "First-blog",
-            description: "Lorem ipsum 1",
-            slug: "first-blog"
-        },
-        {
-            name: "Second-blog",
-            description: "Lorem ipsum 1",
-            slug: "second-blog"
-        }
-    ]
+    const response = await fetch("https://dummyjson.com/products/" + resolvedParams.slug)
+    const data = await response.json()
+    console.log(data);
+    
 
-    const blog = blogPosts.find(post => post.slug === slug)
+    return (
+        <div>
+            <h1>{data.title}</h1>
 
-    if(typeof blog === "undefined"){
-        console.log("ne postoji");
-        
-    }
+            {data.images.map(image => (
+                <img key={image} src={image} alt="" width={150} height={100} />
+            ))}
 
-  return (
-    <div>
-        <p>{blog.name}</p>
-        <p>{blog.description}</p>
-        <p>{blog.slug}</p>
-    </div>
-  )
+        </div>
+    )
 }
 
 export default page
