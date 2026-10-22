@@ -1,7 +1,16 @@
 
 function page() {
   return (
-    <div>About</div>
+    <div>
+
+        <img
+            src="/images/f1.avif"
+            alt="Formula 1 image"
+            width={150}
+            height={100}
+        />
+
+    </div>
   )
 }
 
