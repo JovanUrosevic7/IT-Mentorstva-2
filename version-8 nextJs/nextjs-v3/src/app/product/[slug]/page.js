@@ -4,7 +4,7 @@ async function slug({params}) {
 
     const urlPrarams = await params
 
-    const response = await fetch("https://dummyjson.com/products/" + urlPrarams.slug)
+    const response = await fetch(process.env.PRODUCT_API_URL + "products/" + urlPrarams.slug)
     const data = await response.json()
     console.log(response);
     console.log(data);
