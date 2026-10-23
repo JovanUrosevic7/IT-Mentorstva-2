@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "./page.module.css";
-import getAllProducts from "./src/services/productService";
+import { getAllProducts } from "./src/services/productService";
 
 export default async function Home() {
   

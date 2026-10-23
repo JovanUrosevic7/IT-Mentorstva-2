@@ -1,15 +1,12 @@
+import { getProductById } from '@/app/src/services/productService';
 import React from 'react'
 
 async function slug({params}) {
 
-    const urlPrarams = await params
+    const urlPrarams = await params    
+    const data = await getProductById(urlPrarams.slug)
 
-    const response = await fetch(process.env.PRODUCT_API_URL + "products/" + urlPrarams.slug)
-    const data = await response.json()
-    console.log(response);
-    console.log(data);
-
-    if(response.status === 404) return <h1>Ne postoji</h1>  
+    if(!data) return <h1>Ne postoji</h1>
     
     
   return (
@@ -25,3 +22,4 @@ async function slug({params}) {
 }
 
 export default slug
+
