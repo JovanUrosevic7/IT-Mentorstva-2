@@ -30,3 +30,16 @@ export async function searchProductByQuery(query){
     
 }
 
+export function addProduct(title, desctiption, price) {
+    fetch(process.env.PRODUCT_API_URL + "products/add", {
+        method:"POST",
+        headers: {"Content-Type": "application/json"},
+        body:JSON.stringify({
+            title: title,
+            desctiption: desctiption,
+            price: price
+        })
+    })
+    .then(response => response.json)
+    .then(console.log(ressponse))
+}
