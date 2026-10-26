@@ -21,5 +21,12 @@ export async function getProductById(productId=1){
     return await response.json()
 }
 
+// https://dummyjson.com/products/search?pretraga=phone
 
+export async function searchProductByQuery(query){
+    const response = await fetch(process.env.PRODUCT_API_URL + "products/search?q=" + query)
+    return await response.json()
+    // console.log(query);
+    
+}
 
