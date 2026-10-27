@@ -14,7 +14,7 @@ export default async function Home() {
     
     <div >
       
-      <SearchBar />
+      {/* <SearchBar /> */}
 
       {data.products.map((product, index) => (
         <div key={index}>

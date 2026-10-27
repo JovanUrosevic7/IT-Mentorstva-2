@@ -1,4 +1,4 @@
-// import { searchProductByQuery } from "../../app/src/services/productService";
+// api/search
 
 import { searchProductByQuery } from "@/app/src/services/productService";
 
