@@ -4,7 +4,7 @@ import path from "path"
 
 const pathFile = path.join(process.cwd(), "data", "links.json")
 
-export function getLinka() {
+export function getLinks() {
 
     if(!fs.existsSync(pathFile)){
         return []
@@ -15,8 +15,10 @@ export function getLinka() {
 
 }
 
-export function saveLinks(pathFile){
+export function saveLinks(links){
+    
     const dir = path.dirname(filePath)
+
     if(!fs.existsSync(dir)){
         fs.mkdirSync(dir, {recursive: true})
     }
