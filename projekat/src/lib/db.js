@@ -2,15 +2,15 @@ import fs from "fs"
 import path from "path"
 
 
-const pathFile = path.join(process.cwd(), "data", "links.json")
+const filePath = path.join(process.cwd(), "data", "links.json")
 
 export function getLinks() {
 
-    if(!fs.existsSync(pathFile)){
+    if(!fs.existsSync(filePath)){
         return []
     }
 
-    const fileData = fs.readFileSync(pathFile, "utf8")
+    const fileData = fs.readFileSync(filePath, "utf8")
     return JSON.parse(fileData) 
 
 }

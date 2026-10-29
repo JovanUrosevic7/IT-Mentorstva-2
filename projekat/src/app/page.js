@@ -24,7 +24,7 @@ export default function Home() {
 
       const data = await createLink(originalUrl, customCode)
 
-      const baseUrl = window.location.origin // ?????????????????
+      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || window.location.origin 
       setShortLink(`${baseUrl}/${data.code}`)
 
       setOriginalUrl("")

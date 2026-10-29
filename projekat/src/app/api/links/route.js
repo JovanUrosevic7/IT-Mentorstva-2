@@ -7,23 +7,23 @@ function generateShortCode() {
 
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let result = ""
-    for(let i = 0; i < 6; i++){
-        result += chars.charAt(Math.floor(Math.random() * chars.length)) 
+    for (let i = 0; i < 6; i++) {
+        result += chars.charAt(Math.floor(Math.random() * chars.length))
     }
 
     return result
 
 }
 
-export async function GET(request){ 
+export async function GET(request) {
 
-    const {searchParams} = new URL(request.url)
+    const { searchParams } = new URL(request.url)
     const search = searchParams.get("search") || ""
 
     const links = getLinks()
 
-    if(search){
-        const filtered = links.filter(link => 
+    if (search) {
+        const filtered = links.filter(link =>
             link.originalUrl.toLowerCase().includes(search.toLowerCase()) ||
             link.code.toLowerCase().includes(search.toLowerCase())
         )
@@ -33,42 +33,42 @@ export async function GET(request){
 
     return NextResponse.json(links)
 
-} 
+}
 
 
-export async function POST(request){
+export async function POST(request) {
 
-    try{
+    try {
 
         const body = await request.json()
-        const { originalUrl, customCode} = body
+        const { originalUrl, customCode } = body
 
-        if(!originalUrl || (!originalUrl.startsWith("http://") && !originalUrl.startsWith("https://"))){
+        if (!originalUrl || (!originalUrl.startsWith("http://") && !originalUrl.startsWith("https://"))) {
             return NextResponse.json(
-                {error: "URL mora počinjati sa http:// ili https:// i biti ispravan."},
-                {status: 400}
+                { error: "URL mora počinjati sa http:// ili https:// i biti ispravan." },
+                { status: 400 }
             )
         }
 
         let links = getLinks()
         let code = customCode
 
-        if(code){
+        if (code) {
 
             const codeRegex = /^[a-zA-Z0-9-]+$/;
-            
-            if(code.length < 3 || code.length > 20 || !codeRegex.test(code)){
+
+            if (code.length < 3 || code.length > 20 || !codeRegex.test(code)) {
                 return NextResponse.json(
-                    {error: 'Custom kod mora imati između 3 i 20 karaktera i sadržati samo slova, cifre i crtice.'},
-                    {status: 400}
+                    { error: 'Custom kod mora imati između 3 i 20 karaktera i sadržati samo slova, cifre i crtice.' },
+                    { status: 400 }
                 )
             }
 
             const exists = links.find(l => l.code === code)
-            if(exists){
+            if (exists) {
                 return NextResponse.json(
-                    {error: "Ovaj custom kod već postoji."},
-                    {status: 409}
+                    { error: "Ovaj custom kod već postoji." },
+                    { status: 409 }
                 )
             }
 
@@ -76,9 +76,9 @@ export async function POST(request){
 
         else {
 
-            do{
+            do {
                 code = generateShortCode()
-            } while(links.some(l => l.code === code))
+            } while (links.some(l => l.code === code))
 
         }
 
@@ -92,13 +92,14 @@ export async function POST(request){
         links.push(newLink)
         saveLinks(links)
 
-        return NextResponse.json(newLink, {status: 201})
-    } 
+        return NextResponse.json(newLink, { status: 201 })
+    }
 
-    catch(error){
+    catch (error) {
+        console.error("DETALJNA GRESKA:", error); // <-- Dodaj ovo
         return NextResponse.json(
-            {error: "Došlo je do greške na serveru."},
-            {status: 500}
+            { error: "Došlo je do greške na serveru." },
+            { status: 500 }
         )
     }
 
