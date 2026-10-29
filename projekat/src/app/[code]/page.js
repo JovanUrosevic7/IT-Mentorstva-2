@@ -1,15 +1,15 @@
-import { getLinks, saveLinks } from '@/src/lib/db';
+import { getLinks, saveLinks } from '../../lib/db';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 
-export async function RedirectPage({params}){
+export default async function RedirectPage({params}){
 
     const {code} = await params
 
     const links = getLinks()
     const linkIndex = links.findIndex(l => l.code === code)
 
-    if(findIndex === -1){
+    if(linkIndex === -1){
         return (
             <main style={{ padding: '50px', textAlign: 'center', fontFamily: 'sans-serif' }}>
                 <h1>404 - Link nije pronađen</h1>
