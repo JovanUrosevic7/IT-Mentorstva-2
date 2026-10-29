@@ -1,14 +1,17 @@
-import { getLinks, saveLinks } from '@/src/lib/db'; 
+
+import { getLinks, saveLinks } from "@/lib/db";
 import { NextResponse } from "next/server"
 
 
 function generateShortCode() {
 
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const result = ""
+    let result = ""
     for(let i = 0; i < 6; i++){
         result += chars.charAt(Math.floor(Math.random() * chars.length)) 
     }
+
+    return result
 
 }
 
@@ -54,14 +57,14 @@ export async function POST(request){
 
             const codeRegex = /^[a-zA-Z0-9-]+$/;
             
-            if(code.length > 3 || code.length < 20 || !codeRegex.test(code)){
+            if(code.length < 3 || code.length > 20 || !codeRegex.test(code)){
                 return NextResponse.json(
                     {error: 'Custom kod mora imati između 3 i 20 karaktera i sadržati samo slova, cifre i crtice.'},
                     {status: 400}
                 )
             }
 
-            const exists = links.find(l = l.code === code)
+            const exists = links.find(l => l.code === code)
             if(exists){
                 return NextResponse.json(
                     {error: "Ovaj custom kod već postoji."},

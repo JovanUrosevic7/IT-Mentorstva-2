@@ -1,4 +1,4 @@
-import { getLinks, saveLinks } from '@/src/lib/db';
+import { getLinks, saveLinks } from '../../../../services/linkService';
 import { NextResponse } from "next/server"
 
 export async function GET(request, {params}){

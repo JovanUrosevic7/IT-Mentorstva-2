@@ -1,3 +1,5 @@
+
+
 export async function fetchLinks(search = ''){
 
     const url = search ? `/api/links?search=${encodeURIComponent(search)}` : '/api/links';
@@ -34,7 +36,7 @@ export async function createLink(originalUrl, customCode){
 
 export async function deleteLink(code){
 
-    const response = await fetch("/api/links/${code}",{
+    const response = await fetch(`/api/links/${code}`,{
         method: "DELETE",
     })
 
