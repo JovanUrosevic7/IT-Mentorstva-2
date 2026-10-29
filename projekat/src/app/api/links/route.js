@@ -41,7 +41,7 @@ export async function POST(request) {
     try {
 
         const body = await request.json()
-        const { originalUrl, customCode } = body
+        const { originalUrl, customCode, expiresAt } = body
 
         if (!originalUrl || (!originalUrl.startsWith("http://") && !originalUrl.startsWith("https://"))) {
             return NextResponse.json(
@@ -82,11 +82,14 @@ export async function POST(request) {
 
         }
 
+        
+
         const newLink = {
             code,
             originalUrl,
             clicks: 0,
-            createdAt: new Date().toISOString()
+            createdAt: new Date().toISOString(),
+            expiresAt: expiresAt || null
         }
 
         links.push(newLink)

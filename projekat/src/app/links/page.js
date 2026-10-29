@@ -13,6 +13,7 @@ export default function LinksPage() {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState("")
 
+
     const loadLinks = async (query = "") => {
 
         try {
@@ -101,6 +102,7 @@ export default function LinksPage() {
                     <tbody>
                         {links.map((link) => {
                             const fullShortUrl = typeof window !== 'undefined' ? `${window.location.origin}/${link.code}` : `/${link.code}`;
+                            const isExpired = link.expiresAt && new Date() > new Date(link.expiresAt);
 
                             return (
                                 <tr key={link.code} style={{ borderBottom: '1px solid #eee' }}>
@@ -117,6 +119,19 @@ export default function LinksPage() {
                                     <td style={{ padding: '12px', textAlign: 'center', fontWeight: 'bold' }}>
                                         {link.clicks}
                                     </td>
+
+                                    {/* 🕒 NOVO: Kolona za datum isteka */}
+                                    <td style={{ padding: '12px', textAlign: 'center', fontSize: '14px' }}>
+                                        {link.expiresAt ? (
+                                            <span style={{ color: isExpired ? '#d32f2f' : '#2e7d32', fontWeight: 'bold' }}>
+                                                {new Date(link.expiresAt).toLocaleDateString()}
+                                                {isExpired && <div style={{ fontSize: '11px', color: '#d32f2f' }}>(Istekao)</div>}
+                                            </span>
+                                        ) : (
+                                            <span style={{ color: '#888' }}>Neograničeno</span>
+                                        )}
+                                    </td>
+
                                     <td style={{ padding: '12px', textAlign: 'center' }}>
                                         <button
                                             onClick={() => handleDelete(link.code)}

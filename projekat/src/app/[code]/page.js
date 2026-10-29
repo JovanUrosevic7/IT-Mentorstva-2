@@ -19,6 +19,19 @@ export default async function RedirectPage({params}){
         );
     }
 
+    if(links[linkIndex].expiresAt){
+        const expirationDate = new Date(links[linkIndex].expiresAt)
+        if(new Date() > expirationDate){
+            return (
+                <main style={{ padding: '50px', textAlign: 'center', fontFamily: 'sans-serif' }}>
+                    <h1>⏳ Link je istekao</h1>
+                    <p>Ovaj kratak link je istekao {expirationDate.toLocaleDateString()} i više nije aktivan.</p>
+                    <Link href="/" style={{ color: 'blue', textDecoration: 'underline' }}>Nazad na početnu</Link>
+                </main>
+            );
+        }
+    }
+
     links[linkIndex].clicks += 1
     saveLinks(links)
 

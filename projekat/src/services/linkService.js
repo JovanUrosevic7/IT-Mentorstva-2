@@ -13,14 +13,14 @@ export async function fetchLinks(search = ''){
 
 }
 
-export async function createLink(originalUrl, customCode){
+export async function createLink(originalUrl, customCode, expiresAt){
 
     const response = await fetch("/api/links",{
         method: "POST",
         headers:{
             'Content-Type': 'application/json',
         },
-        body:JSON.stringify({originalUrl, customCode})
+        body:JSON.stringify({originalUrl, customCode, expiresAt})
     })
 
     const data = await response.json()

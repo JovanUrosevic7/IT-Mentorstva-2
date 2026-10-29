@@ -9,6 +9,7 @@ export default function Home() {
   const [originalUrl, setOriginalUrl] = useState("")
   const [customCode, setCustomCode] = useState("")
   const [shortLink, setShortLink] = useState(null)
+  const [expiresAt, setExpiresAt] = useState("")
   const [error, setError] = useState("")
   const [copied, setCopied] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -22,7 +23,7 @@ export default function Home() {
 
     try{
 
-      const data = await createLink(originalUrl, customCode)
+      const data = await createLink(originalUrl, customCode, expiresAt)
 
       const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || window.location.origin 
       setShortLink(`${baseUrl}/${data.code}`)
@@ -79,6 +80,17 @@ export default function Home() {
                         value={customCode}
                         onChange={(e) => setCustomCode(e.target.value)}
                         style={{ width: '100%', padding: '10px', boxSizing: 'border-box', border: '1px solid #ccc', borderRadius: '4px' }}
+                    />
+                </div>
+
+                <div >
+                    <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>Datum isteka (opciono):</label>
+                    <input 
+                        type="date" 
+                        value={expiresAt}
+                        onChange={(e) => setExpiresAt(e.target.value)}
+                        style={{ width: '100%', padding: '10px', boxSizing: 'border-box' }}
+                        className='border border-gray-300'
                     />
                 </div>
 
