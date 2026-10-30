@@ -8,6 +8,7 @@ export default async function RedirectPage({params}){
 
     const links = getLinks()
     const linkIndex = links.findIndex(l => l.code === code)
+    const today = new Date().toISOString().split("T")[0]
 
     if(linkIndex === -1){
         return (
@@ -32,7 +33,17 @@ export default async function RedirectPage({params}){
         }
     }
 
-    links[linkIndex].clicks += 1
+
+
+    if(!links[linkIndex].clicksByDate){
+        links[linkIndex].clicksByDate = {}
+    }
+
+    links[linkIndex].clicks = (links[linkIndex].clicks || 0) + 1
+
+    links[linkIndex].clicksByDate[today] = (links[linkIndex].clicksByDate[today] || 0) + 1
+    
+    
     saveLinks(links)
 
     redirect(links[linkIndex].originalUrl)

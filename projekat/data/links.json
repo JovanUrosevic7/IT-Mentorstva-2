@@ -14,8 +14,11 @@
   {
     "code": "ytLink",
     "originalUrl": "https://www.youtube.com/",
-    "clicks": 0,
-    "createdAt": "2026-10-30T15:35:58.254Z",
-    "expiresAt": "2026-11-08"
+    "clicks": 2,
+    "createdAt": "2026-10-30T15:45:17.462Z",
+    "expiresAt": "2026-11-07",
+    "clicksByDate": {
+      "2026-10-30": 2
+    }
   }
 ]
