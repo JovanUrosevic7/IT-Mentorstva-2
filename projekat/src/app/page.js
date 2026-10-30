@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { createLink } from '../services/linkService';
 import Link from 'next/link';
+import { QRCodeSVG } from 'qrcode.react';
 
 export default function Home() {
 
@@ -127,6 +128,13 @@ export default function Home() {
                         >
                             {copied ? 'Kopirano!' : 'Kopiraj'}
                         </button>
+                    </div>
+
+                    <div className='w-full flex justify-center items-center mt-[20px]'>
+                        <div style={{ textAlign: 'center', background: "white" , padding: '10px', display: 'inline-block', borderRadius: '4px' }} className=''>
+                            <QRCodeSVG value={shortLink} size={128} />
+                            <p style={{ fontSize: '12px', margin: '5px 0 0 0', color: '#666' }}>Skeniraj QR kod</p>
+                        </div>
                     </div>
                 </div>
             )}
