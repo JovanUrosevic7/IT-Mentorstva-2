@@ -1,5 +1,7 @@
 "use client"
 
+
+import { useAuth } from "@/app/context/authContext";
 import {auth} from "@/app/firebase"
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
@@ -7,6 +9,14 @@ import { useState } from "react";
 
 export default function Register(){
 
+    const {user, loggedIn} = useAuth()
+    console.log(loggedIn);
+
+    if(loggedIn){
+        window.location.href = "/"
+    }
+    
+ 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     
