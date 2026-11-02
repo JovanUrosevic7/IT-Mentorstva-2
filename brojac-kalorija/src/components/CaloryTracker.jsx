@@ -7,6 +7,9 @@ export default function CalorieTracker() {
     const [caloriesByMeal, setCaloriesByMeal] = useState("")
     const [typeOfMeal, setTypeOfMeal] = useState("dorucak")
     const [error, setError] = useState("")
+    const [proteins, setProteins] = useState("")
+    const [carbohydrates, setCarbohydrates] = useState("")
+    const [fats, setFats] = useState("")
 
     const [dailyGoal, setDailyGoal] = useState(() => {
         const saved = localStorage.getItem("dailyGoal")
@@ -46,13 +49,20 @@ export default function CalorieTracker() {
             id: Date.now(),
             name: mealName.trim(),
             calories: parsedCalories,
-            mealType: typeOfMeal
+            mealType: typeOfMeal,
+            proteins: Number(proteins) || 0,
+            carbohydrates: Number(carbohydrates) || 0,
+            fats: Number(fats) || 0
         }
+        
         
         setMeals([newMeal, ...meals])
         setMealName("")
         setCaloriesByMeal("")
         setTypeOfMeal("dorucak")
+        setProteins("")
+        setCarbohydrates("")
+        setFats("")
     }
 
     const handleDeleteMeal = (id) => {
@@ -73,6 +83,14 @@ export default function CalorieTracker() {
         acc[meal.mealType] = (acc[meal.mealType] || 0) + meal.calories
         return acc
     }, {})
+
+    const totalProteins = meals.reduce((sum, meal) => sum + (Number(meal.proteins) || 0), 0)
+    const totalCarbohydrates = meals.reduce((sum, meal) => sum + (Number(meal.carbohydrates) || 0), 0)
+    const totalFats = meals.reduce((sum, meal) => sum + (Number(meal.fats) || 0), 0)
+
+    // console.log(meals);
+    // console.log(meals[0].calories);
+    
 
     return (
         <div className='min-h-screen bg-slate-50 py-10 px-4 flex justify-center items-start'>
@@ -125,6 +143,8 @@ export default function CalorieTracker() {
                     </div>
                 </div>
 
+                
+
                 {/* Forma za dodavanje obroka */}
                 <form onSubmit={handleAddMeal} className='bg-slate-50 p-4 rounded-xl border border-slate-200/60 flex flex-col gap-3'>
                     <h3 className='text-sm font-bold text-slate-700'>Dodaj novi obrok</h3>
@@ -158,6 +178,30 @@ export default function CalorieTracker() {
                         </select>
                     </div>
 
+                    <div className='grid grid-cols-3 gap-3'>
+                        <input 
+                            type="number" 
+                            placeholder='Proteini (g)' 
+                            value={proteins}
+                            onChange={(e) => setProteins(e.currentTarget.value)} 
+                            className='bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500'
+                        />
+                        <input 
+                            type="number" 
+                            placeholder='Uglj. hidrati (g)' 
+                            value={carbohydrates}
+                            onChange={(e) => setCarbohydrates(e.currentTarget.value)} 
+                            className='bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500'
+                        />
+                        <input 
+                            type="number" 
+                            placeholder='Masti (g)' 
+                            value={fats}
+                            onChange={(e) => setFats(e.currentTarget.value)} 
+                            className='bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500'
+                        />
+                    </div>
+
                     {error && <p className='text-rose-500 text-xs font-medium mt-1'>{error}</p>}
 
                     <button 
@@ -188,6 +232,25 @@ export default function CalorieTracker() {
                     </div>
                 </div>
 
+                {/* Ukupan zbir Makronutrijenata (Doteran dizajn) */}
+                <div className='bg-slate-50 border border-slate-200/60 p-4 rounded-xl flex flex-col gap-2'>
+                    <p className='text-xs font-semibold text-slate-600 uppercase tracking-wider'>Ukupni makronutrijenti</p>
+                    <div className='grid grid-cols-3 text-center'>
+                        <div className='bg-white p-2.5 rounded-lg border border-slate-100 shadow-2xs'>
+                            <span className='block text-[11px] text-slate-400 font-medium'>Proteini</span>
+                            <strong className='text-slate-800 text-sm font-bold'>{totalProteins}g</strong>
+                        </div>
+                        <div className='bg-white p-2.5 rounded-lg border border-slate-100 shadow-2xs mx-2'>
+                            <span className='block text-[11px] text-slate-400 font-medium'>Uglj. hidrati</span>
+                            <strong className='text-slate-800 text-sm font-bold'>{totalCarbohydrates}g</strong>
+                        </div>
+                        <div className='bg-white p-2.5 rounded-lg border border-slate-100 shadow-2xs'>
+                            <span className='block text-[11px] text-slate-400 font-medium'>Masti</span>
+                            <strong className='text-slate-800 text-sm font-bold'>{totalFats}g</strong>
+                        </div>
+                    </div>
+                </div>
+
                 {/* Lista obroka */}
                 <div className='flex flex-col gap-2'>
                     <h3 className='text-sm font-bold text-slate-700'>Lista unetih obroka</h3>
@@ -207,3 +270,4 @@ export default function CalorieTracker() {
         </div>
     )
 }
+

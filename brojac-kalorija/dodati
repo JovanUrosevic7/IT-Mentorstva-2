@@ -1,3 +1,0 @@
-Posle dodavanja forma se prazni
-
-proveriti da li moze preko recat hooka prebaciti onDelete={handleDeleteMeal} u MealItem.jsx
