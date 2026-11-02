@@ -24,7 +24,7 @@ export default function CalorieTracker() {
     useEffect(() => {
         localStorage.setItem("meals", JSON.stringify(meals))
     }, [meals])
-    
+
     useEffect(() => {
         localStorage.setItem("dailyGoal", JSON.stringify(dailyGoal))
     }, [dailyGoal])
@@ -54,8 +54,8 @@ export default function CalorieTracker() {
             carbohydrates: Number(carbohydrates) || 0,
             fats: Number(fats) || 0
         }
-        
-        
+
+
         setMeals([newMeal, ...meals])
         setMealName("")
         setCaloriesByMeal("")
@@ -63,6 +63,23 @@ export default function CalorieTracker() {
         setProteins("")
         setCarbohydrates("")
         setFats("")
+    }
+
+
+    const handleQuickAdd = (food) => {
+
+        const newMeal = {
+            id: Date.now(),
+            name: food.name,
+            calories: food.calories,
+            mealType: food.type,
+            proteins: food.proteins,
+            carbohydrates: food.carbohydrates,
+            fats: food.fats
+        }
+
+        setMeals([newMeal, ...meals])
+
     }
 
     const handleDeleteMeal = (id) => {
@@ -75,10 +92,17 @@ export default function CalorieTracker() {
         }
     }
 
+    const quickFoods = [
+        { name: "🍎 Jabuka (1 kom)", calories: 52, proteins: 0.3, carbohydrates: 14, fats: 0.2, type: "uzina" },
+        { name: "🥚 Jaje (1 kom)", calories: 78, proteins: 6.3, carbohydrates: 0.6, fats: 5.3, type: "dorucak" },
+        { name: "🍌 Banana (1 kom)", calories: 105, proteins: 1.3, carbohydrates: 27, fats: 0.3, type: "uzina" },
+        { name: "🍗 Pileći file (100g)", calories: 165, proteins: 31, carbohydrates: 0, fats: 3.6, type: "rucak" }
+    ];
+
     const totalConsumed = meals.reduce((sum, meal) => sum + parseInt(meal.calories), 0)
     const progressPercentage = dailyGoal > 0 ? Math.min(Math.round((totalConsumed / dailyGoal) * 100), 100) : 0
     const isExceeded = totalConsumed > dailyGoal
-    
+
     const caloriesByType = meals.reduce((acc, meal) => {
         acc[meal.mealType] = (acc[meal.mealType] || 0) + meal.calories
         return acc
@@ -90,11 +114,11 @@ export default function CalorieTracker() {
 
     // console.log(meals);
     // console.log(meals[0].calories);
-    
+
 
     return (
         <div className='min-h-screen bg-slate-50 py-10 px-4 flex justify-center items-start'>
-            
+
             <div className='w-full max-w-xl bg-white shadow-xl rounded-2xl border border-slate-100 flex flex-col p-6 gap-6'>
 
                 {/* Naslov i dugme za novi dan */}
@@ -103,8 +127,8 @@ export default function CalorieTracker() {
                         🍎 Brojač Kalorija
                     </h1>
                     {meals.length > 0 && (
-                        <button 
-                            onClick={handleNewDay} 
+                        <button
+                            onClick={handleNewDay}
                             className='text-xs bg-rose-50 text-rose-600 hover:bg-rose-100 font-semibold px-3 py-1.5 rounded-lg transition'
                         >
                             Novi dan
@@ -117,11 +141,11 @@ export default function CalorieTracker() {
                     <label className='block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5'>
                         Dnevni cilj kalorija (kcal)
                     </label>
-                    <input 
-                        type="number" 
+                    <input
+                        type="number"
                         value={dailyGoal}
-                        className='w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500' 
-                        onChange={(e) => setDailyGoal(Number(e.currentTarget.value) || 0)} 
+                        className='w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500'
+                        onChange={(e) => setDailyGoal(Number(e.currentTarget.value) || 0)}
                     />
                 </div>
 
@@ -131,44 +155,44 @@ export default function CalorieTracker() {
                         <p className='text-xs text-blue-600 font-medium mb-1'>Uneto</p>
                         <p className='text-lg font-bold text-blue-900'>{totalConsumed}</p>
                     </div>
-                    
+
                     <div className={`p-3.5 rounded-xl border transition-colors ${isExceeded ? 'bg-rose-50 border-rose-200 text-rose-900' : 'bg-emerald-50/60 border-emerald-100 text-emerald-900'}`}>
                         <p className={`text-xs font-medium mb-1 ${isExceeded ? 'text-rose-600' : 'text-emerald-600'}`}>Preostalo</p>
                         <p className='text-lg font-bold'>{dailyGoal - totalConsumed}</p>
                     </div>
-                    
+
                     <div className='bg-amber-50/60 border border-amber-100 p-3.5 rounded-xl'>
                         <p className='text-xs text-amber-600 font-medium mb-1'>Procenat</p>
                         <p className='text-lg font-bold text-amber-900'>{progressPercentage}%</p>
                     </div>
                 </div>
 
-                
+
 
                 {/* Forma za dodavanje obroka */}
                 <form onSubmit={handleAddMeal} className='bg-slate-50 p-4 rounded-xl border border-slate-200/60 flex flex-col gap-3'>
                     <h3 className='text-sm font-bold text-slate-700'>Dodaj novi obrok</h3>
-                    
-                    <input 
-                        type="text" 
-                        placeholder='Naziv obroka (npr. Jaja i tost)' 
+
+                    <input
+                        type="text"
+                        placeholder='Naziv obroka (npr. Jaja i tost)'
                         value={mealName}
-                        className='w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500' 
+                        className='w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500'
                         onChange={(e) => setMealName(e.currentTarget.value)}
                     />
-                
+
                     <div className='grid grid-cols-2 gap-3'>
-                        <input 
-                            type="number" 
-                            placeholder='Broj kalorija' 
+                        <input
+                            type="number"
+                            placeholder='Broj kalorija'
                             value={caloriesByMeal}
-                            className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                            className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             onChange={(e) => setCaloriesByMeal(e.currentTarget.value)}
                         />
-                    
-                        <select 
+
+                        <select
                             value={typeOfMeal}
-                            onChange={(e) => setTypeOfMeal(e.currentTarget.value)} 
+                            onChange={(e) => setTypeOfMeal(e.currentTarget.value)}
                             className='w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 capitalize'
                         >
                             <option value="dorucak">Doručak</option>
@@ -178,39 +202,57 @@ export default function CalorieTracker() {
                         </select>
                     </div>
 
+
                     <div className='grid grid-cols-3 gap-3'>
-                        <input 
-                            type="number" 
-                            placeholder='Proteini (g)' 
+                        <input
+                            type="number"
+                            placeholder='Proteini (g)'
                             value={proteins}
-                            onChange={(e) => setProteins(e.currentTarget.value)} 
+                            onChange={(e) => setProteins(e.currentTarget.value)}
                             className='bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500'
                         />
-                        <input 
-                            type="number" 
-                            placeholder='Uglj. hidrati (g)' 
+                        <input
+                            type="number"
+                            placeholder='Uglj. hidrati (g)'
                             value={carbohydrates}
-                            onChange={(e) => setCarbohydrates(e.currentTarget.value)} 
+                            onChange={(e) => setCarbohydrates(e.currentTarget.value)}
                             className='bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500'
                         />
-                        <input 
-                            type="number" 
-                            placeholder='Masti (g)' 
+                        <input
+                            type="number"
+                            placeholder='Masti (g)'
                             value={fats}
-                            onChange={(e) => setFats(e.currentTarget.value)} 
+                            onChange={(e) => setFats(e.currentTarget.value)}
                             className='bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500'
                         />
                     </div>
 
                     {error && <p className='text-rose-500 text-xs font-medium mt-1'>{error}</p>}
 
-                    <button 
-                        type='submit' 
+                    <button
+                        type='submit'
                         className='w-full mt-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg transition text-sm shadow-sm'
                     >
                         Dodaj obrok
                     </button>
                 </form>
+
+                {/* ⚡ BRZA DUGMAD ZA ČESTE NAMIRNICE */}
+                <div className='bg-slate-50 p-4 rounded-xl border border-slate-200/60 flex flex-col gap-2.5'>
+                    <p className='text-xs font-semibold text-slate-600 uppercase tracking-wider'>Brzi unos česte hrane</p>
+                    <div className='grid grid-cols-2 gap-2'>
+                        {quickFoods.map((food, index) => (
+                            <button
+                                key={index}
+                                onClick={() => handleQuickAdd(food)}
+                                className='bg-white hover:bg-blue-50 border border-slate-200 hover:border-blue-200 text-slate-700 text-xs font-medium p-2.5 rounded-xl transition cursor-pointer flex justify-between items-center shadow-2xs'
+                            >
+                                <span>{food.name}</span>
+                                <span className='text-blue-600 font-bold'>+{food.calories} kcal</span>
+                            </button>
+                        ))}
+                    </div>
+                </div>
 
                 {/* Zbirovi po vrstama obroka */}
                 <div className='grid grid-cols-4 gap-2 bg-slate-100/70 p-3 rounded-xl text-center text-xs text-slate-600'>
