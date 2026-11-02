@@ -167,7 +167,19 @@ export default function CalorieTracker() {
                     </div>
                 </div>
 
-
+                {/* 📊 TRAKA NAPRETKA DO CILJA */}
+                <div className='bg-slate-50 p-4 rounded-xl border border-slate-200/60 flex flex-col gap-2'>
+                    <div className='flex justify-between text-xs font-semibold text-slate-600'>
+                        <span>Progres cilja</span>
+                        <span>{progressPercentage}%</span>
+                    </div>
+                    <div className='w-full bg-slate-200 h-3 rounded-full overflow-hidden'>
+                        <div 
+                            className={`h-full transition-all duration-500 ${isExceeded ? 'bg-rose-500' : 'bg-blue-600'}`} 
+                            style={{ width: `${progressPercentage}%` }}
+                        ></div>
+                    </div>
+                </div>
 
                 {/* Forma za dodavanje obroka */}
                 <form onSubmit={handleAddMeal} className='bg-slate-50 p-4 rounded-xl border border-slate-200/60 flex flex-col gap-3'>
