@@ -1,0 +1,200 @@
+[
+  {
+    "id": "1",
+    "naziv": "Thriller",
+    "izvodjac": "Michael Jackson",
+    "godina": 1982,
+    "zanr": "Pop",
+    "omot": "https://upload.wikimedia.org/wikipedia/en/5/55/Michael_Jackson_-_Thriller.png",
+    "pesme": [
+      { "naziv": "Wanna Be Startin' Somethin'", "trajanje": "6:03" },
+      { "naziv": "Baby Be Mine", "trajanje": "4:20" },
+      { "naziv": "The Girl Is Mine", "trajanje": "3:42" },
+      { "naziv": "Thriller", "trajanje": "5:57" }
+    ]
+  },
+  {
+    "id": "2",
+    "naziv": "Back in Black",
+    "izvodjac": "AC/DC",
+    "godina": 1980,
+    "zanr": "Rock",
+    "omot": "https://upload.wikimedia.org/wikipedia/en/3/3b/ACDC_Back_in_Black_cover.png",
+    "pesme": [
+      { "naziv": "Hells Bells", "trajanje": "5:12" },
+      { "naziv": "Shoot to Thrill", "trajanje": "5:17" },
+      { "naziv": "Back in Black", "trajanje": "4:15" },
+      { "naziv": "You Shook Me All Night Long", "trajanje": "3:30" }
+    ]
+  },
+  {
+    "id": "3",
+    "naziv": "The Dark Side of the Moon",
+    "izvodjac": "Pink Floyd",
+    "godina": 1973,
+    "zanr": "Rock",
+    "omot": "https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png",
+    "pesme": [
+      { "naziv": "Speak to Me", "trajanje": "1:30" },
+      { "naziv": "Breathe", "trajanje": "2:43" },
+      { "naziv": "Time", "trajanje": "6:53" },
+      { "naziv": "Money", "trajanje": "6:22" }
+    ]
+  },
+  {
+    "id": "4",
+    "naziv": "Abbey Road",
+    "izvodjac": "The Beatles",
+    "godina": 1969,
+    "zanr": "Rock",
+    "omot": "https://upload.wikimedia.org/wikipedia/en/4/42/Beatles_Abbey_Road.jpg",
+    "pesme": [
+      { "naziv": "Come Together", "trajanje": "4:20" },
+      { "naziv": "Something", "trajanje": "3:03" },
+      { "naziv": "Here Comes the Sun", "trajanje": "3:05" }
+    ]
+  },
+  {
+    "id": "5",
+    "naziv": "Rumours",
+    "izvodjac": "Fleetwood Mac",
+    "godina": 1977,
+    "zanr": "Rock",
+    "omot": "https://upload.wikimedia.org/wikipedia/en/f/fb/FleetwoodMacRumourscover.jpg",
+    "pesme": [
+      { "naziv": "Second Hand News", "trajanje": "2:53" },
+      { "naziv": "Dreams", "trajanje": "4:14" },
+      { "naziv": "Go Your Own Way", "trajanje": "3:38" }
+    ]
+  },
+  {
+    "id": "6",
+    "naziv": "Nevermind",
+    "izvodjac": "Nirvana",
+    "godina": 1991,
+    "zanr": "Rock",
+    "omot": "https://upload.wikimedia.org/wikipedia/en/b/b7/NirvanaNevermindalbumcover.jpg",
+    "pesme": [
+      { "naziv": "Smells Like Teen Spirit", "trajanje": "5:01" },
+      { "naziv": "In Bloom", "trajanje": "4:14" },
+      { "naziv": "Come as You Are", "trajanje": "3:39" }
+    ]
+  },
+  {
+    "id": "7",
+    "naziv": "Bad",
+    "izvodjac": "Michael Jackson",
+    "godina": 1987,
+    "zanr": "Pop",
+    "omot": "https://upload.wikimedia.org/wikipedia/en/5/51/Michael_Jackson_-_Bad.png",
+    "pesme": [
+      { "naziv": "Bad", "trajanje": "4:07" },
+      { "naziv": "The Way You Make Me Feel", "trajanje": "4:58" },
+      { "naziv": "Smooth Criminal", "trajanje": "4:17" }
+    ]
+  },
+  {
+    "id": "8",
+    "naziv": "The Eminem Show",
+    "izvodjac": "Eminem",
+    "godina": 2002,
+    "zanr": "Hip-Hop",
+    "omot": "https://upload.wikimedia.org/wikipedia/en/3/35/The_Eminem_Show.jpg",
+    "pesme": [
+      { "naziv": "White America", "trajanje": "5:24" },
+      { "naziv": "Without Me", "trajanje": "4:50" },
+      { "naziv": "Cleaning Out My Closet", "trajanje": "4:57" }
+    ]
+  },
+  {
+    "id": "9",
+    "naziv": "Good Kid, M.A.A.D City",
+    "izvodjac": "Kendrick Lamar",
+    "godina": 2012,
+    "zanr": "Hip-Hop",
+    "omot": "https://upload.wikimedia.org/wikipedia/en/2/2c/KendrickLamarGoodKidmaadCity.jpg",
+    "pesme": [
+      { "naziv": "Sherane a.k.a Master Splinter's Daughter", "trajanje": "4:33" },
+      { "naziv": "Bitch, Don't Kill My Vibe", "trajanje": "5:10" },
+      { "naziv": "Swimming Pools (Drank)", "trajanje": "5:13" }
+    ]
+  },
+  {
+    "id": "10",
+    "naziv": "Random Access Memories",
+    "izvodjac": "Daft Punk",
+    "godina": 2013,
+    "zanr": "Electronic",
+    "omot": "https://upload.wikimedia.org/wikipedia/en/a/a7/Daft_Punk_-_Random_Access_Memories.png",
+    "pesme": [
+      { "naziv": "Give Life Back to Music", "trajanje": "4:34" },
+      { "naziv": "Get Lucky", "trajanje": "6:09" },
+      { "naziv": "Instant Crush", "trajanje": "5:37" }
+    ]
+  },
+  {
+    "id": "11",
+    "naziv": "Discovery",
+    "izvodjac": "Daft Punk",
+    "godina": 2001,
+    "zanr": "Electronic",
+    "omot": "https://upload.wikimedia.org/wikipedia/en/2/27/Daft_Punk_-_Discovery.png",
+    "pesme": [
+      { "naziv": "One More Time", "trajanje": "5:20" },
+      { "naziv": "Aerodynamic", "trajanje": "3:27" },
+      { "naziv": "Digital Love", "trajanje": "4:58" }
+    ]
+  },
+  {
+    "id": "12",
+    "naziv": "21",
+    "izvodjac": "Adele",
+    "godina": 2011,
+    "zanr": "Pop",
+    "omot": "https://upload.wikimedia.org/wikipedia/en/1/1b/Adele_21.png",
+    "pesme": [
+      { "naziv": "Rolling in the Deep", "trajanje": "3:48" },
+      { "naziv": "Rumour Has It", "trajanje": "3:43" },
+      { "naziv": "Someone Like You", "trajanje": "4:45" }
+    ]
+  },
+  {
+    "id": "13",
+    "naziv": "Future Nostalgia",
+    "izvodjac": "Dua Lipa",
+    "godina": 2020,
+    "zanr": "Pop",
+    "omot": "https://upload.wikimedia.org/wikipedia/en/f/f2/Dua_Lipa_-_Future_Nostalgia_%28Official_Album_Cover%29.png",
+    "pesme": [
+      { "naziv": "Future Nostalgia", "trajanje": "3:04" },
+      { "naziv": "Don't Start Now", "trajanje": "3:03" },
+      { "naziv": "Physical", "trajanje": "3:13" }
+    ]
+  },
+  {
+    "id": "14",
+    "naziv": "Legend",
+    "izvodjac": "Bob Marley",
+    "godina": 1984,
+    "zanr": "Reggae",
+    "omot": "https://upload.wikimedia.org/wikipedia/en/e/e7/BobMarley-Legend.jpg",
+    "pesme": [
+      { "naziv": "Is This Love", "trajanje": "3:52" },
+      { "naziv": "No Woman, No Cry", "trajanje": "7:07" },
+      { "naziv": "Jamming", "trajanje": "3:31" }
+    ]
+  },
+  {
+    "id": "15",
+    "naziv": "Kind of Blue",
+    "izvodjac": "Miles Davis",
+    "godina": 1959,
+    "zanr": "Jazz",
+    "omot": "https://upload.wikimedia.org/wikipedia/en/9/9c/MilesDavisKindofBlue.jpg",
+    "pesme": [
+      { "naziv": "So What", "trajanje": "9:22" },
+      { "naziv": "Freddie Freeloader", "trajanje": "9:46" },
+      { "naziv": "Blue in Green", "trajanje": "5:37" }
+    ]
+  }
+]
