@@ -12,7 +12,7 @@ function AlbumCard({album}) {
                 
                 <h1 className="text-2xl [overflow-wrap:anywhere]">{album.naziv}</h1>
                 
-                <Link to={`/artist/:${encodeURIComponent(album.izvodjac)}`} target="_blank">{album.izvodjac}</Link>
+                <Link to={`/artist/${encodeURIComponent(album.izvodjac)}`} target="_blank">{album.izvodjac}</Link>
                 
                 <p>{album.godina} • {album.zanr}</p>
 

@@ -1,6 +1,5 @@
 import { Link, useParams } from "react-router-dom"
 import albumsData from "../data/albums.json"
-import { useState } from "react"
 
 
 function AlbumDetails() {
