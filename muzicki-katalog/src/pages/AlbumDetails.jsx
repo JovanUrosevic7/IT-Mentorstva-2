@@ -4,8 +4,8 @@ import albumsData from "../data/albums.json"
 
 function AlbumDetails() {
 
-    const {id} = useParams()
-    let album = albumsData.find(album => album.id === id)    
+    const { id } = useParams()
+    let album = albumsData.find(album => album.id === id)
 
     if (!album) {
         return (
@@ -37,48 +37,77 @@ function AlbumDetails() {
     }
 
     console.log(album);
-    
+
 
     return (
-        <div>
-            <h1>
-                AlbumDetails
-            </h1>
+        <div className="max-w-4xl mx-auto px-4 py-8 flex flex-col gap-6">
 
+            {/* Navigacija / Nazad link */}
+            <div>
+                <Link
+                    to="/"
+                    className="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-800 transition-colors"
+                >
+                    ← Nazad na početnu
+                </Link>
+            </div>
 
-            <div style={{ display: 'flex', gap: '30px', flexWrap: 'wrap', background: '#f9f9f9', padding: '20px', borderRadius: '10px', border: '1px solid #ddd' }}>
-                <img 
-                    src={album.omot} 
-                    alt={album.naziv} 
-                    style={{ width: '250px', height: '250px', objectFit: 'cover', borderRadius: '8px' }} 
+            {/* Glavni box sa informacijama o albumu */}
+            <div className="bg-white border border-slate-200/80 rounded-2xl p-6 md:p-8 shadow-xs flex flex-col md:flex-row gap-8 items-center md:items-start">
+
+                {/* Omot albuma */}
+                <img
+                    src={album.omot}
+                    alt={album.naziv}
+                    className="w-64 h-64 md:w-72 md:h-72 object-cover rounded-xl shadow-md border border-slate-100 flex-shrink-0"
                 />
-                
-                <div style={{ flex: 1 }}>
-                    <h1 style={{ margin: '0 0 10px 0' }}>{album.naziv}</h1>
-                    <p style={{ fontSize: '18px', color: '#555', margin: '0 0 5px 0' }}>
-                        Izvođač: <strong>{album.izvodjac}</strong>
-                    </p>
-                    <p style={{ color: '#777', margin: '0 0 5px 0' }}>Godina izdanja: {album.godina}</p>
-                    <p style={{ color: '#777', margin: '0 0 15px 0' }}>Žanr: {album.zanr}</p>
-                    
-                    <p style={{ fontWeight: 'bold', color: '#333' }}>
-                        Ukupno trajanje albuma: <span style={{ color: '#0070f3' }}>{calculateTotalDuration(album.pesme)}</span>
-                    </p>
+
+                {/* Tekstualni podaci */}
+                <div className="flex flex-col justify-between flex-grow w-full gap-4 text-center md:text-left">
+                    <div className="flex flex-col gap-2">
+                        <h1 className="text-2xl md:text-3xl font-bold text-slate-800 [overflow-wrap:anywhere]">
+                            {album.naziv}
+                        </h1>
+
+                        <p className="text-lg text-slate-600 font-medium">
+                            Izvođač: <span className="text-slate-800 font-bold">{album.izvodjac}</span>
+                        </p>
+
+                        <div className="flex flex-wrap justify-center md:justify-start gap-3 text-xs font-semibold text-slate-500 mt-1">
+                            <span className="bg-slate-100 px-3 py-1 rounded-full">Godina: {album.godina}</span>
+                            <span className="bg-slate-100 px-3 py-1 rounded-full uppercase">Žanr: {album.zanr}</span>
+                        </div>
+                    </div>
+
+                    {/* Ukupno trajanje */}
+                    <div className="bg-blue-50/60 border border-blue-100 rounded-xl p-3.5 flex items-center justify-between mt-2">
+                        <span className="text-xs font-medium text-blue-700">Ukupno trajanje albuma</span>
+                        <span className="text-sm font-bold text-blue-900">{calculateTotalDuration(album.pesme)}</span>
+                    </div>
                 </div>
             </div>
 
-            <h3 style={{ marginTop: '30px' }}>Lista pesama:</h3>
-            <ul style={{ listStyle: 'none', padding: 0 }}>
-                {album.pesme.map((pesma, index) => (
-                    <li 
-                        key={index} 
-                        style={{ display: 'flex', justifyContent: 'space-between', padding: '10px 15px', borderBottom: '1px solid #eee', background: '#fff', marginBottom: '5px', borderRadius: '4px' }}
-                    >
-                        <span>{index + 1}. {pesma.naziv}</span>
-                        <span style={{ color: '#666' }}>{pesma.trajanje}</span>
-                    </li>
-                ))}
-            </ul>
+            {/* Sekcija sa pesmama */}
+            <div className="flex flex-col gap-3 mt-4">
+                <h3 className="text-lg font-bold text-slate-800 px-1">Lista pesama</h3>
+
+                <div className="bg-white border border-slate-200/80 rounded-2xl overflow-hidden shadow-xs divide-y divide-slate-100">
+                    {album.pesme.map((pesma, index) => (
+                        <div
+                            key={index}
+                            className="flex items-center justify-between px-5 py-3.5 hover:bg-slate-50/80 transition-colors"
+                        >
+                            <div className="flex items-center gap-3">
+                                <span className="text-xs font-bold text-slate-400 w-5">{index + 1}.</span>
+                                <span className="text-sm font-medium text-slate-700">{pesma.naziv}</span>
+                            </div>
+                            <span className="text-xs font-semibold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md">
+                                {pesma.trajanje}
+                            </span>
+                        </div>
+                    ))}
+                </div>
+            </div>
 
         </div>
     )
