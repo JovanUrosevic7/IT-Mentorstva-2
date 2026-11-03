@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-function AlbumCard({ album }) {
+function AlbumCard({ album, isFavorite, onToggleFavorite }) {
 
 
     return (
@@ -13,6 +13,22 @@ function AlbumCard({ album }) {
                     alt={album.naziv}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
+
+                {/* Dugme za omiljeno (Srce) */}
+                <button
+                    onClick={(e) => {
+                        e.preventDefault(); // Sprečava klik da pokrene neku drugu akciju
+                        onToggleFavorite(album.id);
+                    }}
+                    className={`absolute top-3 right-3 w-9 h-9 rounded-full flex items-center justify-center transition-all shadow-md cursor-pointer ${
+                        isFavorite 
+                            ? 'bg-rose-500 text-white scale-110' 
+                            : 'bg-white/80 backdrop-blur-md text-slate-600 hover:bg-white hover:text-rose-500'
+                    }`}
+                    title={isFavorite ? "Ukloni iz omiljenih" : "Dodaj u omiljene"}
+                >
+                    {isFavorite ? '❤️' : '🤍'}
+                </button>
             </div>
 
             {/* Informacije o albumu */}

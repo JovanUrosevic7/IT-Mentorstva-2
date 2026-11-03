@@ -1,7 +1,7 @@
 import AlbumList from "../components/AlbumList";
 import Search from "../components/Search";
 import albumsData from "../data/albums.json"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 function Home() {
@@ -11,35 +11,53 @@ function Home() {
   const [selectedGenre, setSelectedGenre] = useState("All")
   const [sortBy, setSortBy] = useState("default")
 
+  const [favorites, setFavorites] = useState(() => {
+    const saved = localStorage.getItem("favoriteAlbums")
+    return saved ? JSON.parse(saved) : []
+  })
+
+  const [showOnlyFavorites, setShowOnlyFavorites] = useState(false)
+
+  useEffect(() => {
+    localStorage.setItem("favoriteAlbums", JSON.stringify(favorites))
+  }, [favorites])
+
+  const toggleFavorites = (id) => {
+    setFavorites(prev =>
+      prev.includes(id) ? prev.filter(favId => favId !== id) : [...prev, id]
+    )
+  }
+
   const genres = ["All", ...new Set(albums.map(album => album.zanr))]
 
   const filteredAlbums = albums.filter(album => {
 
     const matchesGenre = selectedGenre === "All" || album.zanr === selectedGenre
+    const matchesFavorites = !showOnlyFavorites || favorites.includes(album.id)
 
     const query = searchTerm.toLowerCase()
     const matchesSearch =
       album.naziv.toLowerCase().includes(query) ||
       album.izvodjac.toLowerCase().includes(query)
 
-    return matchesGenre && matchesSearch
+    return matchesGenre && matchesSearch && matchesFavorites
 
   })
 
-  const sortedAndFilteredAlbums = [...filteredAlbums].sort((a,b) => {
-    if(sortBy === "year-desc"){
+  const sortedAndFilteredAlbums = [...filteredAlbums].sort((a, b) => {
+    if (sortBy === "year-desc") {
       return b.godina - a.godina
     }
 
-    if(sortBy === "year-asc"){
+    if (sortBy === "year-asc") {
       return a.godina - b.godina
     }
-    
-    if(sortBy === "name-asc"){
+
+    if (sortBy === "name-asc") {
       return a.naziv - b.naziv
     }
-    
-    if(sortBy === "year-desc"){
+
+    if (sortBy === "year-desc") {
       return b.naziv - a.naziv
     }
 
@@ -53,6 +71,16 @@ function Home() {
       {/* Zaglavlje / Naslov */}
       <div className="flex items-center justify-between border-b border-slate-100 pb-4">
         <h1 className="text-2xl font-bold text-slate-800 tracking-tight">🎵 Početna</h1>
+
+        <button
+          onClick={() => setShowOnlyFavorites(!showOnlyFavorites)}
+          className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer border flex items-center gap-2 ${showOnlyFavorites
+            ? 'bg-rose-500 text-white border-rose-500 shadow-sm'
+            : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'
+            }`}
+        >
+          ❤️ Omiljeni ({favorites.length})
+        </button>
       </div>
 
       {/* Sekcija za pretragu */}
@@ -82,9 +110,18 @@ function Home() {
         </div>
 
         {/* Sortiranje po godini ili nazivu */}
-        <div className="flex items-center gap-[5px]">
-          <p>Sortiraj: </p>
-          <select className="border cursor-pointer w-[150px]" onChange={(e) => setSortBy(e.currentTarget.value)}>
+        <div className="flex items-center gap-2">
+          <label htmlFor="sort" className="text-sm font-medium text-gray-700">
+            Sortiraj:
+          </label>
+
+          <select
+            id="sort"
+            onChange={(e) => setSortBy(e.currentTarget.value)}
+            className="cursor-pointer rounded-md border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm
+               hover:border-gray-400
+               focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+          >
             <option value="default">Podrazumevano</option>
             <option value="year-desc">Godina: Od najnovijeg</option>
             <option value="year-asc">Godina: Od najstarijeg</option>
@@ -98,13 +135,15 @@ function Home() {
 
       {/* Naslov za albume */}
       <div className="flex items-center justify-between pt-2">
-        <h2 className="text-lg font-bold text-slate-800">Katalog albuma:</h2>
+        <h2 className="text-lg font-bold text-slate-800">
+          {showOnlyFavorites ? '❤️ Vaši omiljeni albumi' : 'Prikaz albuma'}
+        </h2>
         <span className="text-xs font-medium text-slate-400">Ukupno: {sortedAndFilteredAlbums.length}</span>
       </div>
 
       {/* Lista albuma */}
       <div className="w-full">
-        <AlbumList albums={sortedAndFilteredAlbums} />
+        <AlbumList albums={sortedAndFilteredAlbums} favorites={favorites} onToggleFavorite={toggleFavorites} />
       </div>
 
     </div>
