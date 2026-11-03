@@ -12,9 +12,6 @@ function ArtistPage() {
 
     const sortedAlbums = [...artistAlbums].sort((a, b) => a.godina - b.godina)
 
-    console.log(albumsData);
-    console.log(decodedName);
-
 
     return (
         <div className="max-w-6xl mx-auto px-4 py-8 flex flex-col gap-6">

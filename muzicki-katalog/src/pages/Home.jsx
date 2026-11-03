@@ -25,7 +25,6 @@ function Home() {
 
   })
 
-  console.log(genres);
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8 flex flex-col gap-6">

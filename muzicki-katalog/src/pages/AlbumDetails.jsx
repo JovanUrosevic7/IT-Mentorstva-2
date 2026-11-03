@@ -36,7 +36,6 @@ function AlbumDetails() {
 
     }
 
-    console.log(album);
 
 
     return (
