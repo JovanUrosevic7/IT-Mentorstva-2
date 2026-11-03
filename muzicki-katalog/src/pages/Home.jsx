@@ -10,13 +10,13 @@ function Home() {
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedGenre, setSelectedGenre] = useState("All")
   const [sortBy, setSortBy] = useState("default")
+  const [showOnlyFavorites, setShowOnlyFavorites] = useState(false)
 
   const [favorites, setFavorites] = useState(() => {
     const saved = localStorage.getItem("favoriteAlbums")
     return saved ? JSON.parse(saved) : []
   })
 
-  const [showOnlyFavorites, setShowOnlyFavorites] = useState(false)
 
   useEffect(() => {
     localStorage.setItem("favoriteAlbums", JSON.stringify(favorites))
@@ -36,9 +36,11 @@ function Home() {
     const matchesFavorites = !showOnlyFavorites || favorites.includes(album.id)
 
     const query = searchTerm.toLowerCase()
-    const matchesSearch =
-      album.naziv.toLowerCase().includes(query) ||
-      album.izvodjac.toLowerCase().includes(query)
+    const matchesAlbumName =album.naziv.toLowerCase().includes(query) 
+    const matchesArtist = album.izvodjac.toLowerCase().includes(query)
+    const matchesSong = album.pesme.some(pesma => pesma.naziv.toLowerCase().includes(query))
+
+    const matchesSearch = matchesAlbumName || matchesArtist || matchesSong;
 
     return matchesGenre && matchesSearch && matchesFavorites
 
