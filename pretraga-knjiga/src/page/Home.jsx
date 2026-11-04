@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { Alert } from 'react-bootstrap';
+import BookList from "../components/BookList";
 
 function Home() {
 
@@ -24,7 +25,7 @@ function Home() {
             setError("Došlo je do greške prilikom preuzimanja podataka. Proverite internet konekciju.")
             console.error(error);
         }finally{
-            setError(false)
+            setLoading(false)
         }
 
     }
@@ -47,9 +48,7 @@ function Home() {
             {loading ? (
                 <p className="text-center text-primary fw-semibold">Učitavanje knjiga sa servera...</p>
             ) : (
-                <p className="text-center text-success fw-semibold">
-                    Uspešno preuzeto knjiga: {books.length}
-                </p>
+                <BookList booksData={books} />
             )}
         </div>
     )
