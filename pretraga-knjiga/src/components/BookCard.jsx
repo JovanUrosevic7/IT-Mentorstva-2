@@ -9,6 +9,9 @@ function BookCard({ book }) {
 
     const workId = book.key ? book.key.replace("/works/","") : ""
 
+    console.log(book);
+    
+
     return (
         <Card className="h-100 shadow-sm border-0">
             <Card.Img 
@@ -23,7 +26,22 @@ function BookCard({ book }) {
                         {book.title}
                     </Card.Title>
                     <Card.Text className="text-muted small mb-1">
-                        Autor: {book.author_name ? book.author_name.join(', ') : 'Nepoznat autor'}
+                        Autor:{' '}
+                        {book.author_name && book.author_key ? (
+                            book.author_name.map((name, index) => {
+                                const authorKey = book.author_key[index];
+                                return (
+                                    <span key={authorKey}>
+                                        <Link to={`/author/${authorKey}`} className="text-decoration-none">
+                                            {name}
+                                        </Link>
+                                        {index < book.author_name.length - 1 ? ', ' : ''}
+                                    </span>
+                                );
+                            })
+                        ) : (
+                            'Nepoznat autor'
+                        )}
                     </Card.Text>
                     <Card.Text className="text-secondary small">
                         Prvo izdanje: {book.first_publish_year || 'N/A'}

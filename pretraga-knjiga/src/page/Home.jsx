@@ -101,7 +101,7 @@ function Home() {
                         </Alert>
                     ) : (
                         <>
-                            <BookList booksData={books} />
+                            <BookList booksData={books} />  
 
                             {/* Kontrole za paginaciju */}
                             <div className="d-flex justify-content-between align-items-center mt-5">

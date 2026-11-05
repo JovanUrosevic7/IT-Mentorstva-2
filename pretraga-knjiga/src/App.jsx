@@ -4,6 +4,7 @@ import Home from "./page/Home"
 import NavigationBar from "./components/NavigationBar"
 import BookDetails from "./page/BookDetails"
 import NotFound from "./page/NotFound"
+import AuthorDetails from "./page/AuthorDetails"
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/book/:id" element={<BookDetails />} />
+            <Route path="/author/:id" element={<AuthorDetails />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>

@@ -8,6 +8,7 @@ function  BookDetails() {
 
     const {id} = useParams()
     const [book, setBook] = useState(null)
+    const [authorsData, setAuthorsData] = useState([])
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
 
@@ -21,7 +22,24 @@ function  BookDetails() {
 
                 setLoading(true)
                 const response = await axios.get(`${API_URL}/works/${id}.json`)
-                setBook(response.data)
+                const bookData = response.data
+                setBook(bookData)
+
+                if(bookData.authors && bookData.authors.length > 0){
+
+                    const authorsPromise = bookData.authors.map(async(authorObj) => {
+                        const authorKey = authorObj.author.key
+                        const authorRes = await axios.get(`${API_URL}${authorKey}.json/`)
+                        return {
+                            name: authorRes.data.name,
+                            key: authorKey.replace("/authors/", "")
+                        }
+                    })
+
+                    const resolvedAuthors = await Promise.all(authorsPromise)
+                    setAuthorsData(resolvedAuthors)
+                }
+
 
             } catch (error) {
                 console.error("Nije moguće učitati detalje ove knjige.");
@@ -48,10 +66,13 @@ function  BookDetails() {
         description = book.description.value
     }
 
-    const coverId = book.cover && book.corvers.length > 0 ? book.covers[0] : null
+    const coverId = book.covers && book.covers.length > 0 ? book.covers[0] : null
     const coverUrl = coverId
         ? `${import.meta.env.VITE_APP_COVER_API}/${coverId}-L.jpg` 
         : 'https://via.placeholder.com/300x450?text=Nema+slike';
+
+    console.log(book);
+    
 
     return (
         <div className="container py-5">
@@ -73,7 +94,24 @@ function  BookDetails() {
                 
                 {/* Osnovni podaci, teme i opis */}
                 <div className="col-md-8">
+                    
                     <h1 className="fw-bold text-dark mb-3">{book.title}</h1>
+
+                    <div className="mb-3">
+                        <span className="fw-semibold text-secondary">Autor/i: </span>
+                        {authorsData.length > 0 ? (
+                            authorsData.map((author, index) => (
+                                <span key={author.key}>
+                                    <Link to={`/author/${author.key}`} className="text-decoration-none fw-semibold">
+                                        {author.name}
+                                    </Link>
+                                    {index < authorsData.length - 1 ? ', ' : ''}
+                                </span>
+                            ))
+                        ) : (
+                            <span className="text-muted">Nepoznat autor</span>
+                        )}
+                    </div>
                     
                     {/* Prikaz tema (subjects) ako postoje */}
                     {book.subjects && (
