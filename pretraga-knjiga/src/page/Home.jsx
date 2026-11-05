@@ -17,6 +17,8 @@ function Home() {
     const [currentSearchType, setCurrentSearchType] = useState("title")
     const [currentLanguage, setCurrentLanguage] = useState("")
 
+    const [totalBooks, setTotalBooks] = useState(0)
+
     const API_URL = import.meta.env.VITE_APP_OPEN_LIBRARY_API
 
     const fetchBooks = async (query, searchType, language, pageNum) => {
@@ -42,6 +44,7 @@ function Home() {
 
             const response = await axios.get(url)
             setBooks(response.data.docs)
+            setTotalBooks(response.data.num_found || 0)
 
         } catch (error) {
             setError("Došlo je do greške prilikom preuzimanja podataka. Proverite internet konekciju.")
@@ -55,6 +58,8 @@ function Home() {
     useEffect(() => {
         fetchBooks(currentQuery, currentSearchType, currentLanguage, page)
     }, [page])
+
+
 
     const handleSearchForm = ({ query, searchType, language }) => {
 
@@ -72,6 +77,7 @@ function Home() {
 
     }
 
+    const calculatedTotalPage = Math.min(Math.ceil(totalBooks/20), 500)
 
     console.log(books);
 
@@ -106,7 +112,7 @@ function Home() {
                                 >
                                     ← Prethodna
                                 </Button>
-                                <span className="fw-semibold text-secondary">Strana {page}</span>
+                                <span className="fw-semibold text-secondary">Strana {page} / {calculatedTotalPage}</span>
                                 <Button
                                     variant="secondary"
                                     disabled={books.length < 10 || loading}
