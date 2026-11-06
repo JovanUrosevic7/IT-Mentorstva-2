@@ -21,7 +21,7 @@ export default function CartProvider({children}) {
 
     const addToCart = (product) => dispatch({type:"ADD_ITEM", payload: product})
     const removeFromCart = (id) => dispatch({type:"REMOVE_ITEM", payload:id})
-    const changeQuantity = (id, quantity) => dispatch({dispatch:"CHANGE_QUANTITY", payload: {id, quantity}})
+    const changeQuantity = (id, quantity) => dispatch({type:"CHANGE_QUANTITY", payload: {id, quantity}})
     const clearCart = () => dispatch({type: "CLEAR_CART"})
 
 

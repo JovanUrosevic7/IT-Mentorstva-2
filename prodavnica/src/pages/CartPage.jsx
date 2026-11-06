@@ -66,7 +66,6 @@ export default function CartPage() {
                                 <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden">
                                     <button
                                         onClick={() => {
-                                            console.log("Kliknuto minus za ID:", item.id);
                                             changeQuantity(item.id, item.quantity - 1);
                                         }}
                                         className="px-3 py-1 bg-gray-50 hover:bg-gray-100 text-gray-700 font-bold transition-colors cursor-pointer"
@@ -80,7 +79,6 @@ export default function CartPage() {
 
                                     <button
                                         onClick={() => {
-                                            console.log("Kliknuto plus za ID:", item.id);
                                             changeQuantity(item.id, item.quantity + 1);
                                         }}
                                         disabled={item.quantity >= item.stock}
