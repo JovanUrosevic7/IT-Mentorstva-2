@@ -42,7 +42,7 @@ function cartReducer(state, action) {
 
             return state.map(item => {
                 if(item.id === id){
-                    const validQuantity = Math.max(1, Math.min(quantity, item.stocl))
+                    const validQuantity = Math.max(1, Math.min(quantity, item.stock))
                     return {...item, quantity: validQuantity}
                 }
 

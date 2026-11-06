@@ -1,10 +1,10 @@
-import { Children, createContext, useContext, useEffect, useReducer } from "react"
+import { createContext, useContext, useEffect, useReducer } from "react"
 import cartReducer, { INITIAL_CART_STATE } from "./cartReducer"
 
 const CartContext = createContext()
 const LOCAL_STORAGE_KEY = "shop_cart_items"
 
-function CartProvider({children}) {
+export default function CartProvider({children}) {
 
     const [cart, dispatch] = useReducer(cartReducer, INITIAL_CART_STATE, () => {
         const saved = localStorage.getItem(LOCAL_STORAGE_KEY)
@@ -40,4 +40,4 @@ function CartProvider({children}) {
     )
 }
 
-export default CartProvider
+export const useCart = () => useContext(CartContext);
