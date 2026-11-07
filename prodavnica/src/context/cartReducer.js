@@ -1,4 +1,8 @@
-export const INITIAL_CART_STATE = [];
+export const INITIAL_CART_STATE = {
+    items: [],
+    coupon: null
+
+}
 
 
 function cartReducer(state, action) {
@@ -14,7 +18,7 @@ function cartReducer(state, action) {
 
             if(existingIndex > -1){
 
-                return state.map((item, index) => {
+                const updatedItems = state.map((item, index) => {
 
                     if(index === existingIndex){
                         const newQuantity = item.quantity + 1
@@ -27,20 +31,27 @@ function cartReducer(state, action) {
                     return item
 
                 })
+    
+                return {...state, item: updatedItems}
 
             }
 
-            return [...state, {...product, quantity: 1}]
+            return {...state, items:[...state.items, {...product, quantity: 1}]}
         }
 
         case "REMOVE_ITEM":{
-            return state.filter(item => item.id !== action.payload)
+            return {
+                ...state,
+                items: state.items.filter(item => item.id !== action.payload)
+                
+            }
         }
+
 
         case "CHANGE_QUANTITY":{
             const {id, quantity} = action.payload
 
-            return state.map(item => {
+            const updatedItems = state.items.map(item => {
                 if(item.id === id){
                     const validQuantity = Math.max(1, Math.min(quantity, item.stock))
                     return {...item, quantity: validQuantity}
@@ -48,11 +59,20 @@ function cartReducer(state, action) {
 
                 return item
             })
+
+            return {...state, items: updatedItems}
         }
 
         case "CLEAR_CART":{
-            return []
-            
+            return {...state, item:[], coupon: action.payload}
+        }
+
+        case "APPLY_COUPON":{
+            return {...state, coupon: action.payload}
+        }
+
+        case "REMOVE_COUPON":{
+            return {...state, coupon: null}
         }
         
         default:

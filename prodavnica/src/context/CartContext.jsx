@@ -6,34 +6,79 @@ const LOCAL_STORAGE_KEY = "shop_cart_items"
 
 export default function CartProvider({children}) {
 
-    const [cart, dispatch] = useReducer(cartReducer, INITIAL_CART_STATE, () => {
+    const [cartState, dispatch] = useReducer(cartReducer, INITIAL_CART_STATE, () => {
+
         const saved = localStorage.getItem(LOCAL_STORAGE_KEY)
-        return saved ? JSON.parse(saved) : INITIAL_CART_STATE
+        if(!saved) return INITIAL_CART_STATE
+    
+        try{
+            const parsed = JSON.parse(saved)
+            if(Array.isArray(parsed)){
+                return {items: parsed, coupon:null}
+            }
+
+            return parsed
+        } catch{
+            return INITIAL_CART_STATE
+        }
+    
     })
 
     useEffect(() => {
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(cart))
-    }, [cart])
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(cartState))
+    }, [cartState])
 
+    
+    const items = cartState.items
+    const coupon = cartState.coupon
 
-    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0)
-    const totalPrice = cart.reduce((sum, item) => sum + item.quantity * item.price, 0)
+    const totalItems = items.reduce((sum, item) => sum + item.quantity, 0)
+    const subtotalPrice = items.reduce((sum, item) => sum + item.quantity * item.price, 0)
+
+    const discountAmount = coupon ? (subtotalPrice * coupon.discountPercent) / 100 : 0
+    const totalPrice = Math.max(0, subtotalPrice - discountAmount)
 
     const addToCart = (product) => dispatch({type:"ADD_ITEM", payload: product})
     const removeFromCart = (id) => dispatch({type:"REMOVE_ITEM", payload:id})
     const changeQuantity = (id, quantity) => dispatch({type:"CHANGE_QUANTITY", payload: {id, quantity}})
     const clearCart = () => dispatch({type: "CLEAR_CART"})
 
+    const applyCoupon = (code) => {
+
+        const cleanCode = code.trim().toUpperCase()
+
+        const validCoupon = {
+            "POPUST10": {code: "POPUST10", discountPercent: 10},
+            "SUPER20": {code:"SUPER20", discountPercent: 20},
+            "AKCIJA50": {code:"AKCIJA50", discountPercent: 50},
+        }
+
+        if(validCoupon[cleanCode]){
+            dispatch({type: "APPLY_COUPON", payload: validCoupon[cleanCode]})
+            return {success: true, message: `Kupon ${cleanCode} je uspešno primenjen!`}
+        } else{
+            return {success: false, message: `Nepoznat ili nevažeći kupon kod!`}
+            
+        }
+
+    }
+
+    const removeCoupon = () => dispatch({type: "REMOVE_COUPON"})
 
     return (
         <CartContext.Provider value={{
-            cart,
+            cart: items,
+            coupon,
             totalItems,
+            subtotalPrice,
             totalPrice,
+            discountAmount,
             addToCart,
             removeFromCart,
             changeQuantity,
-            clearCart
+            clearCart,
+            applyCoupon,
+            removeCoupon
         }}>
             {children}
         </CartContext.Provider>
