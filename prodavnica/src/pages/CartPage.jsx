@@ -10,6 +10,9 @@ export default function CartPage() {
         subtotalPrice,
         totalPrice,
         discountAmount,
+        isFreeShipping,
+        SHIPPING_COST,
+        amountNeededForFreeShipping,
         removeFromCart,
         changeQuantity,
         clearCart,
@@ -149,6 +152,18 @@ export default function CartPage() {
                         Pregled porudžbine
                     </h3>
 
+                    <div className={`p-3 rounded-lg text-xs font-medium mb-[10px] ${
+                        isFreeShipping 
+                            ? 'bg-green-50 text-green-800 border border-green-200' 
+                            : 'bg-blue-50 text-blue-800 border border-blue-200'
+                    }`}>
+                        {isFreeShipping ? (
+                            <span>🎉 Čestitamo! Ostvarili ste <strong>besplatnu dostavu</strong>.</span>
+                        ) : (
+                            <span>🚚 Dodajte još <strong>{formatPrice(amountNeededForFreeShipping)}</strong> proizvoda za besplatnu dostavu!</span>
+                        )}
+                    </div>
+
                     {/* Sekcija za kupon */}
                     <div>
                         <form onSubmit={handleApplyCoupon} className="flex gap-2">
@@ -205,7 +220,9 @@ export default function CartPage() {
 
                         <div className="flex justify-between text-gray-600 text-sm">
                             <span>Dostava:</span>
-                            <span className="font-medium text-green-600">Besplatna</span>
+                            <span className={`font-medium ${isFreeShipping ? 'text-green-600' : 'text-gray-900'}`}>
+                                {isFreeShipping ? 'Besplatna' : formatPrice(SHIPPING_COST)}
+                            </span>
                         </div>
 
                         <div className="border-t border-gray-100 pt-3 flex justify-between text-gray-900 font-bold text-lg">

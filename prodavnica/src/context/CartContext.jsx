@@ -36,7 +36,15 @@ export default function CartProvider({children}) {
     const subtotalPrice = items.reduce((sum, item) => sum + item.quantity * item.price, 0)
 
     const discountAmount = coupon ? (subtotalPrice * coupon.discountPercent) / 100 : 0
-    const totalPrice = Math.max(0, subtotalPrice - discountAmount)
+    const discountedPrice = Math.max(0, subtotalPrice - discountAmount)
+
+    const FREE_SHIPPING_THRESHOLD = 50
+    const isFreeShipping = discountedPrice >= FREE_SHIPPING_THRESHOLD
+    const SHIPPING_COST = isFreeShipping ? 0 : 5
+
+    const totalPrice = discountedPrice - SHIPPING_COST
+
+    const amountNeededForFreeShipping = isFreeShipping ? 0 : FREE_SHIPPING_THRESHOLD - discountedPrice
 
     const addToCart = (product) => dispatch({type:"ADD_ITEM", payload: product})
     const removeFromCart = (id) => dispatch({type:"REMOVE_ITEM", payload:id})
@@ -71,8 +79,11 @@ export default function CartProvider({children}) {
             coupon,
             totalItems,
             subtotalPrice,
-            totalPrice,
             discountAmount,
+            isFreeShipping,
+            SHIPPING_COST,
+            amountNeededForFreeShipping,
+            totalPrice,
             addToCart,
             removeFromCart,
             changeQuantity,
