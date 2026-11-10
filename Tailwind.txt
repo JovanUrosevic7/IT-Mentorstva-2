@@ -4,12 +4,12 @@ u vite.confing.js dodati
 
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import tailwindcss from '@tailwindcss/vite' // 1. Uvezi plugin
+import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [
     react(),
-    tailwindcss(), // 2. Dodaj ga ovde
+    tailwindcss(), 
   ],
 })
 

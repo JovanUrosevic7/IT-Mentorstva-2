@@ -2,9 +2,9 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import { getAllProducts } from "./src/services/productService";
 import SearchBar from "./src/components/searchBar";
+import { useAuth } from "./context/authContext";
 
 export default async function Home() {
-  
   
   const data = await getAllProducts()
   console.log(data);

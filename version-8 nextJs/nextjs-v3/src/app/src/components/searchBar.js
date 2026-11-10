@@ -1,8 +1,15 @@
 "use client"
 
+import { useAuth } from "@/app/context/authContext"
+import { auth } from "@/app/firebase";
+import { signOut } from "firebase/auth";
 import { useEffect, useState } from "react"
 
 function SearchBar() {
+
+    const {loggedIn} = useAuth()
+    console.log(loggedIn);
+    
 
     const [searchTerm, setSearchTerm] = useState("")
     const [timer, setTimer] = useState(null)
@@ -16,6 +23,14 @@ function SearchBar() {
         console.log(searchResults);
         
                 
+    }
+
+    const logoutUser = (e) => {
+
+        e.preventDefault()
+        signOut(auth)
+        window.location.reload()        
+
     }
 
     useEffect(() => {
@@ -35,6 +50,8 @@ function SearchBar() {
 
     return (
         <div>
+
+            <div>{loggedIn ? <button onClick={(e) => logoutUser(e)}>Logout</button> : <a href="user/login" >Login</a>}</div>
 
             <form>
                 <input type="text" placeholder="Search product" onChange={(e) => setSearchTerm(e.currentTarget.value)}/>
