@@ -77,7 +77,7 @@ function Home() {
 
     }
 
-    const calculatedTotalPage = Math.min(Math.ceil(totalBooks/20), 500)
+    const calculatedTotalPage = Math.min(Math.ceil(totalBooks/20), 50)
 
     console.log(books);
 
