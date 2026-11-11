@@ -1,31 +1,32 @@
 import { useFieldArray, useForm } from "react-hook-form"
 import { validateEndDate } from "../utils/validators";
 
-function StepTwo() {
+function StepTwo({ formData, updateFormData, nextStep, prevStep }) {
 
     const {
         register,
         control,
         handleSubmit,
         watch,
-        formState: {errors}
-    } = useForm ({
-        defaultValues:{
-            jobs:[
-                {company:"", position:"",startDate:"",endDate:""}
-            ]
+        formState: { errors }
+    } = useForm({
+        defaultValues: {
+            ...formData,
+            jobs: formData.jobs && formData.jobs.length > 0
+                ? formData.jobs
+                : [{ company: "", position: "", startDate: "", endDate: "" }]
         }
     })
 
-    const {fields, append, remove} = useFieldArray({
+    const { fields, append, remove } = useFieldArray({
         control,
         name: "jobs"
     })
 
     const onSubmit = (data) => {
-        console.log(data);
-        alert("StepTwo finished, look at console")
-        
+        updateFormData(data)
+        nextStep()
+
     }
 
     return (
@@ -43,7 +44,7 @@ function StepTwo() {
                         <div key={field.id} className="p-5 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-200 dark:border-gray-700 space-y-4 relative">
                             <div className="flex justify-between items-center">
                                 <h3 className="font-semibold text-gray-900 dark:text-white text-sm">Posao #{index + 1}</h3>
-                                
+
                                 {/* Dugme za brisanje posla (dozvoljavamo brisanje samo ako ima više od 1 posla) */}
                                 {fields.length > 1 && (
                                     <button
@@ -126,12 +127,17 @@ function StepTwo() {
                 </button>
 
                 {/* Submit dugme */}
-                <button
+                {/* <button
                     type="submit"
                     className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3.5 rounded-xl transition-colors cursor-pointer"
                 >
                     Završi Korak 2
-                </button>
+                </button> */}
+
+                <div className="flex justify-between pt-4">
+                    <button type="button" onClick={prevStep} className="px-6 py-3 rounded-xl border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-medium">Nazad</button>
+                    <button type="submit" className="bg-blue-600 text-white px-8 py-3 rounded-xl font-medium">Sledeći korak</button>
+                </div>
             </form>
         </div>
     )

@@ -4,7 +4,14 @@ export const validateName = (value) => {
 
     const trimmed = trimValue(value)
     if(!trimmed) return "Ovo polje je obavezno"
+    
     if(/\d/.test(trimmed)) return "Ime i prezime ne smeju sadržati cifre."
+
+    const words = trimmed.split(/\s+/);
+    if (words.length < 2) {
+        return "Molimo unesite i ime i prezime.";
+    }
+
     return true
 }
 
@@ -65,6 +72,16 @@ export const validateSkills = (skills) => {
     if(!skills || skills.length < 3){
         return "Morate izabrati najmanje 3 veštine.";
     }
+
+    return true
+}
+
+export const validateSalary = (salary) => {
+
+    if(salary === "" || salary === null || salary === undefined ) return "Očekivana plata je obavezna.";
+
+    const num = Number(salary)
+    if(!num || num <= 0) return "Plata mora biti validan broj veći od 0.";
 
     return true
 }

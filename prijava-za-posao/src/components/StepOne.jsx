@@ -109,7 +109,7 @@ function StepOne({formData, updateFormData, nextStep}) {
                     type="submit"
                     className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-8 py-3 rounded-xl transition-colors cursor-pointer shadow-sm"
                 >
-                    Sledeći korak →
+                    Sledeći korak
                 </button>
             </div>
         </form>
