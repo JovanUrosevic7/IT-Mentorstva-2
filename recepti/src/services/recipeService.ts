@@ -10,7 +10,7 @@ const api = axios.create({
 export async function getAllRecipes(limit: number = 0): Promise<Recipe[]> {
 
     try {
-        const response = await axios.get<RecipesResponse>(`/recipes?limit=${limit}`)
+        const response = await api.get<RecipesResponse>(`/recipes?limit=${limit}`)
         return response.data.recipes
     } catch (error) {
         console.error("Greška pri dobavljanju recepata:", error);
@@ -22,7 +22,7 @@ export async function getAllRecipes(limit: number = 0): Promise<Recipe[]> {
 export async function getRecipeById(id: string): Promise<Recipe[] | null> {
 
     try {
-        const response = await axios.get<RecipesResponse>(`/response/${id}`)
+        const response = await api.get<RecipesResponse>(`/response/${id}`)
         return response.data.recipes
     } catch {
         return null;
@@ -33,7 +33,7 @@ export async function getRecipeById(id: string): Promise<Recipe[] | null> {
 export async function getRecipeByTag(tag: string): Promise<Recipe[]> {
 
     try {
-        const response = await axios.get<RecipesResponse>(`/recipes/tag/${tag}`)
+        const response = await api.get<RecipesResponse>(`/recipes/tag/${tag}`)
         return response.data.recipes
     } catch (error) {
         console.error(`Greška pri dobavljanju recepata za tag ${tag}:`, error);
