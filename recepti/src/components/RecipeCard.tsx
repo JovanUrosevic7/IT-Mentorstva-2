@@ -2,11 +2,11 @@ import { Recipe } from "@/types/recipe"
 import Image from "next/image"
 import Link from "next/link"
 
-interface RecipeCardProps{
-    recipe: Recipe
+interface RecipeCardProps {
+  recipe: Recipe
 }
 
-function RecipeCard({recipe}: RecipeCardProps) {
+function RecipeCard({ recipe }: RecipeCardProps) {
   return (
     <Link
       href={`/recipes/${recipe.id}`}
@@ -14,8 +14,8 @@ function RecipeCard({recipe}: RecipeCardProps) {
     >
       {/* Next.js Image komponenta */}
       <div className="relative h-48 w-full overflow-hidden bg-gray-100 dark:bg-gray-800">
-        <Image 
-          src={recipe.image} 
+        <Image
+          src={recipe.image}
           alt={recipe.name}
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-300"

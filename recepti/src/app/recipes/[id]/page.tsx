@@ -6,7 +6,7 @@ import Link from "next/link";
 
 
 interface RecipePageProps {
-    params: Promise<{id: number} >
+    params: Promise<{ id: number }>
 }
 
 export default async function RecipeDetailPage({ params }: RecipePageProps) {
@@ -14,9 +14,9 @@ export default async function RecipeDetailPage({ params }: RecipePageProps) {
     const { id } = await params
     const recipe = await getRecipeById(Number(id))
 
-    console.log(typeof(id));
+    console.log(typeof (id));
     console.log(recipe);
-    
+
 
     // Ako recept ne postoji (nepostojeći ID), prikazujemo poruku
     if (!recipe) {
@@ -55,7 +55,9 @@ export default async function RecipeDetailPage({ params }: RecipePageProps) {
             <div className="space-y-4">
                 <div className="flex flex-wrap items-center gap-2">
                     <span className="bg-orange-50 dark:bg-orange-950/50 text-orange-600 dark:text-orange-400 font-medium px-3 py-1 rounded-full text-xs">
-                        {recipe.cuisine}
+                        <Link href={`/recipes/cuisine/${recipe.cuisine}`} className="bg-orange-50 ... hover:underline">
+                            {recipe.cuisine}
+                        </Link>
                     </span>
                     <span className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-medium px-3 py-1 rounded-full text-xs capitalize">
                         Težina: {recipe.difficulty}
@@ -73,7 +75,9 @@ export default async function RecipeDetailPage({ params }: RecipePageProps) {
                 <div className="flex flex-wrap gap-2">
                     {recipe.tags.map((tag, idx) => (
                         <span key={idx} className="text-xs bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 px-2.5 py-1 rounded-md">
-                            #{tag}
+                            <Link href={`/recipes/tag/${tag}`} className="text-xs bg-gray-100 ... hover:bg-gray-200">
+                                #{tag}
+                            </Link>
                         </span>
                     ))}
                 </div>

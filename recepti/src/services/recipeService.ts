@@ -1,6 +1,5 @@
 import { Recipe, RecipesResponse } from "@/types/recipe";
 import axios from "axios";
-import { Rewrite } from "next/dist/lib/load-custom-routes";
 
 
 const api = axios.create({
@@ -36,7 +35,8 @@ export async function getRecipeById(id: string | number): Promise<Recipe | null>
 export async function getRecipeByTag(tag: string): Promise<Recipe[]> {
 
     try {
-        const response = await api.get<RecipesResponse>(`/recipes/tag/${tag}`)
+        const encodedTag = encodeURIComponent(tag)
+        const response = await api.get<RecipesResponse>(`/recipes/tag/${encodedTag}`)
         return response.data.recipes
     } catch (error) {
         console.error(`Greška pri dobavljanju recepata za tag ${tag}:`, error);
@@ -44,3 +44,16 @@ export async function getRecipeByTag(tag: string): Promise<Recipe[]> {
     }
 }
 
+export async function getRecipeByCusion(cuisine: string): Promise <Recipe[]>{
+
+    try{
+        const allRecipes = await getAllRecipes(0)
+        return allRecipes.filter((recipe) => recipe.cuisine.toLowerCase() === cuisine.toLowerCase())
+        
+        
+    } catch (error) {
+        console.error(`Greška pri dobavljanju recepata za kuhinju ${cuisine}:`, error);
+        return [];
+    }
+
+}
