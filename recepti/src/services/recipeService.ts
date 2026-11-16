@@ -19,11 +19,14 @@ export async function getAllRecipes(limit: number = 0): Promise<Recipe[]> {
 
 }
 
-export async function getRecipeById(id: string): Promise<Recipe[] | null> {
+export async function getRecipeById(id: string | number): Promise<Recipe | null> {
 
     try {
-        const response = await api.get<RecipesResponse>(`/response/${id}`)
-        return response.data.recipes
+
+        const numericId = typeof id === "string" ? parseInt(id, 10) : id 
+
+        const response = await api.get<Recipe>(`/recipes/${numericId}`)
+        return response.data
     } catch {
         return null;
     }
@@ -40,3 +43,4 @@ export async function getRecipeByTag(tag: string): Promise<Recipe[]> {
         return [];
     }
 }
+
