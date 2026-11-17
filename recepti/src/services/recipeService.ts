@@ -75,3 +75,16 @@ export async function getPaginatedRecipes(page: number = 1, limit: number = 9): 
 
 
 }
+
+export async function getRecipesByMealType(mealType: string): Promise<Recipe[]> {
+
+    try {
+        const encodedType = encodeURIComponent(mealType);
+        const response = await api.get<RecipesResponse>(`/recipes/meal-type/${encodedType}`)
+        return response.data.recipes
+    } catch (error) {
+        console.error(`Greška pri dobavljanju recepata za obrok ${mealType}:`, error);
+        return [];
+    }
+
+}
