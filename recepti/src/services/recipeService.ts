@@ -22,7 +22,7 @@ export async function getRecipeById(id: string | number): Promise<Recipe | null>
 
     try {
 
-        const numericId = typeof id === "string" ? parseInt(id, 10) : id 
+        const numericId = typeof id === "string" ? parseInt(id, 10) : id
 
         const response = await api.get<Recipe>(`/recipes/${numericId}`)
         return response.data
@@ -44,16 +44,34 @@ export async function getRecipeByTag(tag: string): Promise<Recipe[]> {
     }
 }
 
-export async function getRecipeByCusion(cuisine: string): Promise <Recipe[]>{
+export async function getRecipeByCusion(cuisine: string): Promise<Recipe[]> {
 
-    try{
+    try {
         const allRecipes = await getAllRecipes(0)
         return allRecipes.filter((recipe) => recipe.cuisine.toLowerCase() === cuisine.toLowerCase())
-        
-        
+
+
     } catch (error) {
         console.error(`Greška pri dobavljanju recepata za kuhinju ${cuisine}:`, error);
         return [];
     }
+
+}
+
+export async function getPaginatedRecipes(page: number = 1, limit: number = 9): Promise<{ recipes: Recipe[], total: number }> {
+
+    try {
+        const skip = (page - 1) * limit
+        const response = await api.get<RecipesResponse>(`/recipes?limit=${limit}&skip=${skip}`)
+
+        return {
+            recipes: response.data.recipes,
+            total: response.data.total,
+        };
+    } catch (error) {
+        console.error("Greška pri dobavljanju paginiranih recepata:", error);
+        return { recipes: [], total: 0 };
+    }
+
 
 }
