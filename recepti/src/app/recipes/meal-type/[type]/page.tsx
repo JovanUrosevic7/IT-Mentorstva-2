@@ -37,16 +37,16 @@ export default async function MealTypePage({ params }: MealTypePageProps) {
                     href="/recipes"
                     className="text-sm font-medium text-orange-600 hover:text-orange-700 dark:text-orange-500 inline-flex items-center gap-1"
                 >
-                    ← Nazad na sve recepte
+                    Nazad na sve recepte
                 </Link>
             </div>
 
             {/* Zaglavlje stranice */}
             <div className="space-y-2">
-                <span className="bg-orange-50 dark:bg-orange-950/50 text-orange-600 dark:text-orange-400 font-medium px-3 py-1 rounded-full text-xs">
+                <span className="bg-orange-50 dark:bg-orange-950/50 text-orange-600 dark:text-orange-400 font-medium px-3 py-1 rounded-full text-xl mb-[10px]">
                     Tip obroka
                 </span>
-                <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight capitalize">
+                <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight capitalize text-center">
                     {displayTitle}
                 </h1>
                 <p className="text-gray-500 dark:text-gray-400">

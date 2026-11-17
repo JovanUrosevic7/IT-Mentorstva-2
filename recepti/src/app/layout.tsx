@@ -32,11 +32,11 @@ export default function RootLayout({
             <Link href="/" className="font-bold text-xl tracking-tight text-orange-600 dark:text-orange-500">
               🍳 ReceptiApp
             </Link>
-            <nav className="flex gap-6 text-sm font-medium">
-              <Link href="/" className="hover:text-orange-600 transition-colors">
+            <nav className="flex gap-6 text-md font-medium">
+              <Link href="/" className="hover:text-orange-600 transition-colors font-bold">
                 Početna
               </Link>
-              <Link href="/recipes" className="hover:text-orange-600 transition-colors">
+              <Link href="/recipes" className="hover:text-orange-600 transition-colors font-bold">
                 Svi recepti
               </Link>
             </nav>

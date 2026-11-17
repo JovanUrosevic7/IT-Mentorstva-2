@@ -20,11 +20,11 @@ function PaginationControls({currentPage, totalPages}: PaginationControlsProps) 
                     href={`/recipes?page=${currentPage - 1}`}
                     className="px-4 py-2 text-sm font-medium rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 hover:border-orange-500 hover:text-orange-600 transition-colors"
                 >
-                    ← Prethodna
+                    Prethodna
                 </Link>
             ) : (
                 <span className="px-4 py-2 text-sm font-medium rounded-xl border border-gray-100 dark:border-gray-800/50 bg-gray-50 dark:bg-gray-900/50 text-gray-400 cursor-not-allowed">
-                    ← Prethodna
+                    Prethodna
                 </span>
             )}
 
@@ -53,11 +53,11 @@ function PaginationControls({currentPage, totalPages}: PaginationControlsProps) 
                     href={`/recipes?page=${currentPage + 1}`}
                     className="px-4 py-2 text-sm font-medium rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 hover:border-orange-500 hover:text-orange-600 transition-colors"
                 >
-                    Sledeća →
+                    Sledeća
                 </Link>
             ) : (
                 <span className="px-4 py-2 text-sm font-medium rounded-xl border border-gray-100 dark:border-gray-800/50 bg-gray-50 dark:bg-gray-900/50 text-gray-400 cursor-not-allowed">
-                    Sledeća →
+                    Sledeća
                 </span>
             )}
         </div>

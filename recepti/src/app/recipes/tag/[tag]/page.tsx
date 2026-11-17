@@ -20,7 +20,7 @@ export default async function TagPage({ params }: TagPageProp) {
                     href="/recipes"
                     className="text-sm font-medium text-orange-600 hover:text-orange-700 dark:text-orange-500 inline-flex items-center gap-1"
                 >
-                    ← Nazad na sve recepte
+                    Nazad na sve recepte
                 </Link>
             </div>
 
