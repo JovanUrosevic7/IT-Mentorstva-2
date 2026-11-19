@@ -1,49 +1,60 @@
-import { BrowserRouter, Navigate, Route, Router, Routes } from "react-router-dom"
-import { AuthProvider, useAuth } from "./context/AuthContext"
-import { ToastContainer } from "react-toastify"
-import Login from "./pages/Login"
-import Register from "./pages/Register"
-import ProtectedRoute from "./components/ProtectedRoute"
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Records from "./pages/Records";
+import AddRecord from "./pages/AddRecord";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Navbar from "./components/Navbar";
 
-
-
-function TempDashboard() {
-
-  const { currentUser, logout } = useAuth()
-
+function AppLayout({ children }) {
   return (
-
-    <div className="p-8 max-w-2xl mx-auto space-y-4">
-      <h1 className="text-2xl font-bold text-slate-900">
-        Zdravo, {currentUser?.displayName || currentUser?.email}!
-      </h1>
-      <p className="text-slate-600">Uspešno ste prijavljeni u zdravstveni karton.</p>
-      <button
-        onClick={logout}
-        className="px-4 py-2 bg-rose-600 text-white rounded-xl font-medium cursor-pointer"
-      >
-        Odjavi se
-      </button>
+    <div className="min-h-screen bg-slate-50">
+      <Navbar />
+      <main className="max-w-6xl mx-auto px-4 py-8">{children}</main>
     </div>
-
-  )
-
+  );
 }
 
-function App() {
+export default function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <ToastContainer position="top-right" autoClose={3500} />
+        <ToastContainer position="top-right" autoClose={4000} />
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+
           <Route
             path="/"
             element={
               <ProtectedRoute>
-                <TempDashboard />
+                <AppLayout>
+                  <Records />
+                </AppLayout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/records"
+            element={
+              <ProtectedRoute>
+                <AppLayout>
+                  <Records />
+                </AppLayout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/records/new"
+            element={
+              <ProtectedRoute>
+                <AppLayout>
+                  <AddRecord />
+                </AppLayout>
               </ProtectedRoute>
             }
           />
@@ -51,7 +62,5 @@ function App() {
         </Routes>
       </AuthProvider>
     </BrowserRouter>
-  )
+  );
 }
-
-export default App

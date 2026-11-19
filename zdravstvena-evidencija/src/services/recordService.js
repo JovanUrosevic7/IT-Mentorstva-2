@@ -13,7 +13,6 @@ export async function addHealthRecord(userId, recordData){
     return docRef.id
 }
 
-
 export async function getUserRecords(userId){
     const q = query(
         collection,(db, RECORDS_COLLECTION),
