@@ -29,7 +29,7 @@ export async function getUserMetrics(userId){
         ...doc.data()
     }))
 
-    return metrics.sort((a,b) => new Date(b.date) - new Date(a.date))
+    return metrics.sort((a,b) => new Date(a.date) - new Date(b.date))
 
 }
 
