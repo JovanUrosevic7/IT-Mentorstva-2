@@ -6,8 +6,6 @@ import { Calendar, Clock, Pill, Plus, Search, Stethoscope, Syringe, Trash2 } fro
 import { Link } from "react-router-dom";
 
 
-
-
 function Records() {
 
     const { currentUser } = useAuth();

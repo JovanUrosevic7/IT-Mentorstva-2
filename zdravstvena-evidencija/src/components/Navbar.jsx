@@ -15,14 +15,14 @@ function Navbar() {
         try {
             await logout()
             toast.info("Uspešno ste se odjavili.")
-            navigate("/")
+            navigate("/login")
         } catch (error) {
             console.error(error);
             toast.error("Greška prilikom odjave.");
         }
     }
 
-    const navLinkClass = ({ isActive }) =>      //?????????????????
+    const navLinkClass = ({ isActive }) =>
         `inline-flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-medium transition-colors ${isActive
             ? "bg-teal-50 text-teal-700 font-semibold"
             : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"

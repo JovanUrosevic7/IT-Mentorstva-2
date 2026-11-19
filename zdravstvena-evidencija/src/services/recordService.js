@@ -15,7 +15,7 @@ export async function addHealthRecord(userId, recordData){
 
 export async function getUserRecords(userId){
     const q = query(
-        collection,(db, RECORDS_COLLECTION),
+        collection(db, RECORDS_COLLECTION),
         where("userId", "==", userId)
     )
 
@@ -27,6 +27,8 @@ export async function getUserRecords(userId){
 
     return records.sort((a,b) => new Date(b.date) - new Date(a.date))
 }
+
+
 
 export async function deleteHealthRecord(recordId){
     const docRef = doc(db, RECORDS_COLLECTION, recordId)
